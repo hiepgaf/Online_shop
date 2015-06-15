@@ -8,8 +8,13 @@
 <title>Интернет-магазин</title>
 </head>
 <body>
-	<div class="header"></div>
-	<div id="body">
+	<div>
+		<%@include file="/elements/header.jsp"%>
+	</div>
+	<div id="loginbar">
+		<%@include file="/elements/login.jsp"%>
+	</div>
+	<div>
 		<div id="navbar">
 			<%@include file="/elements/menu.jsp"%>
 		</div>
