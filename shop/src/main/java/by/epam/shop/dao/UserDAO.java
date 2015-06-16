@@ -8,21 +8,29 @@ import by.epam.shop.entity.User;
 import by.epam.shop.exception.DAOException;
 
 public class UserDAO extends AbstractDAO<User> {
-	private static UserDAO instance;
 	private static final String SQL_SELECT_USERS = "SELECT * FROM internet_shop.users";
 	private static final String SQL_CREATE_USER = "INSERT INTO internet_shop.users (id, login, password, email, black_list_flag, access_level) VALUES (?,?,?,?,?,?)";
 	private static final String SQL_UPDATE_USER = "UPDATE internet_shop.users SET login= ?, password= ?, email= ?, black_list_flag= ?, access_level= ? WHERE id= ?";
 	private static final String SQL_DELETE_USER = "DELETE FROM internet_shop.users WHERE id= ?";
 
-	private UserDAO() {
-		super();
+	@Override
+	protected String getSelectQuery() {
+		return SQL_SELECT_USERS;
 	}
 
-	public static UserDAO getInstance() {
-		if (instance == null) {
-			instance = new UserDAO();
-		}
-		return instance;
+	@Override
+	protected String getCreateQuery() {
+		return SQL_CREATE_USER;
+	}
+
+	@Override
+	protected String getUpdateQuery() {
+		return SQL_UPDATE_USER;
+	}
+
+	@Override
+	protected String getDeleteQuery() {
+		return SQL_DELETE_USER;
 	}
 
 	@Override
@@ -44,26 +52,6 @@ public class UserDAO extends AbstractDAO<User> {
 			throw new DAOException(e);
 		}
 		return users;
-	}
-
-	@Override
-	protected String getSelectQuery() {
-		return SQL_SELECT_USERS;
-	}
-
-	@Override
-	protected String getCreateQuery() {
-		return SQL_CREATE_USER;
-	}
-
-	@Override
-	protected String getUpdateQuery() {
-		return SQL_UPDATE_USER;
-	}
-
-	@Override
-	protected String getDeleteQuery() {
-		return SQL_DELETE_USER;
 	}
 
 	@Override
