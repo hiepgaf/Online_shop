@@ -1,18 +1,10 @@
 package by.epam.shop.entity;
 
-public class Product {
-	private int id;
+public class Product extends AbstractEntity {
 	private String name;
 	private int price;
-	private ProductPicture picture;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	private String description;
+	private String picturePath;
 
 	public String getName() {
 		return name;
@@ -30,21 +22,31 @@ public class Product {
 		this.price = price;
 	}
 
-	public ProductPicture getPicture() {
-		return picture;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPicture(ProductPicture picture) {
-		this.picture = picture;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPicturePath() {
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+		result = prime * result
+				+ ((picturePath == null) ? 0 : picturePath.hashCode());
 		result = prime * result + price;
 		return result;
 	}
@@ -53,32 +55,29 @@ public class Product {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (id != other.id)
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (picture == null) {
-			if (other.picture != null)
+		if (picturePath == null) {
+			if (other.picturePath != null)
 				return false;
-		} else if (!picture.equals(other.picture))
+		} else if (!picturePath.equals(other.picturePath))
 			return false;
 		if (price != other.price)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price
-				+ ", picture=" + picture + "]";
 	}
 
 }

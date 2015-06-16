@@ -2,22 +2,13 @@ package by.epam.shop.entity;
 
 import java.util.List;
 
-public class User {
-	private int id;
+public class User extends AbstractEntity {
 	private String login;
 	private String password;
 	private String email;
-	private int accessLevel;
 	private int blackListFlag;
+	private int accessLevel;
 	private List<Product> shoooppingCart;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getLogin() {
 		return login;
@@ -43,20 +34,20 @@ public class User {
 		this.email = email;
 	}
 
-	public int getAccessLevel() {
-		return accessLevel;
-	}
-
-	public void setAccessLevel(int accessLevel) {
-		this.accessLevel = accessLevel;
-	}
-
 	public int getBlackListFlag() {
 		return blackListFlag;
 	}
 
 	public void setBlackListFlag(int blackListFlag) {
 		this.blackListFlag = blackListFlag;
+	}
+
+	public int getAccessLevel() {
+		return accessLevel;
+	}
+
+	public void setAccessLevel(int accessLevel) {
+		this.accessLevel = accessLevel;
 	}
 
 	public List<Product> getShoooppingCart() {
@@ -70,11 +61,10 @@ public class User {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + accessLevel;
 		result = prime * result + blackListFlag;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
@@ -87,7 +77,7 @@ public class User {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -100,8 +90,6 @@ public class User {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
-			return false;
-		if (id != other.id)
 			return false;
 		if (login == null) {
 			if (other.login != null)
@@ -119,14 +107,6 @@ public class User {
 		} else if (!shoooppingCart.equals(other.shoooppingCart))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password
-				+ ", email=" + email + ", accessLevel=" + accessLevel
-				+ ", blackListFlag=" + blackListFlag + ", shoooppingCart="
-				+ shoooppingCart + "]";
 	}
 
 }

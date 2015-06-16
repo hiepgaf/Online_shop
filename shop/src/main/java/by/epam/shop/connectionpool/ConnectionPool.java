@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.apache.log4j.Logger;
+
 public class ConnectionPool {
 	private static Logger log = Logger.getLogger(ConnectionPool.class);
 	private String user = "root";
@@ -12,29 +14,29 @@ public class ConnectionPool {
 	private String url = "jdbc:mysql://localhost:3306/daotalk";
 	private ArrayBlockingQueue<Connection> connectionPool;
 	private static ConnectionPool instance;
+	private static int connectionsAmount = 30;
 
-	public ConnectionPool(int amountConnections) throws SQLException,
-			InterruptedException {
+	private ConnectionPool() throws SQLException, InterruptedException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		connectionPool = new ArrayBlockingQueue<>(amountConnections);
-		for (int i = 0; i < amountConnections; i++) {
+		connectionPool = new ArrayBlockingQueue<>(connectionsAmount);
+		for (int i = 0; i < connectionsAmount; i++) {
 			connectionPool
 					.put(DriverManager.getConnection(url, user, password));
 		}
 	}
-	public static ConnectionPool getInstance(int amountConnections) {
+
+	public static ConnectionPool getInstance() {
 		if (instance != null) {
 			return instance;
 		} else {
 			try {
-				return new ConnectionPool(amountConnections);
+				return new ConnectionPool();
 			} catch (SQLException | InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
+		return instance;
 	}
-
 
 	public Connection getConnection() throws InterruptedException {
 		return connectionPool.take();
