@@ -10,6 +10,7 @@ import java.util.List;
 import by.epam.shop.connectionpool.ConnectionPool;
 import by.epam.shop.entity.AbstractEntity;
 import by.epam.shop.exception.DAOException;
+import by.epam.shop.exception.TechnicalException;
 
 public abstract class AbstractDAO<T extends AbstractEntity> {
 	public ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -23,7 +24,7 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	protected abstract String getDeleteQuery();
 
 	protected abstract ArrayList<T> parseResultSet(ResultSet resultSet)
-			throws DAOException;
+			throws DAOException, TechnicalException;
 
 	protected abstract void prepareStatementForCreate(
 			PreparedStatement prepareStatement, T entity) throws SQLException;
@@ -31,7 +32,7 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	protected abstract void prepareStatementForUpdate(
 			PreparedStatement prepareStatement, T entity) throws SQLException;
 
-	public List<T> findAll() throws DAOException {
+	public List<T> findAll() throws DAOException, TechnicalException {
 		ArrayList<T> entities = new ArrayList<>();
 		try (Connection connection = connectionPool.getConnection();
 				PreparedStatement prepareStatement = connection
@@ -45,7 +46,7 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 		return entities;
 	}
 
-	public T findEntityById(Integer id) throws DAOException {
+	public T findEntityById(Integer id) throws DAOException, TechnicalException {
 		ArrayList<T> entities = new ArrayList<>();
 		T entity = null;
 		String sql = getSelectQuery() + " where id = ?";

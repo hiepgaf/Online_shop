@@ -6,7 +6,7 @@ public class DAOFactory {
 	private static DAOFactory instance;
 
 	private enum TypeDAO {
-		OrderDAO, ProductDAO, UserDAO
+		ORDER_DAO, PRODUCT_DAO, USER_DAO
 	}
 
 	private DAOFactory() {
@@ -19,14 +19,15 @@ public class DAOFactory {
 		return instance;
 	}
 
-	public AbstractDAO<?> createDAO(String DAOType) throws TechnicalException {
+	@SuppressWarnings("rawtypes")
+	public AbstractDAO createDAO(String DAOType) throws TechnicalException {
 		TypeDAO type = TypeDAO.valueOf(DAOType.toUpperCase());
 		switch (type) {
-		case OrderDAO:
+		case ORDER_DAO:
 			return new OrderDAO();
-		case ProductDAO:
+		case PRODUCT_DAO:
 			return new ProductDAO();
-		case UserDAO:
+		case USER_DAO:
 			return new UserDAO();
 		default:
 			throw new TechnicalException("such type of DAO doesn't exist");
