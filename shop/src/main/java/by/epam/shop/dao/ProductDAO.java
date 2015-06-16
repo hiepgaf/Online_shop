@@ -15,27 +15,27 @@ public class ProductDAO extends AbstractDAO<Product> {
 	private static final String SQL_DELETE_PRODUCT = "DELETE FROM internet_shop.products WHERE id= ?";
 
 	@Override
-	protected String getSelectQuery() {
+	public String getSelectQuery() {
 		return SQL_SELECT_PRODUCT;
 	}
 
 	@Override
-	protected String getCreateQuery() {
+	public String getCreateQuery() {
 		return SQL_CREATE_PRODUCT;
 	}
 
 	@Override
-	protected String getUpdateQuery() {
+	public String getUpdateQuery() {
 		return SQL_UPDATE_PRODUCT;
 	}
 
 	@Override
-	protected String getDeleteQuery() {
+	public String getDeleteQuery() {
 		return SQL_DELETE_PRODUCT;
 	}
 
 	@Override
-	protected ArrayList<Product> parseResultSet(ResultSet resultSet)
+	public ArrayList<Product> parseResultSet(ResultSet resultSet)
 			throws DAOException {
 		ArrayList<Product> products = new ArrayList<>();
 		try {
@@ -56,7 +56,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 	}
 
 	@Override
-	protected void prepareStatementForCreate(
+	public void prepareStatementForCreate(
 			PreparedStatement prepareStatement, Product entity)
 			throws SQLException {
 		prepareStatement.setInt(1, entity.getId());
@@ -67,7 +67,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 	}
 
 	@Override
-	protected void prepareStatementForUpdate(
+	public void prepareStatementForUpdate(
 			PreparedStatement prepareStatement, Product entity)
 			throws SQLException {
 		prepareStatement.setString(1, entity.getName());

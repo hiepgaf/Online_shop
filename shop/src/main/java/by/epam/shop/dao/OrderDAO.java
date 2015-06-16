@@ -19,27 +19,27 @@ public class OrderDAO extends AbstractDAO<Order> {
 	private static final String SQL_SELECT_ORDERS_PRODUCTS = "SELECT * FROM internet_shop.orders_products WHERE orders_id= ?";
 
 	@Override
-	protected String getSelectQuery() {
+	public String getSelectQuery() {
 		return SQL_SELECT_ORDER;
 	}
 
 	@Override
-	protected String getCreateQuery() {
+	public String getCreateQuery() {
 		return SQL_CREATE_ORDER;
 	}
 
 	@Override
-	protected String getUpdateQuery() {
+	public String getUpdateQuery() {
 		return SQL_UPDATE_ORDER;
 	}
 
 	@Override
-	protected String getDeleteQuery() {
+	public String getDeleteQuery() {
 		return SQL_DELETE_ORDER;
 	}
 
 	@Override
-	protected ArrayList<Order> parseResultSet(ResultSet resultSet)
+	public ArrayList<Order> parseResultSet(ResultSet resultSet)
 			throws DAOException, TechnicalException {
 		ArrayList<Order> orders = new ArrayList<>();
 		try {
@@ -60,7 +60,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 	}
 
 	@Override
-	protected void prepareStatementForCreate(
+	public void prepareStatementForCreate(
 			PreparedStatement prepareStatement, Order entity)
 			throws SQLException {
 		prepareStatement.setInt(1, entity.getId());
@@ -70,7 +70,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 	}
 
 	@Override
-	protected void prepareStatementForUpdate(
+	public void prepareStatementForUpdate(
 			PreparedStatement prepareStatement, Order entity)
 			throws SQLException {
 		prepareStatement.setInt(1, entity.getUser().getId());

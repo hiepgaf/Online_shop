@@ -15,21 +15,21 @@ import by.epam.shop.exception.TechnicalException;
 public abstract class AbstractDAO<T extends AbstractEntity> {
 	public ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	protected abstract String getSelectQuery();
+	public abstract String getSelectQuery();
 
-	protected abstract String getCreateQuery();
+	public abstract String getCreateQuery();
 
-	protected abstract String getUpdateQuery();
+	public abstract String getUpdateQuery();
 
-	protected abstract String getDeleteQuery();
+	public abstract String getDeleteQuery();
 
-	protected abstract ArrayList<T> parseResultSet(ResultSet resultSet)
+	public abstract ArrayList<T> parseResultSet(ResultSet resultSet)
 			throws DAOException, TechnicalException;
 
-	protected abstract void prepareStatementForCreate(
+	public abstract void prepareStatementForCreate(
 			PreparedStatement prepareStatement, T entity) throws SQLException;
 
-	protected abstract void prepareStatementForUpdate(
+	public abstract void prepareStatementForUpdate(
 			PreparedStatement prepareStatement, T entity) throws SQLException;
 
 	public List<T> findAll() throws DAOException, TechnicalException {

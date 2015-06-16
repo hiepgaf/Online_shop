@@ -14,27 +14,27 @@ public class UserDAO extends AbstractDAO<User> {
 	private static final String SQL_DELETE_USER = "DELETE FROM internet_shop.users WHERE id= ?";
 
 	@Override
-	protected String getSelectQuery() {
+	public String getSelectQuery() {
 		return SQL_SELECT_USERS;
 	}
 
 	@Override
-	protected String getCreateQuery() {
+	public String getCreateQuery() {
 		return SQL_CREATE_USER;
 	}
 
 	@Override
-	protected String getUpdateQuery() {
+	public String getUpdateQuery() {
 		return SQL_UPDATE_USER;
 	}
 
 	@Override
-	protected String getDeleteQuery() {
+	public String getDeleteQuery() {
 		return SQL_DELETE_USER;
 	}
 
 	@Override
-	protected ArrayList<User> parseResultSet(ResultSet resultSet)
+	public ArrayList<User> parseResultSet(ResultSet resultSet)
 			throws DAOException {
 		ArrayList<User> users = new ArrayList<>();
 		try {
@@ -55,7 +55,7 @@ public class UserDAO extends AbstractDAO<User> {
 	}
 
 	@Override
-	protected void prepareStatementForCreate(
+	public void prepareStatementForCreate(
 			PreparedStatement prepareStatement, User entity)
 			throws SQLException {
 		prepareStatement.setInt(1, entity.getId());
@@ -67,7 +67,7 @@ public class UserDAO extends AbstractDAO<User> {
 	}
 
 	@Override
-	protected void prepareStatementForUpdate(
+	public void prepareStatementForUpdate(
 			PreparedStatement prepareStatement, User entity)
 			throws SQLException {
 		prepareStatement.setString(1, entity.getLogin());
