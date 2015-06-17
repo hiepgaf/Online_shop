@@ -13,7 +13,7 @@ import by.epam.shop.exception.DAOException;
 import by.epam.shop.exception.TechnicalException;
 
 public abstract class AbstractDAO<T extends AbstractEntity> {
-	public ConnectionPool connectionPool = ConnectionPool.getInstance();
+	public static ConnectionPool connectionPool = ConnectionPool.getInstance();
 
 	public abstract String getSelectQuery();
 

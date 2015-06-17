@@ -8,7 +8,7 @@
 <body>
 	<form method="POST" action="Controller">
 		<div>
-			<input name="page" type="hidden" value="enter" />
+			<input name="action" type="hidden" value="login" />
 		</div>
 		<div>
 			<input class="input" type="text" name="login" value="Логин" />

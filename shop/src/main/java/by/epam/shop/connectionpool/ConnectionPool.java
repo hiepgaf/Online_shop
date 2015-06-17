@@ -16,7 +16,7 @@ public class ConnectionPool {
 	private static ConnectionPool instance;
 	private static int connectionsAmount = 30;
 
-	private ConnectionPool() throws SQLException, InterruptedException {
+	private ConnectionPool() {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		connectionPool = new ArrayBlockingQueue<>(connectionsAmount);
 		for (int i = 0; i < connectionsAmount; i++) {
@@ -38,12 +38,11 @@ public class ConnectionPool {
 		return instance;
 	}
 
-	public Connection getConnection() throws InterruptedException {
+	public Connection getConnection() t{
 		return connectionPool.take();
 	}
 
-	public void freeConnection(Connection connection) throws SQLException,
-			InterruptedException {
+	public void freeConnection(Connection connection) t {
 		if (!connection.isClosed()) {
 			connectionPool.put(connection);
 		}
