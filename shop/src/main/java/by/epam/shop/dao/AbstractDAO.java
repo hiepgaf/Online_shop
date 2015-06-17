@@ -49,7 +49,7 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	public T findEntityById(Integer id) throws DAOException, TechnicalException {
 		ArrayList<T> entities = new ArrayList<>();
 		T entity = null;
-		String sql = getSelectQuery() + " where id = ?";
+		String sql = getSelectQuery() + " WHERE id = ?";
 		try (Connection connection = connectionPool.getConnection();
 				PreparedStatement prepareStatement = connection
 						.prepareStatement(sql)) {
