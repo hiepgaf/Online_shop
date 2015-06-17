@@ -68,6 +68,102 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 		return entity;
 	}
 
+	public List<T> findByStringKey(String column, String key)
+			throws DAOException, TechnicalException {
+		ArrayList<T> entities = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append(getSelectQuery());
+		sql.append(" WHERE ");
+		sql.append(column);
+		sql.append(" = ?");
+		try (Connection connection = connectionPool.getConnection();
+				PreparedStatement prepareStatement = connection
+						.prepareStatement(sql.toString())) {
+			prepareStatement.setString(1, key);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			entities = parseResultSet(resultSet);
+			connectionPool.freeConnection(connection);
+		} catch (InterruptedException | SQLException e) {
+			throw new DAOException(e);
+		}
+		return entities;
+	}
+
+	public List<T> findByIntKey(String column, int key) throws DAOException,
+			TechnicalException {
+		ArrayList<T> entities = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append(getSelectQuery());
+		sql.append(" WHERE ");
+		sql.append(column);
+		sql.append(" = ?");
+		try (Connection connection = connectionPool.getConnection();
+				PreparedStatement prepareStatement = connection
+						.prepareStatement(sql.toString())) {
+			prepareStatement.setInt(1, key);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			entities = parseResultSet(resultSet);
+			connectionPool.freeConnection(connection);
+		} catch (InterruptedException | SQLException e) {
+			throw new DAOException(e);
+		}
+		return entities;
+	}
+
+	public T findByUniqueStringKey(String column, String key)
+			throws DAOException, TechnicalException {
+		ArrayList<T> entities = new ArrayList<>();
+		T entity = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append(getSelectQuery());
+		sql.append(" WHERE ");
+		sql.append(column);
+		sql.append(" = ?");
+		try (Connection connection = connectionPool.getConnection();
+				PreparedStatement prepareStatement = connection
+						.prepareStatement(sql.toString())) {
+			prepareStatement.setString(1, key);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			entities = parseResultSet(resultSet);
+			connectionPool.freeConnection(connection);
+		} catch (InterruptedException | SQLException e) {
+			throw new DAOException(e);
+		}
+		if (entities.size() <= 1) {
+			entity = entities.iterator().next();
+		} else {
+			throw new DAOException("Received more than one record");
+		}
+		return entity;
+	}
+
+	public T findByIniqueIntKey(String column, int key) throws DAOException,
+			TechnicalException {
+		ArrayList<T> entities = new ArrayList<>();
+		T entity = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append(getSelectQuery());
+		sql.append(" WHERE ");
+		sql.append(column);
+		sql.append(" = ?");
+		try (Connection connection = connectionPool.getConnection();
+				PreparedStatement prepareStatement = connection
+						.prepareStatement(sql.toString())) {
+			prepareStatement.setInt(1, key);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			entities = parseResultSet(resultSet);
+			connectionPool.freeConnection(connection);
+		} catch (InterruptedException | SQLException e) {
+			throw new DAOException(e);
+		}
+		if (entities.size() <= 1) {
+			entity = entities.iterator().next();
+		} else {
+			throw new DAOException("Received more than one record");
+		}
+		return entity;
+	}
+
 	public boolean delete(Integer id) throws DAOException {
 		boolean flag = false;
 		try (Connection connection = connectionPool.getConnection();
