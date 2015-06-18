@@ -6,6 +6,8 @@ import by.epam.shop.action.Action;
 import by.epam.shop.manager.MessageManager;
 
 public class ActionFactory {
+	MessageManager messageManager = MessageManager.getInstance();
+
 	public Action defineCommand(HttpServletRequest request) {
 		Action current = null;
 		String action = request.getParameter("action");
@@ -17,7 +19,7 @@ public class ActionFactory {
 			current = currentEnum.getCurrentAction();
 		} catch (IllegalArgumentException e) {
 			request.setAttribute("wrongAction",
-					action + MessageManager.getProperty("message.wrongaction"));
+					action + messageManager.getProperty("message.wrongaction"));
 		}
 		return current;
 	}

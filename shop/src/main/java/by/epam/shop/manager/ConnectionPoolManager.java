@@ -2,21 +2,21 @@ package by.epam.shop.manager;
 
 import java.util.ResourceBundle;
 
-public class ConfigurationManager {
+public class ConnectionPoolManager {
 	private final static ResourceBundle resourceBundle = ResourceBundle
-			.getBundle("config");
-	private static ConfigurationManager instance;
+			.getBundle("connection_pool");
+	private static ConnectionPoolManager instance;
 	private volatile static boolean instanceCreated;
 
-	private ConfigurationManager() {
+	private ConnectionPoolManager() {
 	}
 
-	public static ConfigurationManager getInstance() {
+	public static ConnectionPoolManager getInstance() {
 		if (!instanceCreated) {
-			synchronized (ConfigurationManager.class) {
+			synchronized (ConnectionPoolManager.class) {
 				try {
 					if (!instanceCreated) {
-						instance = new ConfigurationManager();
+						instance = new ConnectionPoolManager();
 						instanceCreated = true;
 					}
 				} catch (Exception e) {

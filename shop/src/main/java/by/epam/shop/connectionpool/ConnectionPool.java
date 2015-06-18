@@ -7,44 +7,69 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import org.apache.log4j.Logger;
 
+import by.epam.shop.manager.ConnectionPoolManager;
+
 public class ConnectionPool {
 	private static Logger log = Logger.getLogger(ConnectionPool.class);
-	private String user = "root";
-	private String password = "2573211";
-	private String url = "jdbc:mysql://localhost:3306/daotalk";
+	private String user;
+	private String password;
+	private String url;
 	private ArrayBlockingQueue<Connection> connectionPool;
+	private static int poolSize;
 	private static ConnectionPool instance;
-	private static int connectionsAmount = 30;
+	private volatile static boolean instanceCreated;
 
 	private ConnectionPool() {
-		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		connectionPool = new ArrayBlockingQueue<>(connectionsAmount);
-		for (int i = 0; i < connectionsAmount; i++) {
-			connectionPool
-					.put(DriverManager.getConnection(url, user, password));
+		try {
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			ConnectionPoolManager manager = ConnectionPoolManager.getInstance();
+			poolSize = Integer.parseInt(manager.getProperty("pool_size"));
+			user = manager.getProperty("user");
+			password = manager.getProperty("password");
+			url = manager.getProperty("url");
+			connectionPool = new ArrayBlockingQueue<>(poolSize);
+			for (int i = 0; i < poolSize; i++) {
+				connectionPool.put(DriverManager.getConnection(url, user,
+						password));
+			}
+		} catch (SQLException | InterruptedException e) {
+			log.error(e);
 		}
 	}
 
 	public static ConnectionPool getInstance() {
-		if (instance != null) {
-			return instance;
-		} else {
-			try {
-				return new ConnectionPool();
-			} catch (SQLException | InterruptedException e) {
-				log.error(e);
+		if (!instanceCreated) {
+			synchronized (ConnectionPool.class) {
+				try {
+					if (!instanceCreated) {
+						instance = new ConnectionPool();
+						instanceCreated = true;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return instance;
 	}
 
-	public Connection getConnection() t{
-		return connectionPool.take();
+	public Connection getConnection() {
+		Connection connection = null;
+		try {
+			connection = connectionPool.take();
+		} catch (InterruptedException e) {
+			log.error(e);
+		}
+		return connection;
 	}
 
-	public void freeConnection(Connection connection) t {
-		if (!connection.isClosed()) {
-			connectionPool.put(connection);
+	public void freeConnection(Connection connection) {
+		try {
+			if (!connection.isClosed()) {
+				connectionPool.put(connection);
+			}
+		} catch (SQLException | InterruptedException e) {
+			log.error(e);
 		}
 	}
 }
