@@ -15,20 +15,23 @@ public class LoginAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		String page = null;
 		String login = request.getParameter(PARAM_NAME_LOGIN);
 		String password = request.getParameter(PARAM_NAME_PASSWORD);
 		if (login.length() * password.length() == 0) {
-			page = configurationManager.getProperty("path.page.error");
+			request.setAttribute("message", "nulls");
+			return configurationManager.getProperty("path.page.error");
 		}
 		UserDAO userDAO = new UserDAO();
 		User user = userDAO.findEntityByLogin(login);
 		if (user == null) {
-			page = configurationManager.getProperty("path.page.error");
+			request.setAttribute("message", "null user");
+			return configurationManager.getProperty("path.page.error");
 		}
 		if (!Encryption.encryptMD5(password).equals(user.getPassword())) {
-			page = configurationManager.getProperty("path.page.error");
+			request.setAttribute("message", "password WRONG!");
+			return configurationManager.getProperty("path.page.error");
 		}
-		return page;
+		request.setAttribute("user", user);
+		return configurationManager.getProperty("path.page.error");
 	}
 }

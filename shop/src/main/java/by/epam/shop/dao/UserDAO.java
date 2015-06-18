@@ -16,8 +16,8 @@ public class UserDAO extends AbstractDAO<User> {
 	private static final String SQL_SELECT_USERS = "SELECT * FROM internet_shop.users";
 	private static final String SQL_SELECT_USERS_BY_ID = "SELECT * FROM internet_shop.users WHERE id= ?";
 	private static final String SQL_SELECT_USERS_BY_LOGIN = "SELECT * FROM internet_shop.users WHERE login= ?";
-	private static final String SQL_CREATE_USER = "INSERT INTO internet_shop.users (id, login, password, email, black_list_flag, access_level) VALUES (?,?,?,?,?,?)";
-	private static final String SQL_UPDATE_USER = "UPDATE internet_shop.users SET login= ?, password= ?, email= ?, black_list_flag= ?, access_level= ? WHERE id= ?";
+	private static final String SQL_CREATE_USER = "INSERT INTO internet_shop.users (id, login, password, email, black_list_flag, access_level_id) VALUES (?,?,?,?,?,?)";
+	private static final String SQL_UPDATE_USER = "UPDATE internet_shop.users SET login= ?, password= ?, email= ?, black_list_flag= ?, access_level_id= ? WHERE id= ?";
 	private static final String SQL_DELETE_USER = "DELETE FROM internet_shop.users WHERE id= ?";
 
 	@Override
@@ -34,7 +34,7 @@ public class UserDAO extends AbstractDAO<User> {
 				user.setPassword(resultSet.getString("password"));
 				user.setEmail(resultSet.getString("email"));
 				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-				user.setAccessLevel(resultSet.getInt("access_level"));
+				user.setAccessLevel(resultSet.getInt("access_level_id"));
 				users.add(user);
 			}
 			connectionPool.freeConnection(connection);
@@ -58,7 +58,7 @@ public class UserDAO extends AbstractDAO<User> {
 			user.setPassword(resultSet.getString("password"));
 			user.setEmail(resultSet.getString("email"));
 			user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-			user.setAccessLevel(resultSet.getInt("access_level"));
+			user.setAccessLevel(resultSet.getInt("access_level_id"));
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
@@ -79,7 +79,7 @@ public class UserDAO extends AbstractDAO<User> {
 			user.setPassword(resultSet.getString("password"));
 			user.setEmail(resultSet.getString("email"));
 			user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-			user.setAccessLevel(resultSet.getInt("access_level"));
+			user.setAccessLevel(resultSet.getInt("access_level_id"));
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
@@ -165,7 +165,7 @@ public class UserDAO extends AbstractDAO<User> {
 			user.setPassword(resultSet.getString("password"));
 			user.setEmail(resultSet.getString("email"));
 			user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-			user.setAccessLevel(resultSet.getInt("access_level"));
+			user.setAccessLevel(resultSet.getInt("access_level_id"));
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
