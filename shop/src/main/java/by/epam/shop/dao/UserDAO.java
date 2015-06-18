@@ -16,6 +16,7 @@ public class UserDAO extends AbstractDAO<User> {
 	private static final String SQL_SELECT_USERS = "SELECT * FROM internet_shop.users";
 	private static final String SQL_SELECT_USERS_BY_ID = "SELECT * FROM internet_shop.users WHERE id= ?";
 	private static final String SQL_SELECT_USERS_BY_LOGIN = "SELECT * FROM internet_shop.users WHERE login= ?";
+	private static final String SQL_SELECT_USERS_BY_LOGIN_AND_PASSWORD = "SELECT * FROM internet_shop.users WHERE login= ? AND password= ?";
 	private static final String SQL_CREATE_USER = "INSERT INTO internet_shop.users (id, login, password, email, black_list_flag, access_level_id) VALUES (?,?,?,?,?,?)";
 	private static final String SQL_UPDATE_USER = "UPDATE internet_shop.users SET login= ?, password= ?, email= ?, black_list_flag= ?, access_level_id= ? WHERE id= ?";
 	private static final String SQL_DELETE_USER = "DELETE FROM internet_shop.users WHERE id= ?";
@@ -52,13 +53,16 @@ public class UserDAO extends AbstractDAO<User> {
 				.prepareStatement(SQL_SELECT_USERS_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			user.setId(resultSet.getInt("id"));
-			user.setLogin(resultSet.getString("login"));
-			user.setPassword(resultSet.getString("password"));
-			user.setEmail(resultSet.getString("email"));
-			user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-			user.setAccessLevel(resultSet.getInt("access_level_id"));
+			if (resultSet.next()) {
+				user.setId(resultSet.getInt("id"));
+				user.setLogin(resultSet.getString("login"));
+				user.setPassword(resultSet.getString("password"));
+				user.setEmail(resultSet.getString("email"));
+				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
+				user.setAccessLevel(resultSet.getInt("access_level_id"));
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
@@ -73,13 +77,41 @@ public class UserDAO extends AbstractDAO<User> {
 				.prepareStatement(SQL_SELECT_USERS_BY_LOGIN)) {
 			prepareStatement.setString(1, login);
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			user.setId(resultSet.getInt("id"));
-			user.setLogin(resultSet.getString("login"));
-			user.setPassword(resultSet.getString("password"));
-			user.setEmail(resultSet.getString("email"));
-			user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-			user.setAccessLevel(resultSet.getInt("access_level_id"));
+			if (resultSet.next()) {
+				user.setId(resultSet.getInt("id"));
+				user.setLogin(resultSet.getString("login"));
+				user.setPassword(resultSet.getString("password"));
+				user.setEmail(resultSet.getString("email"));
+				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
+				user.setAccessLevel(resultSet.getInt("access_level_id"));
+			} else {
+				return null;
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return user;
+	}
+
+	public User findEntityByLoginAndPassword(String login, String password) {
+		User user = new User();
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_SELECT_USERS_BY_LOGIN_AND_PASSWORD)) {
+			prepareStatement.setString(1, login);
+			prepareStatement.setString(2, password);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			if (resultSet.next()) {
+				user.setId(resultSet.getInt("id"));
+				user.setLogin(resultSet.getString("login"));
+				user.setPassword(resultSet.getString("password"));
+				user.setEmail(resultSet.getString("email"));
+				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
+				user.setAccessLevel(resultSet.getInt("access_level_id"));
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);

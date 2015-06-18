@@ -53,13 +53,16 @@ public class OrderDAO extends AbstractDAO<Order> {
 				.prepareStatement(SQL_SELECT_ORDER_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			order.setId(resultSet.getInt("id"));
-			order.setUser(new UserDAO().findEntityById(resultSet
-					.getInt("users_id")));
-			order.setStatus(resultSet.getString("status"));
-			order.setDate(resultSet.getDate("date"));
-			order.setProducts(findProductsOfOrder(order));
+			if (resultSet.next()) {
+				order.setId(resultSet.getInt("id"));
+				order.setUser(new UserDAO().findEntityById(resultSet
+						.getInt("users_id")));
+				order.setStatus(resultSet.getString("status"));
+				order.setDate(resultSet.getDate("date"));
+				order.setProducts(findProductsOfOrder(order));
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
@@ -135,13 +138,16 @@ public class OrderDAO extends AbstractDAO<Order> {
 			prepareStatement.setDate(3, entity.getDate());
 			prepareStatement.setInt(4, entity.getId());
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			order.setId(resultSet.getInt("id"));
-			order.setUser(new UserDAO().findEntityById(resultSet
-					.getInt("users_id")));
-			order.setStatus(resultSet.getString("status"));
-			order.setDate(resultSet.getDate("date"));
-			order.setProducts(findProductsOfOrder(order));
+			if (resultSet.next()) {
+				order.setId(resultSet.getInt("id"));
+				order.setUser(new UserDAO().findEntityById(resultSet
+						.getInt("users_id")));
+				order.setStatus(resultSet.getString("status"));
+				order.setDate(resultSet.getDate("date"));
+				order.setProducts(findProductsOfOrder(order));
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);

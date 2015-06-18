@@ -52,13 +52,16 @@ public class ProductDAO extends AbstractDAO<Product> {
 				.prepareStatement(SQL_SELECT_PRODUCT_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			product.setId(resultSet.getInt("id"));
-			product.setName(resultSet.getString("name"));
-			product.setPrice(resultSet.getInt("price"));
-			product.setDescription(resultSet.getString("description"));
-			product.setPicturePath(findPicturePath(resultSet
-					.getInt("product_pictures_id")));
+			if (resultSet.next()) {
+				product.setId(resultSet.getInt("id"));
+				product.setName(resultSet.getString("name"));
+				product.setPrice(resultSet.getInt("price"));
+				product.setDescription(resultSet.getString("description"));
+				product.setPicturePath(findPicturePath(resultSet
+						.getInt("product_pictures_id")));
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
@@ -136,13 +139,16 @@ public class ProductDAO extends AbstractDAO<Product> {
 			prepareStatement.setString(4, entity.getPicturePath());
 			prepareStatement.setInt(5, entity.getId());
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			product.setId(resultSet.getInt("id"));
-			product.setName(resultSet.getString("name"));
-			product.setPrice(resultSet.getInt("price"));
-			product.setDescription(resultSet.getString("description"));
-			product.setPicturePath(findPicturePath(resultSet
-					.getInt("product_pictures_id")));
+			if (resultSet.next()) {
+				product.setId(resultSet.getInt("id"));
+				product.setName(resultSet.getString("name"));
+				product.setPrice(resultSet.getInt("price"));
+				product.setDescription(resultSet.getString("description"));
+				product.setPicturePath(findPicturePath(resultSet
+						.getInt("product_pictures_id")));
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
@@ -157,8 +163,11 @@ public class ProductDAO extends AbstractDAO<Product> {
 				.prepareStatement(SQL_SELECT_PICTURE)) {
 			prepareStatement.setInt(1, pictureId);
 			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			path = resultSet.getString("path");
+			if (resultSet.next()) {
+				path = resultSet.getString("path");
+			} else {
+				return null;
+			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
