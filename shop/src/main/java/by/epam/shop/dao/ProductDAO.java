@@ -19,6 +19,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 	private static final String SQL_UPDATE_PRODUCT = "UPDATE internet_shop.products SET name= ?, price= ?, description= ?, product_pictures_id= ? WHERE id= ?";
 	private static final String SQL_DELETE_PRODUCT = "DELETE FROM internet_shop.products WHERE id= ?";
 	private static final String SQL_SELECT_PICTURE = "SELECT * FROM internet_shop.product_pictures WHERE id= ?";
+	private static final String SQL_SELECT = "SELECT * FROM internet_shop.products JOIN internet_shop.orders_products ON (products.id = orders_products.products_id) JOIN internet_shop.orders ON (orders_products.orders_id = orders.id) WHERE products.id= ?";
 
 	@Override
 	public List<Product> findAll() {
@@ -71,6 +72,9 @@ public class ProductDAO extends AbstractDAO<Product> {
 
 	@Override
 	public boolean delete(Integer id) {
+		if (checkActiveOrder(id)) {
+			return false;
+		}
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
@@ -89,6 +93,9 @@ public class ProductDAO extends AbstractDAO<Product> {
 
 	@Override
 	public boolean delete(Product entity) {
+		if (checkActiveOrder(entity.getId())) {
+			return false;
+		}
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
@@ -173,5 +180,24 @@ public class ProductDAO extends AbstractDAO<Product> {
 			log.error(e);
 		}
 		return path;
+	}
+
+	private boolean checkActiveOrder(int id) {
+		boolean flag = false;
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_SELECT)) {
+			prepareStatement.setInt(1, id);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				if ("active".equals(resultSet.getString("status"))) {
+					flag = true;
+				}
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return flag;
 	}
 }

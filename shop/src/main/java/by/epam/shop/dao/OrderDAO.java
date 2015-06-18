@@ -16,6 +16,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 	private static Logger log = Logger.getLogger(OrderDAO.class);
 	private static final String SQL_SELECT_ORDER = "SELECT * FROM internet_shop.orders";
 	private static final String SQL_SELECT_ORDER_BY_ID = "SELECT * FROM internet_shop.orders WHERE id= ?";
+	private static final String SQL_SELECT_ORDER_BY_STATUS = "SELECT * FROM internet_shop.orders WHERE status= ?";
 	private static final String SQL_CREATE_ORDER = "INSERT INTO internet_shop.orders (id, users_id, status, date) VALUES (?,?,?,?)";
 	private static final String SQL_UPDATE_ORDER = "UPDATE internet_shop.orders SET users_id= ?, status= ?, date= ? WHERE id= ?";
 	private static final String SQL_DELETE_ORDER = "DELETE FROM internet_shop.orders WHERE id= ?";
@@ -68,6 +69,29 @@ public class OrderDAO extends AbstractDAO<Order> {
 			log.error(e);
 		}
 		return order;
+	}
+
+	public List<Order> findEntitiesByStatus(Product product) {
+		ArrayList<Order> orders = new ArrayList<>();
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_SELECT_ORDER_BY_STATUS)) {
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				Order order = new Order();
+				order.setId(resultSet.getInt("id"));
+				order.setUser(new UserDAO().findEntityById(resultSet
+						.getInt("users_id")));
+				order.setStatus(resultSet.getString("status"));
+				order.setDate(resultSet.getDate("date"));
+				order.setProducts(findProductsOfOrder(order));
+				orders.add(order);
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return orders;
 	}
 
 	@Override

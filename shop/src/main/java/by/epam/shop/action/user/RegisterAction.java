@@ -9,7 +9,7 @@ import by.epam.shop.manager.ConfigurationManager;
 import by.epam.shop.manager.MessageManager;
 import by.epam.shop.service.user.Encryption;
 
-public class LogOutAction implements Action {
+public class RegisterAction implements Action {
 	private static final String PARAM_NAME_LOGIN = "login";
 	private static final String PARAM_NAME_PASSWORD = "password";
 	private static final String PARAM_NAME_PASSWORD_REPEAT = "password_repeat";
