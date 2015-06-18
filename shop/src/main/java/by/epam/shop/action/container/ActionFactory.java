@@ -6,7 +6,28 @@ import by.epam.shop.action.Action;
 import by.epam.shop.manager.MessageManager;
 
 public class ActionFactory {
-	MessageManager messageManager = MessageManager.getInstance();
+	private static MessageManager messageManager = MessageManager.getInstance();
+	private static ActionFactory instance;
+	private volatile static boolean instanceCreated;
+
+	private ActionFactory() {
+	}
+
+	public static ActionFactory getInstance() {
+		if (!instanceCreated) {
+			synchronized (ActionFactory.class) {
+				try {
+					if (!instanceCreated) {
+						instance = new ActionFactory();
+						instanceCreated = true;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return instance;
+	}
 
 	public Action defineCommand(HttpServletRequest request) {
 		Action current = null;
