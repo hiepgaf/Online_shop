@@ -3,12 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<c:if
-	test="${sessionScope.locale == 'locale_ru_RU' or empty sessionScope.locale}">
-	<fmt:setLocale value="en_US" scope="session" />
+<c:if test="${sessionScope.locale == 'ru' or empty sessionScope.locale}">
+	<fmt:setLocale value="ru_RU" />
 </c:if>
-<c:if test="${sessionScope.locale == 'locale_en_US'}">
-	<fmt:setLocale value="en_US" scope="session" />
+<c:if test="${sessionScope.locale == 'en'}">
+	<fmt:setLocale value="en_US" />
 </c:if>
 <fmt:setBundle basename="locale" />
 
