@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 public class MessageManager {
 	private ResourceBundle resourceBundle = ResourceBundle
-			.getBundle("messages");
+			.getBundle("locale");
 	private static MessageManager instance;
 	private volatile static boolean instanceCreated;
 
