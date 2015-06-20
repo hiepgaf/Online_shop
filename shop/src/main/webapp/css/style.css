@@ -84,8 +84,10 @@ body {
 	background-size: auto 21px;
 	height: 21px;
 	width: 30px;
+	text-indent: -9000px;
 	border-style: none;
 	position: absolute;
+	cursor: pointer;
 	left: 85%;
 	top: 100px;
 }
@@ -94,8 +96,10 @@ body {
 	background-size: auto 21px;
 	height: 21px;
 	width: 30px;
+	text-indent: -9000px;
 	border-style: none;
 	position: absolute;
+	cursor: pointer;
 	left: 88%;
 	top: 100px;
 }

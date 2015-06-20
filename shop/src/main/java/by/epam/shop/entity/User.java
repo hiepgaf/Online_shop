@@ -1,5 +1,6 @@
 package by.epam.shop.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class User extends AbstractEntity {
@@ -51,11 +52,19 @@ public class User extends AbstractEntity {
 	}
 
 	public List<Product> getShoooppingCart() {
-		return shoooppingCart;
+		return Collections.unmodifiableList(shoooppingCart);
 	}
 
 	public void setShoooppingCart(List<Product> shoooppingCart) {
 		this.shoooppingCart = shoooppingCart;
+	}
+
+	public void addProduct(Product product) {
+		shoooppingCart.add(product);
+	}
+
+	public void removeProduct(Product product) {
+		shoooppingCart.remove(product);
 	}
 
 	@Override

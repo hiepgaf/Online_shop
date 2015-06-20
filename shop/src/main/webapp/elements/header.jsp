@@ -13,16 +13,18 @@
 	<div class="header">
 		<div>
 			<form method="POST" action="Controller">
-				<input id="searchField" type="text" value="Поиск по сайту" />
-				<input id="searchButton" type="submit" value="" />
+				<input id="searchField" type="text" value="Поиск по сайту" /> <input
+					id="searchButton" type="submit" value="" />
 			</form>
 		</div>
 		<div>
 			<form method="POST" action="Controller">
-				<input id="enButton" type="submit" name="locale" value="en">
+				<input name="action" type="hidden" value="change_locale" /> <input
+					id="enButton" type="submit" name="locale" value="en">
 			</form>
 			<form method="POST" action="Controller">
-				<input id="ruButton" type="submit" name="locale" value="ru">
+				<input name="action" type="hidden" value="change_locale" /> <input
+					id="ruButton" type="submit" name="locale" value="ru">
 			</form>
 		</div>
 	</div>

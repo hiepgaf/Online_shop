@@ -1,6 +1,7 @@
 package by.epam.shop.entity;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 public class Order extends AbstractEntity {
@@ -34,7 +35,7 @@ public class Order extends AbstractEntity {
 	}
 
 	public List<Product> getProducts() {
-		return products;
+		return Collections.unmodifiableList(products);
 	}
 
 	public void setProducts(List<Product> products) {

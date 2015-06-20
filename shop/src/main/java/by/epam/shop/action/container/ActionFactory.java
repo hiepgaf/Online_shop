@@ -3,10 +3,9 @@ package by.epam.shop.action.container;
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.shop.action.Action;
-import by.epam.shop.manager.MessageManager;
+import by.epam.shop.constant.MessageKeys;
 
 public class ActionFactory {
-	private static MessageManager messageManager = MessageManager.getInstance();
 	private static ActionFactory instance;
 	private volatile static boolean instanceCreated;
 
@@ -39,8 +38,8 @@ public class ActionFactory {
 			ActionEnum currentEnum = ActionEnum.valueOf(action.toUpperCase());
 			current = currentEnum.getCurrentAction();
 		} catch (IllegalArgumentException e) {
-			request.setAttribute("wrongAction",
-					action + messageManager.getProperty("message.wrongaction"));
+			request.setAttribute("wrongAction", action
+					+ MessageKeys.WRONG_ACTION);
 		}
 		return current;
 	}

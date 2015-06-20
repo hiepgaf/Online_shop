@@ -4,10 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:if test="${sessionScope.locale == 'ru' or empty sessionScope.locale}">
-	<fmt:setLocale value="ru_RU" />
+	<fmt:setLocale value="ru_RU" scope="session" />
 </c:if>
 <c:if test="${sessionScope.locale == 'en'}">
-	<fmt:setLocale value="en_US" />
+	<fmt:setLocale value="en_US" scope="session" />
 </c:if>
 <fmt:setBundle basename="locale" />
 
