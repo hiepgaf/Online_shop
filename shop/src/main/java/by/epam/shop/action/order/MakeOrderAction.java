@@ -1,11 +1,12 @@
 package by.epam.shop.action.order;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.shop.action.Action;
 import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.OrderDAO;
-import by.epam.shop.dao.ProductDAO;
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.Product;
 import by.epam.shop.entity.User;
@@ -22,24 +23,16 @@ public class MakeOrderAction implements Action {
 			request.setAttribute("message", MessageKeys.USER_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		String[] selected = request.getParameterValues("selected");
-		if (selected == null) {
+		List<Product> products = user.getShoooppingCart();
+		if (products == null) {
 			request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		ProductDAO productDAO = new ProductDAO();
 		Order order = new Order();
-		order.setUser(user);
-		order.setStatus("active");
-		for (int i = 0; i < selected.length; i++) {
-			Product product = productDAO.findEntityById(Integer
-					.parseInt(selected[i]));
-			order.addProduct(product);
-		}
+		order.setProducts(products);
 		OrderDAO orderDAO = new OrderDAO();
 		orderDAO.create(order);
-		request.setAttribute("message",
-				MessageKeys.ADD_TO_SHOPPING_CART_SUCCESS);
+		request.setAttribute("message", MessageKeys.MAKE_ORDER_SUCCESS);
 		return configurationManager.getProperty("path.page.success");
 	}
 
