@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
-<title><fmt:message key="title.main" /></title>
+<title><fmt:message key="title.register" /></title>
 </head>
 <body>
 	<div>
@@ -33,9 +33,7 @@
 			</div>
 		</div>
 		<div id="right-content">
-			<div id="content">
-				<a>asdsafsdfdsfsdf</a>
-			</div>
+			<%@include file="/elements/register_content.jsp"%>
 		</div>
 		<div style="clear: left"></div>
 	</div>

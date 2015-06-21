@@ -27,7 +27,7 @@
 					</div>
 				</form>
 				<div id="register">
-					<a href="#"><fmt:message key="menu.button.register" /></a>
+					<a href="register.jsp"><fmt:message key="menu.button.register" /></a>
 				</div>
 			</div>
 		</c:when>

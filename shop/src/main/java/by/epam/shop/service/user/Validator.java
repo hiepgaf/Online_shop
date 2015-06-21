@@ -7,7 +7,7 @@ import by.epam.shop.entity.User;
 
 public class Validator {
 	public static final Pattern LOGIN_PATTERN = Pattern
-			.compile("\\A[A-Za-z]][\\w]{7,14}\\z");
+			.compile("\\A[A-Za-z]][\\w]{2,14}\\z");
 	public static final Pattern PASSWORD_PATTERN = Pattern
 			.compile("\\A[\\w]{8,15}\\z");
 	public static final Pattern EMAIL_PATTERN = Pattern
