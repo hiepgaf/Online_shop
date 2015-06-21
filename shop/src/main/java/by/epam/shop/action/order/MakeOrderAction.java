@@ -30,6 +30,8 @@ public class MakeOrderAction implements Action {
 		}
 		Order order = new Order();
 		order.setProducts(products);
+		order.setStatus("active");
+		order.setUser(user);
 		OrderDAO orderDAO = new OrderDAO();
 		orderDAO.create(order);
 		request.setAttribute("message", MessageKeys.MAKE_ORDER_SUCCESS);
