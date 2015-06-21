@@ -10,7 +10,7 @@
 </head>
 <body>
 	<ul>
-		<li><a href="#"><fmt:message key="menu.button.main" /></a></li>
+		<li><a href="main"><fmt:message key="menu.button.main" /></a></li>
 		<li><a href="#">Новости</a></li>
 		<li><a href="#">Контакты</a></li>
 		<li><a href="#">О нас</a></li>

@@ -42,6 +42,10 @@ public class Order extends AbstractEntity {
 		this.products = products;
 	}
 
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

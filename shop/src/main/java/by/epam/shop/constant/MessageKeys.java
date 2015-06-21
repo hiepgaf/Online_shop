@@ -10,4 +10,11 @@ public class MessageKeys {
 	public static final String REGISTER_LOGIN_PATTERN_ERROR = "message.register.loginpatternerror";
 	public static final String REGISTER_PASSWORD_PATTERN_ERROR = "message.register.passwordpatternerror";
 	public static final String REGISTER_EMAIL_PATTERN_ERROR = "message.register.emailpatternerror";
+	public static final String FIND_PRODUCTS_ERROR = "message.find.products.error";
+	public static final String FIND_PRODUCT_ERROR = "message.find.product.error";
+	public static final String USER_ERROR = "message.user.error";
+	public static final String ADD_TO_SHOPPING_CART_SUCCESS = "message.addproduct.success";
+	public static final String REMOVE_FROM_SHOPPING_CART_SUCCESS = "message.removeproduct.success";
+	public static final String MAKE_ORDER_ERROR = "message.makeorder.error";
+	public static final String MAKE_ORDER_SUCCESS = "message.makeorder.success";
 }
