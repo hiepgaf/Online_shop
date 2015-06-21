@@ -10,13 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="header">
-		<div>
-			<form method="POST" action="Controller">
-				<input id="searchField" type="text" value="Поиск по сайту" /> <input
-					id="searchButton" type="submit" value="" />
-			</form>
-		</div>
+	<div id="header">
 		<div>
 			<form method="POST" action="Controller">
 				<input name="action" type="hidden" value="change_locale" /> <input
@@ -25,6 +19,12 @@
 			<form method="POST" action="Controller">
 				<input name="action" type="hidden" value="change_locale" /> <input
 					id="ruButton" type="submit" name="locale" value="ru">
+			</form>
+		</div>
+		<div>
+			<form method="POST" action="Controller">
+				<input id="searchField" type="text" value="<fmt:message key="field.search" />" /> <input
+					id="searchButton" type="submit" value="" />
 			</form>
 		</div>
 	</div>

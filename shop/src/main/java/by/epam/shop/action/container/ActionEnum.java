@@ -3,6 +3,7 @@ package by.epam.shop.action.container;
 import by.epam.shop.action.Action;
 import by.epam.shop.action.locale.ChangeLocaleAction;
 import by.epam.shop.action.user.LogInAction;
+import by.epam.shop.action.user.LogOutAction;
 import by.epam.shop.action.user.RegisterAction;
 
 public enum ActionEnum {
@@ -11,7 +12,12 @@ public enum ActionEnum {
 			this.action = new LogInAction();
 		}
 	},
-	LOGOUT, REGISTRATION {
+	LOGOUT {
+		{
+			this.action = new LogOutAction();
+		}
+	},
+	REGISTRATION {
 		{
 			this.action = new RegisterAction();
 		}

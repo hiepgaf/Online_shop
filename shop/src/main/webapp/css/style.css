@@ -12,7 +12,7 @@ body {
 	height: 170px;
 	margin: auto;
 	background-image: url(../images/header.png);
-	background-color: #F6F6F6;
+	background-color: #E1DCDC;
 	background-position: 50% 0%;
 	background-repeat: no-repeat;
 	background-size: 70% auto;
@@ -24,7 +24,7 @@ body {
 	min-height: 500px;
 	margin: auto;
 	margin-top: 10px;
-	background-color: #F6F6F6;
+	background-color: #E1DCDC;
 	border-radius: 20px;
 }
 #login {
@@ -92,10 +92,63 @@ body {
 }
 #content {
 	background-color: white;
-	height: auto;
 	border-radius: 20px;
-	position: relative;
-	left: 220px;
-	top: 10px;
+	width: 100%;
+	min-height: 700px;
+}
+#left-content {
+	float: left;
+}
+#right-content {
+	float: left;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	width: 78%;
+}
+#enButton {
+	background: url(../images/en-lang.gif) no-repeat;
+	background-size: auto 21px;
+	height: 21px;
+	width: 30px;
+	text-indent: -9000px;
+	border-style: none;
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	left: 83%;
+}
+#ruButton {
+	background: url(../images/ru-lang.gif) no-repeat;
+	background-size: auto 21px;
+	height: 21px;
+	width: 30px;
+	text-indent: -9000px;
+	border-style: none;
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	left: 86%;
+}
+#searchField {
+	width: 220px;
+	height: 22px;
+	border-style: none;
+	position: absolute;
+	left: 72%;
+	top: 140px;
+	background: url(../images/search-field.gif) no-repeat;
+	background-size: 220px 22px;
+	text-indent: 20px;
+}
+#searchButton {
+	height: 18px;
+	width: 30px;
+	background: url(../images/search-button.gif) no-repeat;
+	background-size: auto 18px;
+	border-style: none;
+	position: absolute;
+	left: 86%;
+	top: 142px;
 }
 

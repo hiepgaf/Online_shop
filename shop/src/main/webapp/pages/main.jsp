@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="ctg" uri="customtags"%>
 
 <c:if test="${sessionScope.locale == 'ru' or empty sessionScope.locale}">
 	<fmt:setLocale value="ru_RU" scope="session" />
@@ -22,13 +23,21 @@
 	<div>
 		<%@include file="/elements/header.jsp"%>
 	</div>
-	<div id="loginbar">
-		<%@include file="/elements/login.jsp"%>
-	</div>
-	<div>
-		<div id="navbar">
-			<%@include file="/elements/menu.jsp"%>
+	<div id="main">
+		<div id="left-content">
+			<div id="login">
+				<%@include file="/elements/login.jsp"%>
+			</div>
+			<div id="menu">
+				<%@include file="/elements/menu.jsp"%>
+			</div>
 		</div>
+		<div id="right-content">
+			<div id="content">
+				<a>asdsafsdfdsfsdf</a>
+			</div>
+		</div>
+		<div style="clear: left"></div>
 	</div>
 </body>
 </html>
