@@ -8,6 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-	<jsp:forward page="/pages/main.jsp" />
+	<jsp:forward page="/pages/main1.jsp" />
 </body>
 </html>

@@ -2,40 +2,42 @@
 
 body {
 	font-family: "Times New Roman", Georgia, Times, serif;
-}
-.header {
-	height: 150px;
-	width: 100%;
-	background: url(../images/logo.jpg);
+	background-image: url(../images/backgroundMain.jpg);
 	background-repeat: no-repeat;
-	background-size: auto 150px;
-	background-position: 5%;
-	border-bottom: solid;
+	background-size: 100% auto;
+	background-attachment: fixed;
 }
-#navbar ul {
-	margin: 40px 0px 0px 0px;
-	padding-left: 5%;
-	list-style-type: none;
-	width: 180px;
+#header {
+	width: 80%;
+	height: 170px;
+	margin: auto;
+	background-image: url(../images/header.png);
+	background-color: #F6F6F6;
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+	background-size: 70% auto;
+	border-radius: 20px;
 }
-#navbar li {
-	background: url(../images/button.jpg) no-repeat;
-	background-size: 180px auto;
+#main {
+	width: 80%;
+	height: auto;
+	min-height: 500px;
+	margin: auto;
+	margin-top: 10px;
+	background-color: #F6F6F6;
+	border-radius: 20px;
 }
-#navbar a {
-	color: #302E2E;
-	padding: 5px;
-	padding-left: 30%;
-	text-decoration: none;
-	display: block;
+#login {
+	width: 200px;
+	height: auto;
+	left: 10px;
+	top: 10px;
+	position: relative;
+	background-color: white;
+	border-radius: 20px;
 }
-#navbar a:active {
-	padding-left: 31%;;
-}
-#loginbar {
-	margin: 30px 0px 0px 0px;
-	width: 180px;
-	padding-left: 5%;
+#innerlogin {
+	padding: 10px 10px 10px 10px;
 }
 .input {
 	border-style: none;
@@ -58,49 +60,42 @@ body {
 	font-size: 12px;
 	text-align: center;
 }
-#searchField {
-	width: 220px;
-	height: 22px;
-	border-style: none;
-	position: absolute;
-	left: 60%;
-	top: 100px;
-	background: url(../images/search-field.gif) no-repeat;
-	background-size: 220px 22px;
-	text-indent: 20px;
+#menu {
+	width: 200px;
+	height: auto;
+	left: 10px;
+	top: 10px;
+	position: relative;
+	background-color: white;
+	border-radius: 20px;
 }
-#searchButton {
-	height: 18px;
-	width: 30px;
-	background: url(../images/search-button.gif) no-repeat;
-	background-size: auto 18px;
-	border-style: none;
-	position: absolute;
-	left: 75%;
-	top: 102px;
+#menu ul {
+	padding: 10px 10px 10px 10px;
+	list-style-type: none;
+	width: auto;
 }
-#enButton {
-	background: url(../images/en-lang.gif) no-repeat;
-	background-size: auto 21px;
-	height: 21px;
-	width: 30px;
-	text-indent: -9000px;
-	border-style: none;
-	position: absolute;
-	cursor: pointer;
-	left: 85%;
-	top: 100px;
+#menu li {
+	background: url(../images/button.jpg) no-repeat;
+	background-size: 180px auto;
+	border-radius: 14px;
+	margin-top: 4px;
 }
-#ruButton {
-	background: url(../images/ru-lang.gif) no-repeat;
-	background-size: auto 21px;
-	height: 21px;
-	width: 30px;
-	text-indent: -9000px;
-	border-style: none;
-	position: absolute;
-	cursor: pointer;
-	left: 88%;
-	top: 100px;
+#menu a {
+	color: #302E2E;
+	padding: 5px;
+	padding-left: 30%;
+	text-decoration: none;
+	display: block;
+}
+#menu a:active {
+	padding-left: 31%;;
+}
+#content {
+	background-color: white;
+	height: auto;
+	border-radius: 20px;
+	position: relative;
+	left: 220px;
+	top: 10px;
 }
 
