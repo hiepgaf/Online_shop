@@ -21,7 +21,7 @@ public class ShowProductsAction implements Action {
 		ProductDAO productDAO = new ProductDAO();
 		List<Product> products = productDAO
 				.findEntitiesByType(product_types_id);
-		if (products == null) {
+		if (products.isEmpty()) {
 			request.setAttribute("message", MessageKeys.FIND_PRODUCTS_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}

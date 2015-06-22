@@ -48,13 +48,14 @@ public class ProductDAO extends AbstractDAO<Product> {
 
 	@Override
 	public Product findEntityById(Integer id) {
-		Product product = new Product();
+		Product product = null;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_SELECT_PRODUCT_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
+				product = new Product();
 				product.setId(resultSet.getInt("id"));
 				product.setName(resultSet.getString("name"));
 				product.setPrice(resultSet.getInt("price"));

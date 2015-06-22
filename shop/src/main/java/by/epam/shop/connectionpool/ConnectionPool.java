@@ -7,6 +7,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import org.apache.log4j.Logger;
 
+import com.mysql.jdbc.Driver;
+
 import by.epam.shop.manager.ConnectionPoolManager;
 
 public class ConnectionPool {
@@ -21,7 +23,7 @@ public class ConnectionPool {
 
 	private ConnectionPool() {
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			DriverManager.registerDriver(new Driver());
 			ConnectionPoolManager manager = ConnectionPoolManager.getInstance();
 			poolSize = Integer.parseInt(manager.getProperty("pool_size"));
 			user = manager.getProperty("user");
@@ -33,7 +35,7 @@ public class ConnectionPool {
 						password));
 			}
 		} catch (SQLException | InterruptedException e) {
-			log.error(e);
+			throw new ExceptionInInitializerError();
 		}
 	}
 

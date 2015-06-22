@@ -7,6 +7,8 @@ import by.epam.shop.action.user.AddToShoppingCartAction;
 import by.epam.shop.action.user.LogInAction;
 import by.epam.shop.action.user.LogOutAction;
 import by.epam.shop.action.user.RegisterAction;
+import by.epam.shop.action.user.RemoveFromShoppingCartAction;
+import by.epam.shop.action.user.ShowCartAction;
 
 public enum ActionEnum {
 	LOGIN {
@@ -37,6 +39,16 @@ public enum ActionEnum {
 	ADD_TO_SHOPPING_CART {
 		{
 			action = new AddToShoppingCartAction();
+		}
+	},
+	SHOW_CART_ACTION {
+		{
+			action = new ShowCartAction();
+		}
+	},
+	REMOVE_FROM_CART {
+		{
+			action = new RemoveFromShoppingCartAction();
 		}
 	};
 	Action action;

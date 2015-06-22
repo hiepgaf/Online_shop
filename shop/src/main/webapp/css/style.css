@@ -280,3 +280,40 @@ body {
 	font-size: 18px;
 	float: left;
 }
+#cart {
+	width: 97%;
+	height: 40px;
+	padding-left: 10px;
+	padding-top: 30px;
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+#cartName {
+	width: 60%;
+	float: left;
+	padding-left: 30px;
+}
+#cartPrice {
+	width: 20%;
+	float: left;
+	padding-left: 10px;
+}
+#deleteFromCartButton {
+	border-style: none;
+	width: 10%;
+	height: 30px;
+	background: url(../images/buybutton.png) no-repeat;
+	background-size: 100% 100%;
+	text-align: center;
+	cursor: pointer;
+}
+#makeOrderButton {
+	border-style: none;
+	width: 180px;
+	height: 30px;
+	background: url(../images/button.jpg) no-repeat;
+	background-size: 180px auto;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 20px;
+}

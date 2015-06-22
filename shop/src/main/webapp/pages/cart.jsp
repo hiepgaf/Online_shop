@@ -1,5 +1,5 @@
-<%@ page isErrorPage="true" language="java"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="ctg" uri="customtags"%>
@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
-<title><fmt:message key="title.error" /></title>
+<title><fmt:message key="title.main" /></title>
 </head>
 <body>
 	<div>
@@ -34,19 +34,7 @@
 		</div>
 		<div id="right-content">
 			<div id="content">
-				<div id="error">
-					<div id="errorImage"></div>
-					<div id="errorMessage">
-						<c:choose>
-							<c:when test="${empty message }">
-								<fmt:message key="message.fatalerror" />
-							</c:when>
-							<c:otherwise>
-								<fmt:message key="${message }" />
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
+				<%@include file="/elements/cart_content.jsp"%>
 			</div>
 		</div>
 		<div style="clear: left"></div>

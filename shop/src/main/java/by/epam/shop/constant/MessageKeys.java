@@ -17,4 +17,5 @@ public class MessageKeys {
 	public static final String REMOVE_FROM_SHOPPING_CART_SUCCESS = "message.removeproduct.success";
 	public static final String MAKE_ORDER_ERROR = "message.makeorder.error";
 	public static final String MAKE_ORDER_SUCCESS = "message.makeorder.success";
+	public static final String SHOW_CART_ERROR = "message.cart.error";
 }

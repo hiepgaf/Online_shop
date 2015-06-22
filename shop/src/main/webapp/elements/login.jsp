@@ -36,7 +36,7 @@
 				<div><fmt:message key="menu.user.appeal" /> ${sessionScope.user.login}</div>
 				<div>
 					<form method="POST" action="Controller">
-						<input name="action" type="hidden" value="show_shopping_cart" />
+						<input name="action" type="hidden" value="show_cart_action" />
 						<input class="button" type="submit" name="shopping_cart"
 							value="<fmt:message key="menu.button.shoppingcart" />">
 					</form>
