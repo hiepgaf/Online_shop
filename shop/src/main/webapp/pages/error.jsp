@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
-<title><fmt:message key="title.main" /></title>
+<title><fmt:message key="title.error" /></title>
 </head>
 <body>
 	<div>

@@ -21,8 +21,9 @@ public class SubStringTag extends TagSupport {
 
 	@Override
 	public int doStartTag() {
+		int maxTextLength = 140;
 		try {
-			if (text.length() > 140) {
+			if (text.length() > maxTextLength) {
 				pageContext.getOut().write(text.substring(0, 140) + "...");
 			} else {
 				pageContext.getOut().write(text + "...");

@@ -239,16 +239,16 @@ body {
 
 #error {
 	width: 90%;
-	height: 100px;
+	height: 60px;
 	padding-left: 40px;
 	padding-top: 40px;
 }
 
 #errorImage {
-	width: 14%;
+	width: 10%;
 	height: 100%;
 	background: url(../images/error.png) no-repeat;
-	background-size: 100% auto;
+	background-size: auto 100%;
 	float: left;
 }
 
@@ -261,16 +261,16 @@ body {
 
 #success {
 	width: 90%;
-	height: 100px;
+	height: 60px;
 	padding-left: 40px;
 	padding-top: 40px;
 }
 
 #successImage {
-	width: 14%;
+	width: 10%;
 	height: 100%;
 	background: url(../images/success.png) no-repeat;
-	background-size: 100% auto;
+	background-size: auto 100%;
 	float: left;
 }
 
