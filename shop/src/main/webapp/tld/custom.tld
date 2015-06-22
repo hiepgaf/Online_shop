@@ -1,42 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<taglib version="2.1"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
 	<tlib-version>1.0</tlib-version>
 	<short-name>ctg</short-name>
 	<uri>customtags</uri>
 	<tag>
-		<name>user</name>
-		<tag-class>by.epam.shop.tag.LoginTag</tag-class>
+		<name>text</name>
+		<tag-class>by.epam.shop.tag.SubStringTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<name>login_field</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>enter_button</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>register_button</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>shopping_cart_button</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>orders_button</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>exit_button</name>
+			<name>text</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

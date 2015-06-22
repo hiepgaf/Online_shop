@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="ctg" uri="customtags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,14 +23,20 @@
 				</div>
 				<div id="productNameDescription">
 					<div id="productName">${product.name }</div>
-					<div id="productsShortDescription">${product.description }</div>
+					<div id="productsShortDescription">
+						<ctg:text text="${product.description }" />
+						<a href="#"><fmt:message key="product.button.more" /></a>
+					</div>
 				</div>
 				<div id="priceBuy">
-					<div id="productPrice">${product.price } <fmt:message key="products.money" /></div>
+					<div id="productPrice">${product.price }
+						<fmt:message key="products.money" />
+					</div>
 					<div>
 						<input name="action" type="hidden" value="add_to_shopping_cart" />
 						<input name="product_id" type="hidden" value="${product.id }" />
-						<input class="buyButton" type="submit" value="<fmt:message key="products.buy" />" />
+						<input class="buyButton" type="submit"
+							value="<fmt:message key="products.buy" />" />
 					</div>
 				</div>
 			</div>
