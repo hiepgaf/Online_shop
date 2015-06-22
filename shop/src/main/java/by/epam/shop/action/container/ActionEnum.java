@@ -2,6 +2,7 @@ package by.epam.shop.action.container;
 
 import by.epam.shop.action.Action;
 import by.epam.shop.action.locale.ChangeLocaleAction;
+import by.epam.shop.action.page.GoToPageAction;
 import by.epam.shop.action.product.ShowProductsAction;
 import by.epam.shop.action.user.AddToShoppingCartAction;
 import by.epam.shop.action.user.LogInAction;
@@ -49,6 +50,11 @@ public enum ActionEnum {
 	REMOVE_FROM_CART {
 		{
 			action = new RemoveFromShoppingCartAction();
+		}
+	},
+	GO_TO_PAGE {
+		{
+			action = new GoToPageAction();
 		}
 	};
 	Action action;

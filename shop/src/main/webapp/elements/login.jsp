@@ -16,41 +16,49 @@
 						<input name="action" type="hidden" value="login" />
 					</div>
 					<div>
-						<input class="input" type="text" name="login" value="<fmt:message key="field.login" />" />
+						<input class="input" type="text" name="login"
+							value="<fmt:message key="field.login" />" />
 					</div>
 					<div>
 						<input class="input" type="password" name="password"
 							value="********" />
 					</div>
 					<div>
-						<input class="button" type="submit" value="<fmt:message key="menu.button.login" />" />
+						<input class="button" type="submit"
+							value="<fmt:message key="menu.button.login" />" />
 					</div>
 				</form>
 				<div id="register">
-					<a href="pages/register.jsp"><fmt:message key="menu.button.register" /></a>
+					<a href="Controller?action=go_to_page&page=path.page.register"><fmt:message
+							key="menu.button.register" /></a>
 				</div>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div id="innerlogin">
-				<div><fmt:message key="menu.user.appeal" /> ${sessionScope.user.login}</div>
+				<div>
+					<fmt:message key="menu.user.appeal" />
+					${sessionScope.user.login}
+				</div>
 				<div>
 					<form method="POST" action="Controller">
-						<input name="action" type="hidden" value="show_cart_action" />
-						<input class="button" type="submit" name="shopping_cart"
+						<input name="action" type="hidden" value="show_cart_action" /> <input
+							class="button" type="submit" name="shopping_cart"
 							value="<fmt:message key="menu.button.shoppingcart" />">
 					</form>
 				</div>
 				<div>
 					<form method="POST" action="Controller">
 						<input name="action" type="hidden" value="show_orders" /> <input
-							class="button" type="submit" name="orders" value="<fmt:message key="menu.button.orders" />">
+							class="button" type="submit" name="orders"
+							value="<fmt:message key="menu.button.orders" />">
 					</form>
 				</div>
 				<div>
 					<form method="POST" action="Controller">
 						<input name="action" type="hidden" value="logout" /> <input
-							class="button" type="submit" name="log_out" value="<fmt:message key="menu.button.exit" />">
+							class="button" type="submit" name="log_out"
+							value="<fmt:message key="menu.button.exit" />">
 					</form>
 				</div>
 			</div>

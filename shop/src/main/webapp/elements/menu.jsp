@@ -10,7 +10,12 @@
 </head>
 <body>
 	<ul>
-		<li><a href="pages/main.jsp"><fmt:message key="menu.button.main" /></a></li>
+		<li><form action="Controller" method="POST">
+				<input name="action" type="hidden" value="go_to_page" /> <input
+					name="page" type="hidden" value="path.page.main" /> <input
+					class="button" type="submit"
+					value="<fmt:message key="menu.button.main"/>" />
+			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
 					name="product_types_id" type="hidden" value="1" /> <input
