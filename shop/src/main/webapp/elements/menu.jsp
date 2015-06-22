@@ -10,10 +10,37 @@
 </head>
 <body>
 	<ul>
-		<li><a href="main"><fmt:message key="menu.button.main" /></a></li>
-		<li><a href="#">Новости</a></li>
-		<li><a href="#">Контакты</a></li>
-		<li><a href="#">О нас</a></li>
+		<li><a href="pages/main.jsp"><fmt:message key="menu.button.main" /></a></li>
+		<li><form action="Controller" method="POST">
+				<input name="action" type="hidden" value="show_products" /> <input
+					name="product_types_id" type="hidden" value="1" /> <input
+					class="button" type="submit"
+					value="<fmt:message key="menu.button.action"/>" />
+			</form></li>
+		<li><form action="Controller" method="POST">
+				<input name="action" type="hidden" value="show_products" /> <input
+					name="product_types_id" type="hidden" value="2" /> <input
+					class="button" type="submit"
+					value="<fmt:message key="menu.button.rpg"/>" />
+			</form></li>
+		<li><form action="Controller" method="POST">
+				<input name="action" type="hidden" value="show_products" /> <input
+					name="product_types_id" type="hidden" value="3" /> <input
+					class="button" type="submit"
+					value="<fmt:message key="menu.button.strategy"/>" />
+			</form></li>
+		<li><form action="Controller" method="POST">
+				<input name="action" type="hidden" value="show_products" /> <input
+					name="product_types_id" type="hidden" value="4" /> <input
+					class="button" type="submit"
+					value="<fmt:message key="menu.button.simulator"/>" />
+			</form></li>
+		<li><form action="Controller" method="POST">
+				<input name="action" type="hidden" value="show_products" /> <input
+					name="product_types_id" type="hidden" value="5" /> <input
+					class="button" type="submit"
+					value="<fmt:message key="menu.button.quest"/>" />
+			</form></li>
 	</ul>
 </body>
 </html>

@@ -2,6 +2,8 @@ package by.epam.shop.action.container;
 
 import by.epam.shop.action.Action;
 import by.epam.shop.action.locale.ChangeLocaleAction;
+import by.epam.shop.action.product.ShowProductsAction;
+import by.epam.shop.action.user.AddToShoppingCartAction;
 import by.epam.shop.action.user.LogInAction;
 import by.epam.shop.action.user.LogOutAction;
 import by.epam.shop.action.user.RegisterAction;
@@ -9,22 +11,32 @@ import by.epam.shop.action.user.RegisterAction;
 public enum ActionEnum {
 	LOGIN {
 		{
-			this.action = new LogInAction();
+			action = new LogInAction();
 		}
 	},
 	LOGOUT {
 		{
-			this.action = new LogOutAction();
+			action = new LogOutAction();
 		}
 	},
 	REGISTRATION {
 		{
-			this.action = new RegisterAction();
+			action = new RegisterAction();
 		}
 	},
 	CHANGE_LOCALE {
 		{
-			this.action = new ChangeLocaleAction();
+			action = new ChangeLocaleAction();
+		}
+	},
+	SHOW_PRODUCTS {
+		{
+			action = new ShowProductsAction();
+		}
+	},
+	ADD_TO_SHOPPING_CART {
+		{
+			action = new AddToShoppingCartAction();
 		}
 	};
 	Action action;

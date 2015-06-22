@@ -34,9 +34,9 @@
 		</div>
 		<div id="right-content">
 			<div id="content">
-				<div id="error">
-					<div id="errorImage"></div>
-					<div id="errorMessage">
+				<div id="success">
+					<div id="successImage"></div>
+					<div id="successMessage">
 						<fmt:message key="${message }" />
 					</div>
 				</div>

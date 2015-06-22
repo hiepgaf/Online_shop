@@ -15,7 +15,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 	private static Logger log = Logger.getLogger(ProductDAO.class);
 	private static final String SQL_SELECT_PRODUCT = "SELECT * FROM internet_shop.products";
 	private static final String SQL_SELECT_PRODUCT_BY_ID = "SELECT * FROM internet_shop.products WHERE id= ?";
-	private static final String SQL_SELECT_PRODUCT_BY_TYPE = "SELECT * FROM internet_shop.products JOIN internet_shop.product_types ON (products.product_types_id = product_types.id) WHERE product_types.description= ?";
+	private static final String SQL_SELECT_PRODUCT_BY_TYPE = "SELECT * FROM internet_shop.products WHERE product_types_id= ?";
 	private static final String SQL_CREATE_PRODUCT = "INSERT INTO internet_shop.products (id, name, price, description, product_pictures_id) VALUES (?,?,?,?,?)";
 	private static final String SQL_UPDATE_PRODUCT = "UPDATE internet_shop.products SET name= ?, price= ?, description= ?, product_pictures_id= ? WHERE id= ?";
 	private static final String SQL_DELETE_PRODUCT = "DELETE FROM internet_shop.products WHERE id= ?";
@@ -71,12 +71,12 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return product;
 	}
 
-	public List<Product> findEntitiesByType(String type) {
+	public List<Product> findEntitiesByType(int product_types_id) {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_SELECT_PRODUCT_BY_TYPE)) {
-			prepareStatement.setString(1, type);
+			prepareStatement.setInt(1, product_types_id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Product product = new Product();

@@ -1,7 +1,6 @@
 package by.epam.shop.entity;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
 
 public class User extends AbstractEntity {
 	private String login;
@@ -9,7 +8,7 @@ public class User extends AbstractEntity {
 	private String email;
 	private int blackListFlag;
 	private int accessLevel;
-	private List<Product> shoooppingCart;
+	private ArrayList<Product> shoooppingCart = new ArrayList<>();
 
 	public String getLogin() {
 		return login;
@@ -51,11 +50,11 @@ public class User extends AbstractEntity {
 		this.accessLevel = accessLevel;
 	}
 
-	public List<Product> getShoooppingCart() {
-		return Collections.unmodifiableList(shoooppingCart);
+	public ArrayList<Product> getShoooppingCart() {
+		return shoooppingCart;
 	}
 
-	public void setShoooppingCart(List<Product> shoooppingCart) {
+	public void setShoooppingCart(ArrayList<Product> shoooppingCart) {
 		this.shoooppingCart = shoooppingCart;
 	}
 
@@ -117,5 +116,4 @@ public class User extends AbstractEntity {
 			return false;
 		return true;
 	}
-
 }

@@ -16,9 +16,11 @@ public class ShowProductsAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		String type = request.getParameter("product_type");
+		int product_types_id = Integer.parseInt(request
+				.getParameter("product_types_id"));
 		ProductDAO productDAO = new ProductDAO();
-		List<Product> products = productDAO.findEntitiesByType(type);
+		List<Product> products = productDAO
+				.findEntitiesByType(product_types_id);
 		if (products == null) {
 			request.setAttribute("message", MessageKeys.FIND_PRODUCTS_ERROR);
 			return configurationManager.getProperty("path.page.error");

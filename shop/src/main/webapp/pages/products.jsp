@@ -34,12 +34,7 @@
 		</div>
 		<div id="right-content">
 			<div id="content">
-				<div id="error">
-					<div id="errorImage"></div>
-					<div id="errorMessage">
-						<fmt:message key="${message }" />
-					</div>
-				</div>
+				<%@include file="/elements/products_content.jsp"%>
 			</div>
 		</div>
 		<div style="clear: left"></div>
