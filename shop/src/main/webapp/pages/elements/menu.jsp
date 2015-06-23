@@ -18,31 +18,31 @@
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_types_id" type="hidden" value="1" /> <input
+					name="product_type" type="hidden" value="Action" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.action"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_types_id" type="hidden" value="2" /> <input
+					name="product_type" type="hidden" value="RPG" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.rpg"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_types_id" type="hidden" value="3" /> <input
+					name="product_type" type="hidden" value="Strategy" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.strategy"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_types_id" type="hidden" value="4" /> <input
+					name="product_type" type="hidden" value="Simulator" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.simulator"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_types_id" type="hidden" value="5" /> <input
+					name="product_type" type="hidden" value="Quest" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.quest"/>" />
 			</form></li>

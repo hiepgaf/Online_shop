@@ -37,7 +37,7 @@
 	</div>
 	<div align="center">
 		<form method="POST" action="Controller">
-			<input name="action" type="hidden" value="remove_from_cart" /><input
+			<input name="action" type="hidden" value="make_order" /><input
 				id="makeOrderButton" type="submit"
 				value="<fmt:message key="cart.makeorder" />" />
 		</form>

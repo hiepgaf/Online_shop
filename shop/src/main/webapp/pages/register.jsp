@@ -21,19 +21,19 @@
 </head>
 <body>
 	<div>
-		<%@include file="/elements/header.jsp"%>
+		<%@include file="/pages/elements/header.jsp"%>
 	</div>
 	<div id="main">
 		<div id="left-content">
 			<div id="login">
-				<%@include file="/elements/login.jsp"%>
+				<%@include file="/pages/elements/login.jsp"%>
 			</div>
 			<div id="menu">
-				<%@include file="/elements/menu.jsp"%>
+				<%@include file="/pages/elements/menu.jsp"%>
 			</div>
 		</div>
 		<div id="right-content">
-			<%@include file="/elements/register_content.jsp"%>
+			<%@include file="/pages/elements/register_content.jsp"%>
 		</div>
 		<div style="clear: left"></div>
 	</div>

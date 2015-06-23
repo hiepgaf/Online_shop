@@ -9,20 +9,23 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.mysql.jdbc.Statement;
+
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.Product;
 
 public class OrderDAO extends AbstractDAO<Order> {
 	private static Logger log = Logger.getLogger(OrderDAO.class);
-	private static final String SQL_SELECT_ORDER = "SELECT * FROM internet_shop.orders";
-	private static final String SQL_SELECT_ORDER_BY_ID = "SELECT * FROM internet_shop.orders WHERE id= ?";
-	private static final String SQL_SELECT_ORDER_BY_LAST_ID = "SELECT * FROM internet_shop.orders WHERE id= last_insert_id()";
-	private static final String SQL_SELECT_ORDER_BY_STATUS = "SELECT * FROM internet_shop.orders WHERE status= ?";
-	private static final String SQL_CREATE_ORDER = "INSERT INTO internet_shop.orders (users_id, status, date) VALUES (?,?,?)";
+	private static final String SQL_SELECT_ORDER = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id)";
+	private static final String SQL_SELECT_ORDER_BY_ID = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id) WHERE orders.id= ?";
+	private static final String SQL_SELECT_ORDER_BY_STATUS = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id) WHERE status.description= ?";
+	private static final String SQL_CREATE_ORDER = "INSERT INTO internet_shop.orders (users_id, status_id) VALUES (?,?)";
 	private static final String SQL_CREATE_ORDERS_PRODUCTS = "INSERT INTO internet_shop.orders_products (orders_id, products_id) VALUES (?,?)";
-	private static final String SQL_UPDATE_ORDER = "UPDATE internet_shop.orders SET users_id= ?, status= ?, date= ? WHERE id= ?";
+	private static final String SQL_UPDATE_ORDER_STATUS = "UPDATE internet_shop.orders SET status= ? WHERE id= ?";
 	private static final String SQL_DELETE_ORDER = "DELETE FROM internet_shop.orders WHERE id= ?";
+	private static final String SQL_DELETE_ORDERS_PRODUCTS = "DELETE FROM internet_shop.orders_products WHERE orders_id= ?";
 	private static final String SQL_SELECT_ORDERS_PRODUCTS = "SELECT * FROM internet_shop.orders_products WHERE orders_id= ?";
+	private static final String SQL_SELECT_STATUS = "SELECT * FROM internet_shop.status WHERE description= ?";
 
 	@Override
 	public List<Order> findAll() {
@@ -33,11 +36,11 @@ public class OrderDAO extends AbstractDAO<Order> {
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Order order = new Order();
-				order.setId(resultSet.getInt("id"));
+				order.setId(resultSet.getInt("orders.id"));
 				order.setUser(new UserDAO().findEntityById(resultSet
-						.getInt("users_id")));
-				order.setStatus(resultSet.getString("status"));
-				order.setDate(resultSet.getDate("date"));
+						.getInt("orders.users_id")));
+				order.setStatus(resultSet.getString("status.description"));
+				order.setDate(resultSet.getTimestamp("orders.date"));
 				order.setProducts(findProductsOfOrder(order));
 				orders.add(order);
 			}
@@ -50,21 +53,20 @@ public class OrderDAO extends AbstractDAO<Order> {
 
 	@Override
 	public Order findEntityById(Integer id) {
-		Order order = new Order();
+		Order order = null;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_SELECT_ORDER_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
-				order.setId(resultSet.getInt("id"));
+				order = new Order();
+				order.setId(resultSet.getInt("orders.id"));
 				order.setUser(new UserDAO().findEntityById(resultSet
-						.getInt("users_id")));
-				order.setStatus(resultSet.getString("status"));
-				order.setDate(resultSet.getDate("date"));
+						.getInt("orders.users_id")));
+				order.setStatus(resultSet.getString("status.description"));
+				order.setDate(resultSet.getTimestamp("orders.date"));
 				order.setProducts(findProductsOfOrder(order));
-			} else {
-				return null;
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
@@ -73,19 +75,20 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return order;
 	}
 
-	public List<Order> findEntitiesByStatus(Product product) {
+	public List<Order> findEntitiesByStatus(String status) {
 		ArrayList<Order> orders = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_SELECT_ORDER_BY_STATUS)) {
+			prepareStatement.setString(1, status);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Order order = new Order();
-				order.setId(resultSet.getInt("id"));
+				order.setId(resultSet.getInt("orders.id"));
 				order.setUser(new UserDAO().findEntityById(resultSet
-						.getInt("users_id")));
-				order.setStatus(resultSet.getString("status"));
-				order.setDate(resultSet.getDate("date"));
+						.getInt("orders.users_id")));
+				order.setStatus(resultSet.getString("status.description"));
+				order.setDate(resultSet.getTimestamp("orders.date"));
 				order.setProducts(findProductsOfOrder(order));
 				orders.add(order);
 			}
@@ -96,29 +99,6 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return orders;
 	}
 
-	public Order findLastOrder() {
-		Order order = new Order();
-		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_ORDER_BY_LAST_ID)) {
-			ResultSet resultSet = prepareStatement.executeQuery();
-			if (resultSet.next()) {
-				order.setId(resultSet.getInt("id"));
-				order.setUser(new UserDAO().findEntityById(resultSet
-						.getInt("users_id")));
-				order.setStatus(resultSet.getString("status"));
-				order.setDate(resultSet.getDate("date"));
-				order.setProducts(findProductsOfOrder(order));
-			} else {
-				return null;
-			}
-			connectionPool.freeConnection(connection);
-		} catch (SQLException e) {
-			log.error(e);
-		}
-		return order;
-	}
-
 	@Override
 	public boolean delete(Integer id) {
 		boolean flag = false;
@@ -127,7 +107,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 				.prepareStatement(SQL_DELETE_ORDER)) {
 			prepareStatement.setInt(1, id);
 			int count = prepareStatement.executeUpdate();
-			if (count == 1) {
+			if (count == 1 && deleteFromOrdersProducts(id)) {
 				flag = true;
 			}
 			connectionPool.freeConnection(connection);
@@ -145,7 +125,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 				.prepareStatement(SQL_DELETE_ORDER)) {
 			prepareStatement.setInt(1, entity.getId());
 			int count = prepareStatement.executeUpdate();
-			if (count == 1) {
+			if (count == 1 && deleteFromOrdersProducts(entity.getId())) {
 				flag = true;
 			}
 			connectionPool.freeConnection(connection);
@@ -160,25 +140,18 @@ public class OrderDAO extends AbstractDAO<Order> {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatementOrder = connection
-				.prepareStatement(SQL_CREATE_ORDER);
-				PreparedStatement prepareStatementOrdersProducts = connection
-						.prepareStatement(SQL_CREATE_ORDERS_PRODUCTS)) {
+				.prepareStatement(SQL_CREATE_ORDER,
+						Statement.RETURN_GENERATED_KEYS)) {
 			prepareStatementOrder.setInt(1, entity.getUser().getId());
-			prepareStatementOrder.setString(2, entity.getStatus());
-			prepareStatementOrder.setDate(3, entity.getDate());
+			prepareStatementOrder.setInt(2, findStatusId(entity.getStatus()));
 			int count = prepareStatementOrder.executeUpdate();
-			if (count == 1) {
-				flag = true;
+			ResultSet resultSet = prepareStatementOrder.getGeneratedKeys();
+			if (resultSet.next()) {
+				entity.setId(new Integer(resultSet.getInt(1)));
+				System.out.println(resultSet.toString());
 			}
-			Order order = new Order();
-			order = findLastOrder();
-			for (Product product : order.getProducts()) {
-				prepareStatementOrdersProducts.setInt(1, order.getId());
-				prepareStatementOrdersProducts.setInt(2, product.getId());
-				count = prepareStatementOrdersProducts.executeUpdate();
-				if (count != 1) {
-					flag = false;
-				}
+			if (count == 1 && createOrdersProducts(entity)) {
+				flag = true;
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
@@ -189,30 +162,24 @@ public class OrderDAO extends AbstractDAO<Order> {
 
 	@Override
 	public Order update(Order entity) {
-		Order order = new Order();
+		throw new UnsupportedOperationException();
+	}
+
+	public boolean updateStatus(Order entity) {
+		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_UPDATE_ORDER)) {
-			prepareStatement.setInt(1, entity.getUser().getId());
-			prepareStatement.setString(2, entity.getStatus());
-			prepareStatement.setDate(3, entity.getDate());
-			prepareStatement.setInt(4, entity.getId());
-			ResultSet resultSet = prepareStatement.executeQuery();
-			if (resultSet.next()) {
-				order.setId(resultSet.getInt("id"));
-				order.setUser(new UserDAO().findEntityById(resultSet
-						.getInt("users_id")));
-				order.setStatus(resultSet.getString("status"));
-				order.setDate(resultSet.getDate("date"));
-				order.setProducts(findProductsOfOrder(order));
-			} else {
-				return null;
+				.prepareStatement(SQL_UPDATE_ORDER_STATUS)) {
+			prepareStatement.setInt(1, findStatusId(entity.getStatus()));
+			int count = prepareStatement.executeUpdate();
+			if (count == 1) {
+				flag = true;
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
 		}
-		return order;
+		return flag;
 	}
 
 	private ArrayList<Product> findProductsOfOrder(Order order) {
@@ -224,8 +191,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 			prepareStatement.setInt(1, order.getId());
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
-				Product product = new Product();
-				product = productDAO.findEntityById(resultSet
+				Product product = productDAO.findEntityById(resultSet
 						.getInt("products_id"));
 				products.add(product);
 			}
@@ -234,5 +200,61 @@ public class OrderDAO extends AbstractDAO<Order> {
 			log.error(e);
 		}
 		return products;
+	}
+
+	private Integer findStatusId(String status) {
+		Integer id = null;
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_SELECT_STATUS)) {
+			prepareStatement.setString(1, status);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			if (resultSet.next()) {
+				id = resultSet.getInt("id");
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return id;
+	}
+
+	private boolean deleteFromOrdersProducts(int id) {
+		boolean flag = false;
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_DELETE_ORDERS_PRODUCTS)) {
+			prepareStatement.setInt(1, id);
+			int count = prepareStatement.executeUpdate();
+			if (count == 1) {
+				flag = true;
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return flag;
+	}
+
+	private boolean createOrdersProducts(Order entity) {
+		boolean flag = false;
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_CREATE_ORDERS_PRODUCTS)) {
+			for (Product product : entity.getProducts()) {
+				prepareStatement.setInt(1, entity.getId());
+				prepareStatement.setInt(2, product.getId());
+				int count = prepareStatement.executeUpdate();
+				if (count != 1) {
+					flag = false;
+					break;
+				}
+				flag = true;
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return flag;
 	}
 }

@@ -8,7 +8,7 @@ public class Product extends AbstractEntity {
 	private String picturePath;
 	private String publisher;
 	private String developer;
-	private String imprintDate;
+	private int imprintYear;
 
 	public String getType() {
 		return type;
@@ -66,12 +66,12 @@ public class Product extends AbstractEntity {
 		this.developer = developer;
 	}
 
-	public String getImprintDate() {
-		return imprintDate;
+	public int getImprintYear() {
+		return imprintYear;
 	}
 
-	public void setImprintDate(String imprintDate) {
-		this.imprintDate = imprintDate;
+	public void setImprintYear(int imprintYear) {
+		this.imprintYear = imprintYear;
 	}
 
 	@Override
@@ -82,8 +82,7 @@ public class Product extends AbstractEntity {
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result
 				+ ((developer == null) ? 0 : developer.hashCode());
-		result = prime * result
-				+ ((imprintDate == null) ? 0 : imprintDate.hashCode());
+		result = prime * result + imprintYear;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((picturePath == null) ? 0 : picturePath.hashCode());
@@ -113,10 +112,7 @@ public class Product extends AbstractEntity {
 				return false;
 		} else if (!developer.equals(other.developer))
 			return false;
-		if (imprintDate == null) {
-			if (other.imprintDate != null)
-				return false;
-		} else if (!imprintDate.equals(other.imprintDate))
+		if (imprintYear != other.imprintYear)
 			return false;
 		if (name == null) {
 			if (other.name != null)

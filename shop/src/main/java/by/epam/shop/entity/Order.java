@@ -1,13 +1,13 @@
 package by.epam.shop.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
 public class Order extends AbstractEntity {
 	private User user;
 	private String status;
-	private Date date;
+	private Timestamp date;
 	private List<Product> products;
 
 	public User getUser() {
@@ -26,11 +26,11 @@ public class Order extends AbstractEntity {
 		this.status = status;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
@@ -40,10 +40,6 @@ public class Order extends AbstractEntity {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	public void addProduct(Product product) {
-		products.add(product);
 	}
 
 	@Override

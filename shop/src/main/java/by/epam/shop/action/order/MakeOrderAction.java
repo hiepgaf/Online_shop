@@ -33,9 +33,12 @@ public class MakeOrderAction implements Action {
 		order.setStatus("active");
 		order.setUser(user);
 		OrderDAO orderDAO = new OrderDAO();
-		orderDAO.create(order);
-		request.setAttribute("message", MessageKeys.MAKE_ORDER_SUCCESS);
-		return configurationManager.getProperty("path.page.success");
+		if (orderDAO.create(order)) {
+			request.setAttribute("message", MessageKeys.MAKE_ORDER_SUCCESS);
+			return configurationManager.getProperty("path.page.success");
+		}
+		request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);
+		return configurationManager.getProperty("path.page.error");
 	}
 
 }
