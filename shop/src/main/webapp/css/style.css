@@ -317,3 +317,29 @@ body {
 	cursor: pointer;
 	margin-top: 20px;
 }
+#detProductImage {
+	float: left;
+	width: 30%;
+	padding-top: 30px;
+}
+#detProductInf {
+	width: 60%;
+	float: left;
+	padding-top: 30px;
+}
+.detProductInfBlock {
+	margin-top: 5px;
+	font-size: 18px;
+	padding-left: 10px;
+}
+#detProductDescription {
+	width: 90%;
+	padding-left: 40px;
+	padding-top: 30px;
+	font-size: 17px;
+}
+#detBuy {
+	width: 12%;
+	padding-left: 42%;
+	padding-top: 20px;
+}

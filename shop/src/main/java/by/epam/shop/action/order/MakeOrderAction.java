@@ -34,11 +34,13 @@ public class MakeOrderAction implements Action {
 		order.setUser(user);
 		OrderDAO orderDAO = new OrderDAO();
 		if (orderDAO.create(order)) {
+			user.removeAllProducts();
 			request.setAttribute("message", MessageKeys.MAKE_ORDER_SUCCESS);
 			return configurationManager.getProperty("path.page.success");
+		} else {
+			request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);
+			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);
-		return configurationManager.getProperty("path.page.error");
 	}
 
 }

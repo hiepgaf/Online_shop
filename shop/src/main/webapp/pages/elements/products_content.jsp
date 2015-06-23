@@ -25,7 +25,8 @@
 					<div id="productName">${product.name }</div>
 					<div id="productsShortDescription">
 						<ctg:text text="${product.description }" />
-						<a href="#"><fmt:message key="product.button.more" /></a>
+						<a href="Controller?action=show_product&product_id=${product.id }"><fmt:message
+								key="product.button.more" /></a>
 					</div>
 				</div>
 				<div id="priceBuy">

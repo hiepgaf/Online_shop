@@ -18,7 +18,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 	private static Logger log = Logger.getLogger(OrderDAO.class);
 	private static final String SQL_SELECT_ORDER = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id)";
 	private static final String SQL_SELECT_ORDER_BY_ID = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id) WHERE orders.id= ?";
-	private static final String SQL_SELECT_ORDER_BY_STATUS = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id) WHERE status.description= ?";
+	private static final String SQL_SELECT_ORDER_BY_USER_ID = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id) WHERE orders.users_id= ?";
 	private static final String SQL_CREATE_ORDER = "INSERT INTO internet_shop.orders (users_id, status_id) VALUES (?,?)";
 	private static final String SQL_CREATE_ORDERS_PRODUCTS = "INSERT INTO internet_shop.orders_products (orders_id, products_id) VALUES (?,?)";
 	private static final String SQL_UPDATE_ORDER_STATUS = "UPDATE internet_shop.orders SET status= ? WHERE id= ?";
@@ -75,12 +75,12 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return order;
 	}
 
-	public List<Order> findEntitiesByStatus(String status) {
+	public List<Order> findEntitiesByUserId(int id) {
 		ArrayList<Order> orders = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_ORDER_BY_STATUS)) {
-			prepareStatement.setString(1, status);
+				.prepareStatement(SQL_SELECT_ORDER_BY_USER_ID)) {
+			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Order order = new Order();
@@ -148,7 +148,6 @@ public class OrderDAO extends AbstractDAO<Order> {
 			ResultSet resultSet = prepareStatementOrder.getGeneratedKeys();
 			if (resultSet.next()) {
 				entity.setId(new Integer(resultSet.getInt(1)));
-				System.out.println(resultSet.toString());
 			}
 			if (count == 1 && createOrdersProducts(entity)) {
 				flag = true;
