@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="title">
-		<fmt:message key="products.title" />
+		${product.name }
 	</div>
 	<form method="POST" action="Controller">
 		<div id="detProductImage">

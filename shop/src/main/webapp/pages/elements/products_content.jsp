@@ -13,36 +13,36 @@
 	<div class="title">
 		<fmt:message key="products.title" />
 	</div>
-	<form method="POST" action="Controller">
-		<c:forEach items="${products}" var="product">
-			<div id="productInf">
-				<div id="productImage">
-					<center>
-						<img src="${product.picturePath }" width="70%" align="middle">
-					</center>
+	<c:forEach items="${products}" var="product">
+		<div id="productInf">
+			<div id="productImage">
+				<center>
+					<img src="${product.picturePath }" width="70%" align="middle">
+				</center>
+			</div>
+			<div id="productNameDescription">
+				<div id="productName">${product.name }</div>
+				<div id="productsShortDescription">
+					<ctg:text text="${product.description }" />
+					<a href="Controller?action=show_product&product_id=${product.id }"><fmt:message
+							key="product.button.more" /></a>
 				</div>
-				<div id="productNameDescription">
-					<div id="productName">${product.name }</div>
-					<div id="productsShortDescription">
-						<ctg:text text="${product.description }" />
-						<a href="Controller?action=show_product&product_id=${product.id }"><fmt:message
-								key="product.button.more" /></a>
-					</div>
+			</div>
+			<div id="priceBuy">
+				<div id="productPrice">${product.price }
+					<fmt:message key="products.money" />
 				</div>
-				<div id="priceBuy">
-					<div id="productPrice">${product.price }
-						<fmt:message key="products.money" />
-					</div>
-					<div>
+				<div>
+					<form method="POST" action="Controller">
 						<input name="action" type="hidden" value="add_to_shopping_cart" />
 						<input name="product_id" type="hidden" value="${product.id }" />
 						<input class="buyButton" type="submit"
 							value="<fmt:message key="products.buy" />" />
-					</div>
+					</form>
 				</div>
 			</div>
-			<div style="clear: left"></div>
-		</c:forEach>
-	</form>
+		</div>
+		<div style="clear: left"></div>
+	</c:forEach>
 </body>
 </html>

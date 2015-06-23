@@ -18,4 +18,6 @@ public class MessageKeys {
 	public static final String MAKE_ORDER_ERROR = "message.makeorder.error";
 	public static final String MAKE_ORDER_SUCCESS = "message.makeorder.success";
 	public static final String SHOW_CART_ERROR = "message.cart.error";
+	public static final String CANCEL_ORDER_ERROR = "message.cancelorder.error";
+	public static final String CANCEL_ORDER_SUCCESS = "message.cancelorder.success";
 }

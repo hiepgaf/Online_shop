@@ -13,26 +13,36 @@
 	<div class="title">
 		<fmt:message key="orders.title" />
 	</div>
-	<form method="POST" action="Controller">
-		<c:forEach items="${orders}" var="order">
-			<div id="order">
-				<div id="orderId">${order.id }</div>
-				<div id="cartPrice">${price }
-					<fmt:message key="products.money" />
-				</div>
-				<div id="orderDate">${order.date }</div>
-				<div id="orderStatus">${order.status }</div>
-				<c:if test="${order.status == 'active' }">
-					<div>
-						<input name="action" type="hidden" value="cancel_order" /> <input
-							name="order_id" type="hidden" value="${order.id }" /> <input
-							id="cancelOrderButton" type="submit"
-							value="<fmt:message key="order.cancel" />" />
-					</div>
-				</c:if>
-			</div>
-			<div style="clear: left"></div>
-		</c:forEach>
-	</form>
+	<div style="width: 80%; padding-left: 18%; padding-top: 30px">
+		<table id="orderTable">
+			<tr>
+				<th><fmt:message key="orders.id" /></th>
+				<th><fmt:message key="orders.date" /></th>
+				<th><fmt:message key="orders.status" /></th>
+				<th></th>
+			</tr>
+			<c:forEach items="${orders}" var="order">
+				<tr>
+					<td><form method="POST" action="Controller">
+							<input name="action" type="hidden" value="show_order" /> <input
+								name="order_id" type="hidden" value="${order.id }" /> <input
+								style="border-style: none; cursor: pointer; background-color: white; text-decoration: underline"
+								type="submit" value="${order.id }" />
+						</form></td>
+					<td>${order.date }</td>
+					<td>${order.status }</td>
+					<c:if test="${order.status == 'active' }">
+						<td><form method="POST" action="Controller">
+								<input name="action" type="hidden" value="cancel_order" /> <input
+									name="order_id" type="hidden" value="${order.id }" /> <input
+									class="buyButton" type="submit"
+									value="<fmt:message key="orders.cancel" />" />
+							</form></td>
+						<div style="clear: left"></div>
+					</c:if>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>

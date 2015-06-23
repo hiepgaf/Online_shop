@@ -2,7 +2,9 @@ package by.epam.shop.action.container;
 
 import by.epam.shop.action.Action;
 import by.epam.shop.action.locale.ChangeLocaleAction;
+import by.epam.shop.action.order.CancelOrderAction;
 import by.epam.shop.action.order.MakeOrderAction;
+import by.epam.shop.action.order.ShowConcreteOrderAction;
 import by.epam.shop.action.order.ShowOrdersAction;
 import by.epam.shop.action.page.GoToPageAction;
 import by.epam.shop.action.product.ShowConcreteProductAction;
@@ -73,6 +75,16 @@ public enum ActionEnum {
 	SHOW_PRODUCT {
 		{
 			action = new ShowConcreteProductAction();
+		}
+	},
+	SHOW_ORDER {
+		{
+			action = new ShowConcreteOrderAction();
+		}
+	},
+	CANCEL_ORDER {
+		{
+			action = new CancelOrderAction();
 		}
 	};
 	Action action;

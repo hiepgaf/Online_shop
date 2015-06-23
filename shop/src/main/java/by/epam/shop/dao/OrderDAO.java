@@ -21,7 +21,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 	private static final String SQL_SELECT_ORDER_BY_USER_ID = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id) WHERE orders.users_id= ?";
 	private static final String SQL_CREATE_ORDER = "INSERT INTO internet_shop.orders (users_id, status_id) VALUES (?,?)";
 	private static final String SQL_CREATE_ORDERS_PRODUCTS = "INSERT INTO internet_shop.orders_products (orders_id, products_id) VALUES (?,?)";
-	private static final String SQL_UPDATE_ORDER_STATUS = "UPDATE internet_shop.orders SET status= ? WHERE id= ?";
+	private static final String SQL_UPDATE_ORDER_STATUS = "UPDATE internet_shop.orders SET status_id= ? WHERE id= ?";
 	private static final String SQL_DELETE_ORDER = "DELETE FROM internet_shop.orders WHERE id= ?";
 	private static final String SQL_DELETE_ORDERS_PRODUCTS = "DELETE FROM internet_shop.orders_products WHERE orders_id= ?";
 	private static final String SQL_SELECT_ORDERS_PRODUCTS = "SELECT * FROM internet_shop.orders_products WHERE orders_id= ?";
@@ -40,7 +40,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 				order.setUser(new UserDAO().findEntityById(resultSet
 						.getInt("orders.users_id")));
 				order.setStatus(resultSet.getString("status.description"));
-				order.setDate(resultSet.getTimestamp("orders.date"));
+				order.setDate(resultSet.getDate("orders.date"));
 				order.setProducts(findProductsOfOrder(order));
 				orders.add(order);
 			}
@@ -65,7 +65,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 				order.setUser(new UserDAO().findEntityById(resultSet
 						.getInt("orders.users_id")));
 				order.setStatus(resultSet.getString("status.description"));
-				order.setDate(resultSet.getTimestamp("orders.date"));
+				order.setDate(resultSet.getDate("orders.date"));
 				order.setProducts(findProductsOfOrder(order));
 			}
 			connectionPool.freeConnection(connection);
@@ -88,7 +88,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 				order.setUser(new UserDAO().findEntityById(resultSet
 						.getInt("orders.users_id")));
 				order.setStatus(resultSet.getString("status.description"));
-				order.setDate(resultSet.getTimestamp("orders.date"));
+				order.setDate(resultSet.getDate("orders.date"));
 				order.setProducts(findProductsOfOrder(order));
 				orders.add(order);
 			}
@@ -170,6 +170,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_UPDATE_ORDER_STATUS)) {
 			prepareStatement.setInt(1, findStatusId(entity.getStatus()));
+			prepareStatement.setInt(2, entity.getId());
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
 				flag = true;

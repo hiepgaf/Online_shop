@@ -343,3 +343,20 @@ body {
 	padding-left: 42%;
 	padding-top: 20px;
 }
+#orderTable {
+  font-size: 17px;
+  background: white;
+  max-width: 70%;
+  width: 70%;
+  border-collapse: collapse;
+  text-align: center;
+}
+#orderTable th {
+  font-weight: normal;
+  border-bottom: 1px solid black;
+  padding: 10px 8px;
+}
+#orderTable td {
+  padding: 9px 8px;
+  transition: .3s linear;
+}
