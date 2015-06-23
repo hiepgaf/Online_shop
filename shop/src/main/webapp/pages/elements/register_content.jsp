@@ -9,61 +9,58 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	<div>
-		<h1>Регистрация нового пользователя</h1>
+	<div class="title">
+		<fmt:message key="reg.title" />
 	</div>
-	<div>
-		<form method="POST" action="Controller">
-			<table>
-				<tr>
-					<td style="vertical-align: top"><fmt:message key="reg.login" />:</td>
-					<td><input type="text" name="login" /> <br /> <b
-						style="color: red; font-size: 10px;"> <fmt:message
-								key="reg.info.login" />
-					</b></td>
-				</tr>
-				<tr>
-					<td style="vertical-align: top"><fmt:message
-							key="reg.password" />:</td>
-					<td><input type="password" name="password" /> <br /> <b
-						style="color: red; font-size: 10px;"> <fmt:message
-								key="reg.info.password" />
-					</b></td>
-				</tr>
-				<tr>
-					<td style="vertical-align: top"><fmt:message
-							key="reg.password.repeat" />:</td>
-					<td><input type="password" name="password_repeat" /> <br /></td>
-				</tr>
-				<tr>
-					<td style="vertical-align: top"><fmt:message key="reg.email" />:</td>
-					<td><input type="text" name="email" /> <br /> <b
-						style="color: red; font-size: 10px;"> <fmt:message
-								key="reg.info.email" />
-					</b></td>
-				</tr>
-			</table>
-			<input class="button" type="submit"
-				value="<fmt:message key="menu.button.register" />" />
-		</form>
+	<div style="width: 250px; padding-left: 30%; padding-top: 50px">
+		<c:if test="${not empty message }">
+			<div style="margin-bottom: 10px; color: red; font-size: 18px">
+				<fmt:message key="${message }" />
+			</div>
+		</c:if>
 		<form method="POST" action="Controller">
 			<div>
-				<input name="action" type="hidden" value="register" />
+				<input name="action" type="hidden" value="registration" />
+			</div>
+			<div style="font-size: 18px; margin-bottom: 5px">
+				<fmt:message key="reg.login" />
 			</div>
 			<div>
-				<input class="input" type="text" name="login" value="" />
+				<input id="regInput" type="text" name="login" />
 			</div>
 			<div>
-				<input class="input" type="password" name="password" value="" />
+				<b style="color: red; font-size: 14px;"><fmt:message
+						key="reg.info.login" /></b>
+			</div>
+			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
+				<fmt:message key="reg.password" />
 			</div>
 			<div>
-				<input class="input" type="password" name="password_repeat" value="" />
+				<input id="regInput" type="password" name="password" />
 			</div>
 			<div>
-				<input class="input" type="text" name="email" value="" />
+				<b style="color: red; font-size: 14px;"> <fmt:message
+						key="reg.info.password" />
+				</b>
+			</div>
+			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
+				<fmt:message key="reg.password.repeat" />
 			</div>
 			<div>
-				<input class="button" type="submit"
+				<input id="regInput" type="password" name="password_repeat" />
+			</div>
+			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
+				<fmt:message key="reg.email" />
+			</div>
+			<div>
+				<input id="regInput" type="text" name="email" />
+			</div>
+			<div>
+				<b style="color: red; font-size: 14px;"><fmt:message
+						key="reg.info.email" /></b>
+			</div>
+			<div style="margin-top: 16px">
+				<input id="regButton" type="submit"
 					value="<fmt:message key="menu.button.register" />" />
 			</div>
 		</form>

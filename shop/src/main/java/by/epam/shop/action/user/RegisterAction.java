@@ -37,23 +37,27 @@ public class RegisterAction implements Action {
 		}
 		User user = new User();
 		user.setLogin(login);
-		user.setPassword(Encryption.hashMD5(password));
+		user.setPassword(password);
 		user.setEmail(email);
 		user.setAccessLevel(1); // default value for simple user
 		String validationMessage = Validator.validateUser(user);
 		if (validationMessage != null) {
 			request.setAttribute("message", validationMessage);
 			return configurationManager.getProperty("path.page.register");
-		} else {
-			UserDAO userDAO = new UserDAO();
-			if (userDAO.findEntityByLogin(login) == null) {
-				request.getSession().setAttribute("user", user);
-				return configurationManager.getProperty("path.page.main");
-			} else {
-				request.setAttribute("loginError",
-						MessageKeys.REGISTER_LOGIN_ERROR);
-				return configurationManager.getProperty("path.page.register");
-			}
 		}
+		UserDAO userDAO = new UserDAO();
+		if (userDAO.findEntityByLogin(login) != null) {
+			request.setAttribute("message", MessageKeys.REGISTER_LOGIN_ERROR);
+			return configurationManager.getProperty("path.page.register");
+		}
+		user.setPassword(Encryption.hashMD5(password));
+		if (userDAO.create(user)) {
+			user = userDAO.findEntityByLogin(user.getLogin());
+			request.getSession().setAttribute("user", user);
+			request.setAttribute("message", MessageKeys.REGISTER_SUCCESS);
+			return configurationManager.getProperty("path.page.success");
+		}
+		request.setAttribute("message", MessageKeys.REGISTER_ERROR);
+		return configurationManager.getProperty("path.page.error");
 	}
 }

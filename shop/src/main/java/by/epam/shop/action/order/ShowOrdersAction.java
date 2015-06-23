@@ -24,6 +24,10 @@ public class ShowOrdersAction implements Action {
 		}
 		OrderDAO orderDAO = new OrderDAO();
 		List<Order> orders = orderDAO.findEntitiesByUserId(user.getId());
+		if (orders.isEmpty()) {
+			request.setAttribute("message", MessageKeys.SHOW_ORDERS_ERROR);
+			return configurationManager.getProperty("path.page.error");
+		}
 		request.setAttribute("orders", orders);
 		return configurationManager.getProperty("path.page.orders");
 	}

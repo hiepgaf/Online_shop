@@ -33,7 +33,9 @@
 			</div>
 		</div>
 		<div id="right-content">
-			<%@include file="/pages/elements/register_content.jsp"%>
+			<div id="content">
+				<%@include file="/pages/elements/register_content.jsp"%>
+			</div>
 		</div>
 		<div style="clear: left"></div>
 	</div>

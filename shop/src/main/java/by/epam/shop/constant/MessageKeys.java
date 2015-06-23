@@ -20,4 +20,7 @@ public class MessageKeys {
 	public static final String SHOW_CART_ERROR = "message.cart.error";
 	public static final String CANCEL_ORDER_ERROR = "message.cancelorder.error";
 	public static final String CANCEL_ORDER_SUCCESS = "message.cancelorder.success";
+	public static final String REGISTER_ERROR = "message.register.error";
+	public static final String REGISTER_SUCCESS = "message.register.success";
+	public static final String SHOW_ORDERS_ERROR = "message.showorder.error";
 }
