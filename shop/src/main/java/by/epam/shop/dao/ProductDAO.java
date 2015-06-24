@@ -189,7 +189,6 @@ public class ProductDAO extends AbstractDAO<Product> {
 
 	@Override
 	public Product update(Product entity) {
-		Product product = null;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_UPDATE_PRODUCT)) {
@@ -204,28 +203,15 @@ public class ProductDAO extends AbstractDAO<Product> {
 			prepareStatement.setString(7, entity.getDeveloper());
 			prepareStatement.setInt(8, entity.getImprintYear());
 			prepareStatement.setInt(9, entity.getId());
-			ResultSet resultSet = prepareStatement.executeQuery();
-			if (resultSet.next()) {
-				product = new Product();
-				product.setId(resultSet.getInt("products.id"));
-				product.setType(resultSet
-						.getString("product_types.description"));
-				product.setName(resultSet.getString("products.name"));
-				product.setPrice(resultSet.getInt("products.price"));
-				product.setDescription(resultSet
-						.getString("products.description"));
-				product.setPicturePath(resultSet
-						.getString("product_pictures.path"));
-				product.setPublisher(resultSet.getString("products.publisher"));
-				product.setDeveloper(resultSet.getString("products.developer"));
-				product.setImprintYear(resultSet
-						.getInt("products.imprint_year"));
+			int count = prepareStatement.executeUpdate();
+			if (count == 1) {
+				return entity;
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
 		}
-		return product;
+		return null;
 	}
 
 	public List<String> findAllProductTypes() {

@@ -10,10 +10,12 @@ import by.epam.shop.action.order.ShowConcreteOrderAction;
 import by.epam.shop.action.order.ShowOrdersAction;
 import by.epam.shop.action.page.AddProductPageAction;
 import by.epam.shop.action.page.AllOrdersPageAction;
+import by.epam.shop.action.page.EditProductPageAction;
 import by.epam.shop.action.page.GoToPageAction;
 import by.epam.shop.action.page.UsersPageAction;
 import by.epam.shop.action.product.AddProductAction;
 import by.epam.shop.action.product.DeleteProductAction;
+import by.epam.shop.action.product.EditProductAction;
 import by.epam.shop.action.product.ShowConcreteProductAction;
 import by.epam.shop.action.product.ShowProductsAction;
 import by.epam.shop.action.user.AddToShoppingCartAction;
@@ -133,6 +135,16 @@ public enum ActionEnum {
 	DELETE_PRODUCT {
 		{
 			action = new DeleteProductAction();
+		}
+	},
+	EDIT_PRODUCT_PAGE {
+		{
+			action = new EditProductPageAction();
+		}
+	},
+	EDIT_PRODUCT {
+		{
+			action = new EditProductAction();
 		}
 	};
 	Action action;

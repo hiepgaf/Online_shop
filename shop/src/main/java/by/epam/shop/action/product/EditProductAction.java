@@ -11,7 +11,7 @@ import by.epam.shop.entity.Product;
 import by.epam.shop.entity.User;
 import by.epam.shop.manager.ConfigurationManager;
 
-public class AddProductAction implements Action {
+public class EditProductAction implements Action {
 	private static ConfigurationManager configurationManager = ConfigurationManager
 			.getInstance();
 
@@ -41,9 +41,10 @@ public class AddProductAction implements Action {
 			request.setAttribute("picturePath", pictures);
 			request.setAttribute("message",
 					MessageKeys.ADD_PRODUCT_BLANK_FIELDS);
-			return configurationManager.getProperty("path.page.addproduct");
+			return configurationManager.getProperty("path.page.editproduct");
 		}
 		Product product = new Product();
+		product.setId(Integer.parseInt(request.getParameter("product_id")));
 		product.setType(type);
 		product.setName(name);
 		product.setPrice(Integer.parseInt(price));
@@ -52,11 +53,12 @@ public class AddProductAction implements Action {
 		product.setPublisher(publisher);
 		product.setDeveloper(developer);
 		product.setImprintYear(Integer.parseInt(imprintYear));
-		if (productDAO.create(product)) {
-			request.setAttribute("message", MessageKeys.ADD_PRODUCT_SUCCESS);
+		if (productDAO.update(product) != null) {
+			request.setAttribute("message", MessageKeys.EDIT_PRODUCT_SUCCESS);
 			return configurationManager.getProperty("path.page.success");
 		}
-		request.setAttribute("message", MessageKeys.ADD_PRODUCT_ERROR);
+		request.setAttribute("message", MessageKeys.EDIT_PRODUCT_ERROR);
 		return configurationManager.getProperty("path.page.error");
 	}
+
 }

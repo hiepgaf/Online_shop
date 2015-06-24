@@ -65,6 +65,14 @@
 					value="<fmt:message key="product.delete" />" />
 			</form>
 		</div>
+		<div style="width: 120px; padding-left: 41%; margin-top: 20px">
+			<form method="POST" action="Controller">
+				<input name="action" type="hidden" value="edit_product_page" /> <input
+					name="product_id" type="hidden" value="${product.id }" /> <input
+					class="buyButton" type="submit"
+					value="<fmt:message key="product.edit" />" />
+			</form>
+		</div>
 	</c:if>
 	<div style="clear: left"></div>
 </body>

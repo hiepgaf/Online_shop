@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="title">
-		<fmt:message key="addproduct.title" />
+		<fmt:message key="editproduct.title" />
 	</div>
 	<div style="width: 300px; padding-left: 30%; padding-top: 50px">
 		<c:if test="${not empty message }">
@@ -20,7 +20,10 @@
 		</c:if>
 		<form method="POST" action="Controller">
 			<div>
-				<input name="action" type="hidden" value="add_product" />
+				<input name="action" type="hidden" value="edit_product" />
+			</div>
+			<div>
+				<input name="product_id" type="hidden" value="${product.id }" />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<fmt:message key="product.genre" />
@@ -36,7 +39,7 @@
 				:
 			</div>
 			<div>
-				<input id="regInput" type="text" name="name" />
+				<input id="regInput" type="text" name="name" value="${product.name }" />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<fmt:message key="product.price" />
@@ -45,14 +48,14 @@
 				:
 			</div>
 			<div>
-				<input id="regInput" type="text" name="price" />
+				<input id="regInput" type="text" name="price" value="${product.price }" />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<fmt:message key="product.description" />
 				:
 			</div>
 			<div>
-				<textarea rows="10" cols="34" name="description"></textarea>
+				<textarea rows="10" cols="34" name="description">${product.description }</textarea>
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<fmt:message key="product.image" />
@@ -69,25 +72,25 @@
 				:
 			</div>
 			<div>
-				<input id="regInput" type="text" name="publisher" />
+				<input id="regInput" type="text" name="publisher" value="${product.publisher }" />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<fmt:message key="product.developer" />
 				:
 			</div>
 			<div>
-				<input id="regInput" type="text" name="developer" />
+				<input id="regInput" type="text" name="developer" value="${product.developer }" />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<fmt:message key="product.imprintyear" />
 				:
 			</div>
 			<div>
-				<input id="regInput" type="text" name="imprintYear" />
+				<input id="regInput" type="text" name="imprintYear" value="${product.imprintYear }" />
 			</div>
 			<div style="margin-top: 16px; padding-bottom: 20px">
 				<input id="regButton" type="submit"
-					value="<fmt:message key="addproduct.button" />" />
+					value="<fmt:message key="editproduct.button" />" />
 			</div>
 		</form>
 	</div>
