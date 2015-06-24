@@ -32,12 +32,7 @@
 					<td>${order.date }</td>
 					<td>${order.status }</td>
 					<c:if test="${order.status == 'active' }">
-						<td><form method="POST" action="Controller">
-								<input name="action" type="hidden" value="cancel_order" /> <input
-									name="order_id" type="hidden" value="${order.id }" /> <input
-									class="buyButton" type="submit"
-									value="<fmt:message key="orders.cancel" />" />
-							</form></td>
+						<td>${order.id }</td>
 						<div style="clear: left"></div>
 					</c:if>
 				</tr>

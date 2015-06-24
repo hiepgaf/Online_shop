@@ -30,12 +30,7 @@
 								style="border-style: none; cursor: pointer; background-color: white; text-decoration: underline"
 								type="submit" value="${order.id }" />
 						</form></td>
-					<td><form method="POST" action="Controller">
-							<input name="action" type="hidden" value="show_user" /> <input
-								name="user_id" type="hidden" value="${order.user.id }" /> <input
-								style="border-style: none; cursor: pointer; background-color: white; text-decoration: underline"
-								type="submit" value="${order.user.login }" />
-						</form></td>
+					<td>${order.user.login }</td>
 					<td>${order.date }</td>
 					<td>${order.status }</td>
 					<td><div style="width: 140px"><form method="POST" action="Controller">

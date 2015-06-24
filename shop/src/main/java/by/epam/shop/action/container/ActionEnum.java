@@ -11,6 +11,7 @@ import by.epam.shop.action.order.ShowOrdersAction;
 import by.epam.shop.action.page.AddProductPageAction;
 import by.epam.shop.action.page.AllOrdersPageAction;
 import by.epam.shop.action.page.GoToPageAction;
+import by.epam.shop.action.page.UsersPageAction;
 import by.epam.shop.action.product.AddProductAction;
 import by.epam.shop.action.product.ShowConcreteProductAction;
 import by.epam.shop.action.product.ShowProductsAction;
@@ -115,6 +116,11 @@ public enum ActionEnum {
 	DELIVER_ORDER {
 		{
 			action = new DeliverOrderAction();
+		}
+	},
+	USERS_PAGE {
+		{
+			action = new UsersPageAction();
 		}
 	};
 	Action action;
