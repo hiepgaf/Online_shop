@@ -106,8 +106,9 @@ public class OrderDAO extends AbstractDAO<Order> {
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_DELETE_ORDER)) {
 			prepareStatement.setInt(1, id);
+			deleteFromOrdersProducts(id);
 			int count = prepareStatement.executeUpdate();
-			if (count == 1 && deleteFromOrdersProducts(id)) {
+			if (count == 1) {
 				flag = true;
 			}
 			connectionPool.freeConnection(connection);
@@ -124,11 +125,10 @@ public class OrderDAO extends AbstractDAO<Order> {
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_DELETE_ORDER)) {
 			prepareStatement.setInt(1, entity.getId());
-			if (deleteFromOrdersProducts(entity.getId())) {
-				int count = prepareStatement.executeUpdate();
-				if (count == 1) {
-					flag = true;
-				}
+			deleteFromOrdersProducts(entity.getId());
+			int count = prepareStatement.executeUpdate();
+			if (count == 1) {
+				flag = true;
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
@@ -221,21 +221,16 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return id;
 	}
 
-	private boolean deleteFromOrdersProducts(int id) {
-		boolean flag = false;
+	private void deleteFromOrdersProducts(int id) {
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_DELETE_ORDERS_PRODUCTS)) {
 			prepareStatement.setInt(1, id);
-			int count = prepareStatement.executeUpdate();
-			if (count > 0) {
-				flag = true;
-			}
+			prepareStatement.executeUpdate();
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
 			log.error(e);
 		}
-		return flag;
 	}
 
 	private boolean createOrdersProducts(Order entity) {
