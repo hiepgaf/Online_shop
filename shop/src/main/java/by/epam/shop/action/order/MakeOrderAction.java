@@ -23,6 +23,10 @@ public class MakeOrderAction implements Action {
 			request.setAttribute("message", MessageKeys.USER_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
+		if (user.getBlackListFlag() == 1) {
+			request.setAttribute("message", MessageKeys.BUY_ERROR);
+			return configurationManager.getProperty("path.page.error");
+		}
 		List<Product> products = user.getShoooppingCart();
 		if (products == null) {
 			request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);

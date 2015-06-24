@@ -182,7 +182,7 @@ public class UserDAO extends AbstractDAO<User> {
 
 	@Override
 	public User update(User entity) {
-		User user = new User();
+		User user = null;
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_UPDATE_USER)) {
@@ -192,19 +192,14 @@ public class UserDAO extends AbstractDAO<User> {
 			prepareStatement.setInt(4, entity.getBlackListFlag());
 			prepareStatement.setInt(5, entity.getAccessLevel());
 			prepareStatement.setInt(6, entity.getId());
-			ResultSet resultSet = prepareStatement.executeQuery();
-			resultSet.next();
-			user.setId(resultSet.getInt("id"));
-			user.setLogin(resultSet.getString("login"));
-			user.setPassword(resultSet.getString("password"));
-			user.setEmail(resultSet.getString("email"));
-			user.setBlackListFlag(resultSet.getInt("black_list_flag"));
-			user.setAccessLevel(resultSet.getInt("access_level_id"));
-			connectionPool.freeConnection(connection);
+			int count = prepareStatement.executeUpdate();
+			if (count == 1) {
+				return user;
+			}
 		} catch (SQLException e) {
 			log.error(e);
 		}
-		return user;
+		return null;
 	}
 
 }

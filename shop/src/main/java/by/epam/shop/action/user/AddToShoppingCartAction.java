@@ -20,6 +20,10 @@ public class AddToShoppingCartAction implements Action {
 			request.setAttribute("message", MessageKeys.USER_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
+		if (user.getBlackListFlag() == 1) {
+			request.setAttribute("message", MessageKeys.BUY_ERROR);
+			return configurationManager.getProperty("path.page.error");
+		}
 		int id = Integer.parseInt(request.getParameter("product_id"));
 		ProductDAO productDAO = new ProductDAO();
 		Product product = productDAO.findEntityById(id);
@@ -27,7 +31,6 @@ public class AddToShoppingCartAction implements Action {
 			request.setAttribute("message", MessageKeys.FIND_PRODUCT_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		System.out.println(product.getId());
 		user.addProduct(product);
 		request.getSession().setAttribute("user", user);
 		request.setAttribute("message",

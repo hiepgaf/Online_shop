@@ -126,7 +126,6 @@ public class OrderDAO extends AbstractDAO<Order> {
 			prepareStatement.setInt(1, entity.getId());
 			if (deleteFromOrdersProducts(entity.getId())) {
 				int count = prepareStatement.executeUpdate();
-				System.out.println(count + " gdfgdfgdfgdfgdfgdfgdfgfgd");
 				if (count == 1) {
 					flag = true;
 				}

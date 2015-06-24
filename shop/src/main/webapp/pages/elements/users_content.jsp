@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="title">
-		<fmt:message key="allorders.title" />
+		<fmt:message key="users.title" />
 	</div>
 	<div style="width: 120%; padding-left: 10%; padding-top: 30px">
 		<table id="orderTable">
@@ -28,8 +28,18 @@
 					<td>${user.id }</td>
 					<td>${user.login }</td>
 					<td>${user.email }</td>
-					<td>${user.accessLevel }</td>
-					<td>${user.blackListFlag }</td>
+					<c:if test="${user.accessLevel == 1 }">
+						<td><fmt:message key="user.simpleuser" /></td>
+					</c:if>
+					<c:if test="${user.accessLevel == 2 }">
+						<td><fmt:message key="user.admin" /></td>
+					</c:if>
+					<c:if test="${user.blackListFlag == 0 }">
+						<td><fmt:message key="user.notblocked" /></td>
+					</c:if>
+					<c:if test="${user.blackListFlag == 1 }">
+						<td><fmt:message key="user.blocked" /></td>
+					</c:if>
 					<td><div style="width: 180px">
 							<form method="POST" action="Controller">
 								<input name="action" type="hidden" value="change_blocking" /> <input

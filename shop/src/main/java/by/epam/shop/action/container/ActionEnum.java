@@ -13,9 +13,11 @@ import by.epam.shop.action.page.AllOrdersPageAction;
 import by.epam.shop.action.page.GoToPageAction;
 import by.epam.shop.action.page.UsersPageAction;
 import by.epam.shop.action.product.AddProductAction;
+import by.epam.shop.action.product.DeleteProductAction;
 import by.epam.shop.action.product.ShowConcreteProductAction;
 import by.epam.shop.action.product.ShowProductsAction;
 import by.epam.shop.action.user.AddToShoppingCartAction;
+import by.epam.shop.action.user.ChangeBlockingAction;
 import by.epam.shop.action.user.LogInAction;
 import by.epam.shop.action.user.LogOutAction;
 import by.epam.shop.action.user.RegisterAction;
@@ -121,6 +123,16 @@ public enum ActionEnum {
 	USERS_PAGE {
 		{
 			action = new UsersPageAction();
+		}
+	},
+	CHANGE_BLOCKING {
+		{
+			action = new ChangeBlockingAction();
+		}
+	},
+	DELETE_PRODUCT {
+		{
+			action = new DeleteProductAction();
 		}
 	};
 	Action action;

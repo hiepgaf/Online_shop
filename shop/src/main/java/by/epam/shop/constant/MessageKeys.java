@@ -31,4 +31,7 @@ public class MessageKeys {
 	public static final String DELETE_ORDER_ERROR = "message.deleteorder.error";
 	public static final String DELIVER_ORDER_SUCCESS = "message.deliverorder.success";
 	public static final String DELIVER_ORDER_ERROR = "message.deliverorder.error";
+	public static final String BUY_ERROR = "message.buy.error";
+	public static final String DELETE_PRODUCT_SUCCESS = "message.deleteproduct.success";
+	public static final String DELETE_PRODUCT_ERROR = "message.deleteproduct.error";
 }
