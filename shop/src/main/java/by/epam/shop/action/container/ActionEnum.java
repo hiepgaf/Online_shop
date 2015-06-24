@@ -3,10 +3,15 @@ package by.epam.shop.action.container;
 import by.epam.shop.action.Action;
 import by.epam.shop.action.locale.ChangeLocaleAction;
 import by.epam.shop.action.order.CancelOrderAction;
+import by.epam.shop.action.order.DeleteOrder;
+import by.epam.shop.action.order.DeliverOrderAction;
 import by.epam.shop.action.order.MakeOrderAction;
 import by.epam.shop.action.order.ShowConcreteOrderAction;
 import by.epam.shop.action.order.ShowOrdersAction;
+import by.epam.shop.action.page.AddProductPageAction;
+import by.epam.shop.action.page.AllOrdersPageAction;
 import by.epam.shop.action.page.GoToPageAction;
+import by.epam.shop.action.product.AddProductAction;
 import by.epam.shop.action.product.ShowConcreteProductAction;
 import by.epam.shop.action.product.ShowProductsAction;
 import by.epam.shop.action.user.AddToShoppingCartAction;
@@ -85,6 +90,31 @@ public enum ActionEnum {
 	CANCEL_ORDER {
 		{
 			action = new CancelOrderAction();
+		}
+	},
+	ADD_PRODUCT_PAGE {
+		{
+			action = new AddProductPageAction();
+		}
+	},
+	ADD_PRODUCT {
+		{
+			action = new AddProductAction();
+		}
+	},
+	ALL_ORDERS_PAGE {
+		{
+			action = new AllOrdersPageAction();
+		}
+	},
+	DELETE_ORDER {
+		{
+			action = new DeleteOrder();
+		}
+	},
+	DELIVER_ORDER {
+		{
+			action = new DeliverOrderAction();
 		}
 	};
 	Action action;

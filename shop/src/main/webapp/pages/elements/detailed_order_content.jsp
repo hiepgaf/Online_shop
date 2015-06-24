@@ -31,11 +31,7 @@
 		<fmt:message key="products.money" />
 	</div>
 	<div align="center">
-		<form method="POST" action="Controller">
-			<input name="action" type="hidden" value="show_orders" /><input
-				id="makeOrderButton" type="submit"
-				value="<fmt:message key="order.back.button" />" />
-		</form>
+		<input id="makeOrderButton" type="button" onclick="history.back()" value="<fmt:message key="order.back.button" />">
 	</div>
 </body>
 </html>

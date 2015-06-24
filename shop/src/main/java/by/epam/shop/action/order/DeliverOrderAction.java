@@ -8,7 +8,7 @@ import by.epam.shop.dao.OrderDAO;
 import by.epam.shop.entity.Order;
 import by.epam.shop.manager.ConfigurationManager;
 
-public class CancelOrderAction implements Action {
+public class DeliverOrderAction implements Action {
 	private static ConfigurationManager configurationManager = ConfigurationManager
 			.getInstance();
 
@@ -18,14 +18,14 @@ public class CancelOrderAction implements Action {
 		OrderDAO orderDAO = new OrderDAO();
 		Order order = orderDAO.findEntityById(orderId);
 		if ("active".equals(order.getStatus())) {
-			order.setStatus("canceled");
+			order.setStatus("delivered");
 			if (orderDAO.updateStatus(order)) {
 				request.setAttribute("message",
-						MessageKeys.CANCEL_ORDER_SUCCESS);
+						MessageKeys.DELIVER_ORDER_SUCCESS);
 				return configurationManager.getProperty("path.page.success");
 			}
 		}
-		request.setAttribute("message", MessageKeys.CANCEL_ORDER_ERROR);
+		request.setAttribute("message", MessageKeys.DELIVER_ORDER_ERROR);
 		return configurationManager.getProperty("path.page.error");
 	}
 }

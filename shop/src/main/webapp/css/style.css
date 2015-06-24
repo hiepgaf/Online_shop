@@ -299,6 +299,7 @@ body {
 	font-size: 18px;
 	float: left;
 }
+
 #cart {
 	width: 97%;
 	height: 40px;
@@ -307,16 +308,19 @@ body {
 	border-bottom: 1px solid black;
 	margin-bottom: 10px;
 }
+
 #cartName {
 	width: 60%;
 	float: left;
 	padding-left: 30px;
 }
+
 #cartPrice {
 	width: 20%;
 	float: left;
 	padding-left: 10px;
 }
+
 #deleteFromCartButton {
 	border-style: none;
 	width: 10%;
@@ -326,6 +330,7 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
+
 #makeOrderButton {
 	border-style: none;
 	width: 180px;
@@ -336,46 +341,70 @@ body {
 	cursor: pointer;
 	margin-top: 20px;
 }
+
 #detProductImage {
 	float: left;
 	width: 30%;
 	padding-top: 30px;
 }
+
 #detProductInf {
 	width: 60%;
 	float: left;
 	padding-top: 30px;
 }
+
 .detProductInfBlock {
 	margin-top: 5px;
 	font-size: 18px;
 	padding-left: 10px;
 }
+
 #detProductDescription {
 	width: 90%;
 	padding-left: 40px;
 	padding-top: 30px;
 	font-size: 17px;
 }
+
 #detBuy {
 	width: 12%;
 	padding-left: 42%;
 	padding-top: 20px;
 }
+
 #orderTable {
-  font-size: 17px;
-  background: white;
-  max-width: 70%;
-  width: 70%;
-  border-collapse: collapse;
-  text-align: center;
+	font-size: 17px;
+	background: white;
+	max-width: 70%;
+	width: 70%;
+	border-collapse: collapse;
+	text-align: center;
 }
+
 #orderTable th {
-  font-weight: normal;
-  border-bottom: 1px solid black;
-  padding: 10px 8px;
+	font-weight: normal;
+	border-bottom: 1px solid black;
+	padding: 10px 8px;
 }
+
 #orderTable td {
-  padding: 9px 8px;
-  transition: .3s linear;
+	padding: 9px 8px;
+	transition: .3s linear;
+}
+
+select {
+	width: 100%;
+	height: 30px;
+	padding: 3px;
+	margin: 0;
+	border-radius: 20px;
+	box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	background: #f8f8f8;
+	color: black;
+	border: none;
+	outline: none;
+	display: inline-block;
+	appearance: none;
+	cursor: pointer;
 }

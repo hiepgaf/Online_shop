@@ -22,16 +22,17 @@ public class ProductDAO extends AbstractDAO<Product> {
 	private static final String SQL_SELECT_PICTURE = "SELECT * FROM internet_shop.product_pictures WHERE path= ?";
 	private static final String SQL_SELECT_TYPE = "SELECT * FROM internet_shop.product_types WHERE description= ?";
 	private static final String SQL_CHECK_ACTIVE_ORDER = "SELECT * FROM internet_shop.products JOIN internet_shop.orders_products ON (products.id = orders_products.products_id) JOIN internet_shop.orders ON (orders.id = orders_products.orders_id) WHERE orders.status_id = 1 AND products.id= ?";
+	private static final String SQL_SELECT_PRODUCT_TYPES = "SELECT * FROM internet_shop.product_types";
+	private static final String SQL_SELECT_PRODUCT_PICTURES = "SELECT * FROM internet_shop.product_pictures";
 
 	@Override
 	public List<Product> findAll() {
-		ArrayList<Product> products = null;
+		ArrayList<Product> products = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_SELECT_PRODUCT)) {
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
-				products = new ArrayList<>();
 				Product product = new Product();
 				product.setId(resultSet.getInt("products.id"));
 				product.setType(resultSet
@@ -227,6 +228,38 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return product;
 	}
 
+	public List<String> findAllProductTypes() {
+		ArrayList<String> types = new ArrayList<>();
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_SELECT_PRODUCT_TYPES)) {
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				types.add(resultSet.getString("description"));
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return types;
+	}
+
+	public List<String> findAllProductPicturePath() {
+		ArrayList<String> path = new ArrayList<>();
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_SELECT_PRODUCT_PICTURES)) {
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				path.add(resultSet.getString("path"));
+			}
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return path;
+	}
+
 	private boolean checkActiveOrder(int id) {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
@@ -252,7 +285,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 			prepareStatement.setString(1, type);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
-				id = resultSet.getInt("id");
+				id = new Integer(resultSet.getInt("id"));
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
@@ -269,7 +302,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 			prepareStatement.setString(1, path);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
-				id = resultSet.getInt("id");
+				id = new Integer(resultSet.getInt("id"));
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {

@@ -124,9 +124,12 @@ public class OrderDAO extends AbstractDAO<Order> {
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_DELETE_ORDER)) {
 			prepareStatement.setInt(1, entity.getId());
-			int count = prepareStatement.executeUpdate();
-			if (count == 1 && deleteFromOrdersProducts(entity.getId())) {
-				flag = true;
+			if (deleteFromOrdersProducts(entity.getId())) {
+				int count = prepareStatement.executeUpdate();
+				System.out.println(count + " gdfgdfgdfgdfgdfgdfgdfgfgd");
+				if (count == 1) {
+					flag = true;
+				}
 			}
 			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
@@ -226,7 +229,7 @@ public class OrderDAO extends AbstractDAO<Order> {
 				.prepareStatement(SQL_DELETE_ORDERS_PRODUCTS)) {
 			prepareStatement.setInt(1, id);
 			int count = prepareStatement.executeUpdate();
-			if (count == 1) {
+			if (count > 0) {
 				flag = true;
 			}
 			connectionPool.freeConnection(connection);

@@ -23,4 +23,12 @@ public class MessageKeys {
 	public static final String REGISTER_ERROR = "message.register.error";
 	public static final String REGISTER_SUCCESS = "message.register.success";
 	public static final String SHOW_ORDERS_ERROR = "message.showorder.error";
+	public static final String ACESS_LEVEL_ERROR = "message.accesslevel.error";
+	public static final String ADD_PRODUCT_BLANK_FIELDS = "message.addproduct.field";
+	public static final String ADD_PRODUCT_SUCCESS = "message.addproduct.success";
+	public static final String ADD_PRODUCT_ERROR = "message.addproduct.error";
+	public static final String DELETE_ORDER_SUCCESS = "message.deleteorder.success";
+	public static final String DELETE_ORDER_ERROR = "message.deleteorder.error";
+	public static final String DELIVER_ORDER_SUCCESS = "message.deliverorder.success";
+	public static final String DELIVER_ORDER_ERROR = "message.deliverorder.error";
 }

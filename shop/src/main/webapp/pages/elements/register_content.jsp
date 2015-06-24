@@ -23,7 +23,7 @@
 				<input name="action" type="hidden" value="registration" />
 			</div>
 			<div style="font-size: 18px; margin-bottom: 5px">
-				<fmt:message key="reg.login" />
+				<fmt:message key="reg.login" />:
 			</div>
 			<div>
 				<input id="regInput" type="text" name="login" />
@@ -33,7 +33,7 @@
 						key="reg.info.login" /></b>
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
-				<fmt:message key="reg.password" />
+				<fmt:message key="reg.password" />:
 			</div>
 			<div>
 				<input id="regInput" type="password" name="password" />
@@ -44,13 +44,13 @@
 				</b>
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
-				<fmt:message key="reg.password.repeat" />
+				<fmt:message key="reg.password.repeat" />:
 			</div>
 			<div>
 				<input id="regInput" type="password" name="password_repeat" />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
-				<fmt:message key="reg.email" />
+				<fmt:message key="reg.email" />:
 			</div>
 			<div>
 				<input id="regInput" type="text" name="email" />

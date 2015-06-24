@@ -46,6 +46,24 @@
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.quest"/>" />
 			</form></li>
+		<c:if test="${sessionScope.user.accessLevel == 2 }">
+			<li><form action="Controller" method="POST">
+					<input name="action" type="hidden" value="add_product_page" /> <input
+						class="button" type="submit"
+						value="<fmt:message key="menu.button.addproduct"/>" />
+				</form></li>
+			<li><form action="Controller" method="POST">
+					<input name="action" type="hidden" value="all_orders_page" /> <input
+						class="button" type="submit"
+						value="<fmt:message key="menu.button.orders"/>" />
+				</form></li>
+			<li><form action="Controller" method="POST">
+					<input name="action" type="hidden" value="go_to_page" /> <input
+						name="page" type="hidden" value="path.page.users" /> <input
+						class="button" type="submit"
+						value="<fmt:message key="menu.button.users"/>" />
+				</form></li>
+		</c:if>
 	</ul>
 </body>
 </html>
