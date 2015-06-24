@@ -16,6 +16,7 @@ import by.epam.shop.action.page.UsersPageAction;
 import by.epam.shop.action.product.AddProductAction;
 import by.epam.shop.action.product.DeleteProductAction;
 import by.epam.shop.action.product.EditProductAction;
+import by.epam.shop.action.product.SearchProductAction;
 import by.epam.shop.action.product.ShowConcreteProductAction;
 import by.epam.shop.action.product.ShowProductsAction;
 import by.epam.shop.action.user.AddToShoppingCartAction;
@@ -145,6 +146,11 @@ public enum ActionEnum {
 	EDIT_PRODUCT {
 		{
 			action = new EditProductAction();
+		}
+	},
+	SEARCH_PRODUCTS {
+		{
+			action = new SearchProductAction();
 		}
 	};
 	Action action;

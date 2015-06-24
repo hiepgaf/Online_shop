@@ -22,7 +22,9 @@
 		</div>
 		<div>
 			<form method="POST" action="Controller">
-				<input id="searchField" type="text" value="<fmt:message key="field.search" />" /> <input
+				<input name="action" type="hidden" value="search_products" /> <input
+					id="searchField" type="text" name="text_search"
+					value="<fmt:message key="field.search" />" /> <input
 					id="searchButton" type="submit" value="" />
 			</form>
 		</div>
