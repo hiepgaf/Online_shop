@@ -19,6 +19,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 	private static final String SQL_CREATE_PRODUCT = "INSERT INTO internet_shop.products (product_types_id, name, price, description, product_pictures_id, publisher, developer, imprint_year) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String SQL_UPDATE_PRODUCT = "UPDATE internet_shop.products SET product_types_id= ?, name= ?, price= ?, description= ?, product_pictures_id= ?, publisher= ?, developer= ?, imprint_year= ? WHERE id= ?";
 	private static final String SQL_DELETE_PRODUCT = "DELETE FROM internet_shop.products WHERE id= ?";
+	private static final String SQL_DELETE_ORDERS_PRODUCTS = "DELETE FROM internet_shop.orders_products WHERE products_id= ?";
 	private static final String SQL_SELECT_PICTURE = "SELECT * FROM internet_shop.product_pictures WHERE path= ?";
 	private static final String SQL_SELECT_TYPE = "SELECT * FROM internet_shop.product_types WHERE description= ?";
 	private static final String SQL_CHECK_ACTIVE_ORDER = "SELECT * FROM internet_shop.products JOIN internet_shop.orders_products ON (products.id = orders_products.products_id) JOIN internet_shop.orders ON (orders.id = orders_products.orders_id) WHERE orders.status_id = 1 AND products.id= ?";
@@ -127,6 +128,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_DELETE_PRODUCT)) {
+			deleteFromOrdersProducts(id);
 			prepareStatement.setInt(1, id);
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
@@ -148,6 +150,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
 				.prepareStatement(SQL_DELETE_PRODUCT)) {
+			deleteFromOrdersProducts(entity.getId());
 			prepareStatement.setInt(1, entity.getId());
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
@@ -295,5 +298,17 @@ public class ProductDAO extends AbstractDAO<Product> {
 			log.error(e);
 		}
 		return id;
+	}
+
+	private void deleteFromOrdersProducts(int productId) {
+		Connection connection = connectionPool.getConnection();
+		try (PreparedStatement prepareStatement = connection
+				.prepareStatement(SQL_DELETE_ORDERS_PRODUCTS)) {
+			prepareStatement.setInt(1, productId);
+			prepareStatement.executeUpdate();
+			connectionPool.freeConnection(connection);
+		} catch (SQLException e) {
+			log.error(e);
+		}
 	}
 }
