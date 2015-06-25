@@ -44,7 +44,7 @@ public class Controller extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
-			log.info(e);
+			log.error(e);
 		}
 	}
 }
