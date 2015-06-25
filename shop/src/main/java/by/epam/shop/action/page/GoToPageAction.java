@@ -14,5 +14,4 @@ public class GoToPageAction implements Action {
 		String page = request.getParameter("page");
 		return configurationManager.getProperty(page);
 	}
-
 }

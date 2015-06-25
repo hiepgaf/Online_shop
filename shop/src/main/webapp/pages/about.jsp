@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
-<title><fmt:message key="title.register" /></title>
+<title><fmt:message key="title.about" /></title>
 </head>
 <body>
 	<div>
@@ -34,7 +34,14 @@
 		</div>
 		<div id="right-content">
 			<div id="content">
-				<%@include file="/pages/elements/register_content.jsp"%>
+				<div
+					style="width: 100%; text-align: center; font-size: 20px; padding-top: 40px">
+					<fmt:message key="author.about" />
+				</div>
+				<div
+					style="width: 100%; text-align: center; font-size: 20px; margin-top: 30px">
+					<fmt:message key="author.email" />
+				</div>
 			</div>
 		</div>
 		<div style="clear: left"></div>

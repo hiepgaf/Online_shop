@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
-<title><fmt:message key="title.main" /></title>
+<title><fmt:message key="title.order" /></title>
 </head>
 <body>
 	<div>
@@ -38,6 +38,7 @@
 			</div>
 		</div>
 		<div style="clear: left"></div>
+		<%@include file="/pages/elements/footer_content.jsp"%>
 	</div>
 </body>
 </html>

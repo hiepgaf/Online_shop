@@ -43,6 +43,7 @@
 			</div>
 		</div>
 		<div style="clear: left"></div>
+		<%@include file="/pages/elements/footer_content.jsp"%>
 	</div>
 </body>
 </html>
