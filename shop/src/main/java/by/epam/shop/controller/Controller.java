@@ -1,6 +1,7 @@
 package by.epam.shop.controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+
 import by.epam.shop.action.Action;
 import by.epam.shop.action.container.ActionFactory;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static Logger log = Logger.getLogger(Controller.class);
-
 	/**
 	 * 
 	 */
