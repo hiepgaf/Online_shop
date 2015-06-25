@@ -65,6 +65,7 @@ public class User extends AbstractEntity {
 	public void removeProduct(Product product) {
 		shoooppingCart.remove(product);
 	}
+
 	public void removeAllProducts() {
 		shoooppingCart.removeAll(shoooppingCart);
 	}

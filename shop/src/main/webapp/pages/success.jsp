@@ -17,6 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+<link rel="shortcut icon" href="images/favicon.png" />
 <title><fmt:message key="title.success" /></title>
 </head>
 <body>
