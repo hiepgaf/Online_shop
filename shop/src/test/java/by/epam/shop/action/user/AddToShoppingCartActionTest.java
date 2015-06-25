@@ -56,7 +56,7 @@ public class AddToShoppingCartActionTest extends Mockito {
 	}
 
 	@Test
-	public void shoppingCartTest() throws ServletException, IOException {
+	public void addProductTest() throws ServletException, IOException {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("user")).thenReturn(user);
 		when(mockRequest.getParameter("action")).thenReturn(
