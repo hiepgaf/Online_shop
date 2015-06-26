@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 
 import by.epam.shop.entity.User;
 
+/**
+ * The Class UserDAO.
+ */
 public class UserDAO extends AbstractDAO<User> {
 	private static Logger log = Logger.getLogger(UserDAO.class);
 	private static final String SQL_SELECT_USERS = "SELECT * FROM internet_shop.users";
@@ -21,6 +24,11 @@ public class UserDAO extends AbstractDAO<User> {
 	private static final String SQL_UPDATE_USER = "UPDATE internet_shop.users SET login= ?, password= ?, email= ?, black_list_flag= ?, access_level_id= ? WHERE id= ?";
 	private static final String SQL_DELETE_USER = "DELETE FROM internet_shop.users WHERE id= ?";
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#findAll()
+	 */
 	@Override
 	public List<User> findAll() {
 		ArrayList<User> users = new ArrayList<>();
@@ -45,6 +53,11 @@ public class UserDAO extends AbstractDAO<User> {
 		return users;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#findEntityById(java.lang.Integer)
+	 */
 	@Override
 	public User findEntityById(Integer id) {
 		User user = null;
@@ -71,6 +84,13 @@ public class UserDAO extends AbstractDAO<User> {
 		return user;
 	}
 
+	/**
+	 * Find entity by login.
+	 *
+	 * @param login
+	 *            the login
+	 * @return the user
+	 */
 	public User findEntityByLogin(String login) {
 		User user = null;
 		Connection connection = connectionPool.getConnection();
@@ -96,6 +116,15 @@ public class UserDAO extends AbstractDAO<User> {
 		return user;
 	}
 
+	/**
+	 * Find entity by login and password.
+	 *
+	 * @param login
+	 *            the login
+	 * @param password
+	 *            the password
+	 * @return the user
+	 */
 	public User findEntityByLoginAndPassword(String login, String password) {
 		User user = null;
 		Connection connection = connectionPool.getConnection();
@@ -122,6 +151,11 @@ public class UserDAO extends AbstractDAO<User> {
 		return user;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#delete(java.lang.Integer)
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		boolean flag = false;
@@ -140,6 +174,12 @@ public class UserDAO extends AbstractDAO<User> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#delete(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public boolean delete(User entity) {
 		boolean flag = false;
@@ -158,6 +198,12 @@ public class UserDAO extends AbstractDAO<User> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#create(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public boolean create(User entity) {
 		boolean flag = false;
@@ -180,6 +226,12 @@ public class UserDAO extends AbstractDAO<User> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#update(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public User update(User entity) {
 		User user = null;

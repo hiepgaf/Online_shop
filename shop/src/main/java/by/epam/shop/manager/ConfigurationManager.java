@@ -2,6 +2,9 @@ package by.epam.shop.manager;
 
 import java.util.ResourceBundle;
 
+/**
+ * The Class ConfigurationManager.
+ */
 public class ConfigurationManager {
 	private final static ResourceBundle resourceBundle = ResourceBundle
 			.getBundle("config");
@@ -11,6 +14,11 @@ public class ConfigurationManager {
 	private ConfigurationManager() {
 	}
 
+	/**
+	 * Gets the single instance of ConfigurationManager.
+	 *
+	 * @return single instance of ConfigurationManager
+	 */
 	public static ConfigurationManager getInstance() {
 		if (!instanceCreated) {
 			synchronized (ConfigurationManager.class) {
@@ -27,6 +35,12 @@ public class ConfigurationManager {
 		return instance;
 	}
 
+	/**
+	 * Gets the property.
+	 *
+	 * @param key the key
+	 * @return the property
+	 */
 	public String getProperty(String key) {
 		return resourceBundle.getString(key);
 	}

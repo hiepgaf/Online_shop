@@ -5,16 +5,24 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.shop.action.Action;
+import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.UserDAO;
 import by.epam.shop.entity.User;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class ChangeBlockingAction. Only available to the administrator. Changes
+ * the blocking of selected user. If user is blocked, he couldn't make
+ * purchases.
+ */
 public class ChangeBlockingAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null || sessionUser.getAccessLevel() != 2) {
+			request.setAttribute("message", MessageKeys.USER_ERROR);
+			return configurationManager.getProperty("path.page.error");
+		}
 		int userId = Integer.parseInt(request.getParameter("user_id"));
 		UserDAO userDAO = new UserDAO();
 		User user = userDAO.findEntityById(userId);
@@ -24,7 +32,6 @@ public class ChangeBlockingAction implements Action {
 			user.setBlackListFlag(0);
 		}
 		userDAO.update(user);
-		User sessionUser = (User) request.getSession().getAttribute("user");
 		if (user.getId() == sessionUser.getId()) {
 			request.getSession().setAttribute("user", user);
 		}

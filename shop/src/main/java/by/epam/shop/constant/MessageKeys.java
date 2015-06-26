@@ -1,5 +1,9 @@
 package by.epam.shop.constant;
 
+/**
+ * The Class MessageKeys. Contains keys by which taking message resources for
+ * current locale.
+ */
 public class MessageKeys {
 	public static final String LOG_IN_ERROR = "message.loginerror";
 	public static final String NULL_PAGE = "message.nullpage";

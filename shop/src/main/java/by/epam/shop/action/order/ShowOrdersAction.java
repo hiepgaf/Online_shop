@@ -9,11 +9,11 @@ import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.OrderDAO;
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.User;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class ShowOrdersAction. Shows all orders of user.
+ */
 public class ShowOrdersAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

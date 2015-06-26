@@ -14,6 +14,9 @@ import com.mysql.jdbc.Statement;
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.Product;
 
+/**
+ * The Class OrderDAO.
+ */
 public class OrderDAO extends AbstractDAO<Order> {
 	private static Logger log = Logger.getLogger(OrderDAO.class);
 	private static final String SQL_SELECT_ORDER = "SELECT * FROM internet_shop.orders JOIN internet_shop.status ON (orders.status_id = status.id)";
@@ -27,6 +30,11 @@ public class OrderDAO extends AbstractDAO<Order> {
 	private static final String SQL_SELECT_ORDERS_PRODUCTS = "SELECT * FROM internet_shop.orders_products WHERE orders_id= ?";
 	private static final String SQL_SELECT_STATUS = "SELECT * FROM internet_shop.status WHERE description= ?";
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#findAll()
+	 */
 	@Override
 	public List<Order> findAll() {
 		ArrayList<Order> orders = new ArrayList<>();
@@ -51,6 +59,11 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return orders;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#findEntityById(java.lang.Integer)
+	 */
 	@Override
 	public Order findEntityById(Integer id) {
 		Order order = null;
@@ -75,6 +88,13 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return order;
 	}
 
+	/**
+	 * Find entities by user id.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the list
+	 */
 	public List<Order> findEntitiesByUserId(int id) {
 		ArrayList<Order> orders = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
@@ -99,6 +119,11 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return orders;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#delete(java.lang.Integer)
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		boolean flag = false;
@@ -118,6 +143,12 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#delete(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public boolean delete(Order entity) {
 		boolean flag = false;
@@ -137,6 +168,12 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#create(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public boolean create(Order entity) {
 		boolean flag = false;
@@ -161,11 +198,24 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#update(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public Order update(Order entity) {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Update status.
+	 *
+	 * @param entity
+	 *            the entity
+	 * @return true, if successful
+	 */
 	public boolean updateStatus(Order entity) {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
@@ -184,6 +234,13 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return flag;
 	}
 
+	/**
+	 * Find products of order.
+	 *
+	 * @param order
+	 *            the order
+	 * @return the array list
+	 */
 	private ArrayList<Product> findProductsOfOrder(Order order) {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
@@ -204,6 +261,13 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return products;
 	}
 
+	/**
+	 * Find status id.
+	 *
+	 * @param status
+	 *            the status
+	 * @return the integer
+	 */
 	private Integer findStatusId(String status) {
 		Integer id = null;
 		Connection connection = connectionPool.getConnection();
@@ -221,6 +285,12 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return id;
 	}
 
+	/**
+	 * Delete from orders_products.
+	 *
+	 * @param id
+	 *            the id
+	 */
 	private void deleteFromOrdersProducts(int id) {
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection
@@ -233,6 +303,13 @@ public class OrderDAO extends AbstractDAO<Order> {
 		}
 	}
 
+	/**
+	 * Creates the orders_products.
+	 *
+	 * @param entity
+	 *            the entity
+	 * @return true, if successful
+	 */
 	private boolean createOrdersProducts(Order entity) {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();

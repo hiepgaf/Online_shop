@@ -3,11 +3,11 @@ package by.epam.shop.action.locale;
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.shop.action.Action;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class ChangeLocaleAction. Changes current locale in session.
+ */
 public class ChangeLocaleAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

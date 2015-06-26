@@ -6,11 +6,11 @@ import by.epam.shop.action.Action;
 import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.OrderDAO;
 import by.epam.shop.entity.Order;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class CancelOrderAction. Cancels the order if its status is "active".
+ */
 public class CancelOrderAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

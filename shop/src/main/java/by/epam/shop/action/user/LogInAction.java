@@ -6,14 +6,14 @@ import by.epam.shop.action.Action;
 import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.UserDAO;
 import by.epam.shop.entity.User;
-import by.epam.shop.manager.ConfigurationManager;
 import by.epam.shop.service.user.Encryption;
 
+/**
+ * The Class LogInAction. Adds user in session.
+ */
 public class LogInAction implements Action {
 	private static final String PARAM_NAME_LOGIN = "login";
 	private static final String PARAM_NAME_PASSWORD = "password";
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

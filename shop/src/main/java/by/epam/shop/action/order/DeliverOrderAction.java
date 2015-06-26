@@ -6,14 +6,21 @@ import by.epam.shop.action.Action;
 import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.OrderDAO;
 import by.epam.shop.entity.Order;
-import by.epam.shop.manager.ConfigurationManager;
+import by.epam.shop.entity.User;
 
+/**
+ * The Class DeliverOrderAction. Only available to the administrator. Changes
+ * the status of selected order to "delivered".
+ */
 public class DeliverOrderAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null || user.getAccessLevel() != 2) {
+			request.setAttribute("message", MessageKeys.USER_ERROR);
+			return configurationManager.getProperty("path.page.error");
+		}
 		int orderId = Integer.parseInt(request.getParameter("order_id"));
 		OrderDAO orderDAO = new OrderDAO();
 		Order order = orderDAO.findEntityById(orderId);

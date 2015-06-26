@@ -2,6 +2,9 @@ package by.epam.shop.entity;
 
 import java.util.ArrayList;
 
+/**
+ * The Class User.
+ */
 public class User extends AbstractEntity {
 	private String login;
 	private String password;
@@ -10,66 +13,152 @@ public class User extends AbstractEntity {
 	private int accessLevel;
 	private ArrayList<Product> shoooppingCart = new ArrayList<>();
 
+	/**
+	 * Gets the login.
+	 *
+	 * @return the login
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * Sets the login.
+	 *
+	 * @param login
+	 *            the new login
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Sets the password.
+	 *
+	 * @param password
+	 *            the new password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Sets the email.
+	 *
+	 * @param email
+	 *            the new email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Gets the black list flag.
+	 *
+	 * @return the black list flag
+	 */
 	public int getBlackListFlag() {
 		return blackListFlag;
 	}
 
+	/**
+	 * Sets the black list flag.
+	 *
+	 * @param blackListFlag
+	 *            the new black list flag
+	 */
 	public void setBlackListFlag(int blackListFlag) {
 		this.blackListFlag = blackListFlag;
 	}
 
+	/**
+	 * Gets the access level.
+	 *
+	 * @return the access level
+	 */
 	public int getAccessLevel() {
 		return accessLevel;
 	}
 
+	/**
+	 * Sets the access level.
+	 *
+	 * @param accessLevel
+	 *            the new access level
+	 */
 	public void setAccessLevel(int accessLevel) {
 		this.accessLevel = accessLevel;
 	}
 
+	/**
+	 * Gets the shooopping cart.
+	 *
+	 * @return the shooopping cart
+	 */
 	public ArrayList<Product> getShoooppingCart() {
 		return shoooppingCart;
 	}
 
+	/**
+	 * Sets the shooopping cart.
+	 *
+	 * @param shoooppingCart
+	 *            the new shooopping cart
+	 */
 	public void setShoooppingCart(ArrayList<Product> shoooppingCart) {
 		this.shoooppingCart = shoooppingCart;
 	}
 
+	/**
+	 * Adds the product.
+	 *
+	 * @param product
+	 *            the product
+	 */
 	public void addProduct(Product product) {
 		shoooppingCart.add(product);
 	}
 
+	/**
+	 * Removes the product.
+	 *
+	 * @param product
+	 *            the product
+	 */
 	public void removeProduct(Product product) {
 		shoooppingCart.remove(product);
 	}
 
+	/**
+	 * Removes the all products.
+	 */
 	public void removeAllProducts() {
 		shoooppingCart.removeAll(shoooppingCart);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.entity.AbstractEntity#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -85,6 +174,11 @@ public class User extends AbstractEntity {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.entity.AbstractEntity#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

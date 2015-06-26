@@ -10,11 +10,11 @@ import by.epam.shop.dao.OrderDAO;
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.Product;
 import by.epam.shop.entity.User;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class MakeOrderAction. Creates an order of products in the shopping cart.
+ */
 public class MakeOrderAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

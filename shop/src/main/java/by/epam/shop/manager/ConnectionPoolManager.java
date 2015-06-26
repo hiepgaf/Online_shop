@@ -2,6 +2,9 @@ package by.epam.shop.manager;
 
 import java.util.ResourceBundle;
 
+/**
+ * The Class ConnectionPoolManager.
+ */
 public class ConnectionPoolManager {
 	private final static ResourceBundle resourceBundle = ResourceBundle
 			.getBundle("connection_pool");
@@ -11,6 +14,11 @@ public class ConnectionPoolManager {
 	private ConnectionPoolManager() {
 	}
 
+	/**
+	 * Gets the single instance of ConnectionPoolManager.
+	 *
+	 * @return single instance of ConnectionPoolManager
+	 */
 	public static ConnectionPoolManager getInstance() {
 		if (!instanceCreated) {
 			synchronized (ConnectionPoolManager.class) {
@@ -27,6 +35,12 @@ public class ConnectionPoolManager {
 		return instance;
 	}
 
+	/**
+	 * Gets the property.
+	 *
+	 * @param key the key
+	 * @return the property
+	 */
 	public String getProperty(String key) {
 		return resourceBundle.getString(key);
 	}

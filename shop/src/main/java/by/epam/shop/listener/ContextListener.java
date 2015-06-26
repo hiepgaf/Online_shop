@@ -9,9 +9,22 @@ import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.PropertyConfigurator;
 
+/**
+ * The listener interface for receiving context events. Initializes log4j in the
+ * event the creation of the servlet context.
+ *
+ * @see ContextEvent
+ */
 @WebListener
 public class ContextListener implements ServletContextListener {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.servlet.ServletContextListener#contextInitialized(javax.servlet
+	 * .ServletContextEvent)
+	 */
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext context = sce.getServletContext();
@@ -22,6 +35,12 @@ public class ContextListener implements ServletContextListener {
 		PropertyConfigurator.configure(fullPath);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.
+	 * ServletContextEvent)
+	 */
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 	}

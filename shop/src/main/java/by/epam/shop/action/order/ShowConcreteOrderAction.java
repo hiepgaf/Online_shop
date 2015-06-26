@@ -6,11 +6,11 @@ import by.epam.shop.action.Action;
 import by.epam.shop.dao.OrderDAO;
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.Product;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class ShowConcreteOrderAction. Shows selected order with products in it.
+ */
 public class ShowConcreteOrderAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

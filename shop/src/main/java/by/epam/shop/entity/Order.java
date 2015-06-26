@@ -4,44 +4,96 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The Class Order.
+ */
 public class Order extends AbstractEntity {
 	private User user;
 	private String status;
 	private Date date;
 	private List<Product> products;
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	public User getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param user
+	 *            the new user
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public String getStatus() {
 		return status;
 	}
 
+	/**
+	 * Sets the status.
+	 *
+	 * @param status
+	 *            the new status
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	/**
+	 * Gets the date.
+	 *
+	 * @return the date
+	 */
 	public Date getDate() {
 		return date;
 	}
 
+	/**
+	 * Sets the date.
+	 *
+	 * @param date
+	 *            the new date
+	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
+	/**
+	 * Gets the products.
+	 *
+	 * @return the products
+	 */
 	public List<Product> getProducts() {
 		return Collections.unmodifiableList(products);
 	}
 
+	/**
+	 * Sets the products.
+	 *
+	 * @param products
+	 *            the new products
+	 */
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.entity.AbstractEntity#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -54,6 +106,11 @@ public class Order extends AbstractEntity {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.entity.AbstractEntity#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

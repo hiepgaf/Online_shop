@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 
 import by.epam.shop.entity.Product;
 
+/**
+ * The Class ProductDAO.
+ */
 public class ProductDAO extends AbstractDAO<Product> {
 	private static Logger log = Logger.getLogger(ProductDAO.class);
 	private static final String SQL_SELECT_PRODUCT = "SELECT * FROM internet_shop.products JOIN internet_shop.product_types ON (products.product_types_id = product_types.id) JOIN internet_shop.product_pictures ON (products.product_pictures_id = product_pictures.id)";
@@ -26,6 +29,11 @@ public class ProductDAO extends AbstractDAO<Product> {
 	private static final String SQL_SELECT_PRODUCT_TYPES = "SELECT * FROM internet_shop.product_types";
 	private static final String SQL_SELECT_PRODUCT_PICTURES = "SELECT * FROM internet_shop.product_pictures";
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#findAll()
+	 */
 	@Override
 	public List<Product> findAll() {
 		ArrayList<Product> products = new ArrayList<>();
@@ -57,6 +65,11 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return products;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#findEntityById(java.lang.Integer)
+	 */
 	@Override
 	public Product findEntityById(Integer id) {
 		Product product = null;
@@ -88,6 +101,13 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return product;
 	}
 
+	/**
+	 * Find entities by type.
+	 *
+	 * @param type
+	 *            the type
+	 * @return the list
+	 */
 	public List<Product> findEntitiesByType(String type) {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
@@ -119,6 +139,11 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return products;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.dao.AbstractDAO#delete(java.lang.Integer)
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		if (checkActiveOrder(id)) {
@@ -141,6 +166,12 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#delete(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public boolean delete(Product entity) {
 		if (checkActiveOrder(entity.getId())) {
@@ -163,6 +194,12 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#create(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public boolean create(Product entity) {
 		boolean flag = false;
@@ -190,6 +227,12 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return flag;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * by.epam.shop.dao.AbstractDAO#update(by.epam.shop.entity.AbstractEntity)
+	 */
 	@Override
 	public Product update(Product entity) {
 		Connection connection = connectionPool.getConnection();
@@ -217,6 +260,11 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return null;
 	}
 
+	/**
+	 * Find all product types.
+	 *
+	 * @return the list
+	 */
 	public List<String> findAllProductTypes() {
 		ArrayList<String> types = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
@@ -233,6 +281,11 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return types;
 	}
 
+	/**
+	 * Find all product picture path.
+	 *
+	 * @return the list
+	 */
 	public List<String> findAllProductPicturePath() {
 		ArrayList<String> path = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
@@ -249,6 +302,13 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return path;
 	}
 
+	/**
+	 * Check active order.
+	 *
+	 * @param id
+	 *            the id
+	 * @return true, if successful
+	 */
 	private boolean checkActiveOrder(int id) {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
@@ -266,6 +326,13 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return flag;
 	}
 
+	/**
+	 * Find type_id.
+	 *
+	 * @param type
+	 *            the type
+	 * @return the integer
+	 */
 	private Integer findTypeId(String type) {
 		Integer id = null;
 		Connection connection = connectionPool.getConnection();
@@ -283,6 +350,13 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return id;
 	}
 
+	/**
+	 * Find picture_id.
+	 *
+	 * @param path
+	 *            the path
+	 * @return the integer
+	 */
 	private Integer findPictureId(String path) {
 		Integer id = null;
 		Connection connection = connectionPool.getConnection();
@@ -300,6 +374,12 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return id;
 	}
 
+	/**
+	 * Delete from orders_products.
+	 *
+	 * @param productId
+	 *            the product id
+	 */
 	private void deleteFromOrdersProducts(int productId) {
 		Connection connection = connectionPool.getConnection();
 		try (PreparedStatement prepareStatement = connection

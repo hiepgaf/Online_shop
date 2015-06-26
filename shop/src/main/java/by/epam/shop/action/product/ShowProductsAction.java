@@ -8,11 +8,11 @@ import by.epam.shop.action.Action;
 import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.ProductDAO;
 import by.epam.shop.entity.Product;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class ShowProductsAction. Shows list of products selected by type.
+ */
 public class ShowProductsAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {

@@ -2,10 +2,8 @@ package by.epam.shop.action.user;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
@@ -14,8 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
 import by.epam.shop.action.Action;
 import by.epam.shop.action.container.ActionFactory;
 import by.epam.shop.entity.Product;
@@ -27,11 +25,7 @@ public class AddToShoppingCartActionTest extends Mockito {
 	@Mock
 	private HttpServletRequest mockRequest;
 	@Mock
-	private HttpServletResponse mockResponse;
-	@Mock
 	private HttpSession mockSession;
-	@Mock
-	private RequestDispatcher mockRd;
 	private User user;
 	private Product product;
 
@@ -53,14 +47,14 @@ public class AddToShoppingCartActionTest extends Mockito {
 		product.setPublisher("1С-СофтКлаб");
 		product.setDeveloper("CD Projekt Red");
 		product.setImprintYear(2015);
-	}
-
-	@Test
-	public void addProductTest() throws ServletException, IOException {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("user")).thenReturn(user);
 		when(mockRequest.getParameter("action")).thenReturn(
 				"add_to_shopping_cart");
+	}
+
+	@Test
+	public void addProductTest() throws ServletException, IOException {
 		when(mockRequest.getParameter("product_id")).thenReturn("1");
 		ActionFactory factory = ActionFactory.getInstance();
 		Action action = factory.defineCommand(mockRequest);
@@ -69,4 +63,12 @@ public class AddToShoppingCartActionTest extends Mockito {
 		assertEquals("/pages/success.jsp", page);
 	}
 
+	@Test
+	public void productNotFoundTest() throws ServletException, IOException {
+		when(mockRequest.getParameter("product_id")).thenReturn("50");
+		ActionFactory factory = ActionFactory.getInstance();
+		Action action = factory.defineCommand(mockRequest);
+		String page = action.execute(mockRequest);
+		assertEquals("/pages/error.jsp", page);
+	}
 }

@@ -1,5 +1,8 @@
 package by.epam.shop.entity;
 
+/**
+ * The Class Product.
+ */
 public class Product extends AbstractEntity {
 	private String type;
 	private String name;
@@ -10,70 +13,163 @@ public class Product extends AbstractEntity {
 	private String developer;
 	private int imprintYear;
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type
+	 *            the new type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name
+	 *            the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the price.
+	 *
+	 * @return the price
+	 */
 	public int getPrice() {
 		return price;
 	}
 
+	/**
+	 * Sets the price.
+	 *
+	 * @param price
+	 *            the new price
+	 */
 	public void setPrice(int price) {
 		this.price = price;
 	}
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Sets the description.
+	 *
+	 * @param description
+	 *            the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Gets the picture path.
+	 *
+	 * @return the picture path
+	 */
 	public String getPicturePath() {
 		return picturePath;
 	}
 
+	/**
+	 * Sets the picture path.
+	 *
+	 * @param picturePath
+	 *            the new picture path
+	 */
 	public void setPicturePath(String picturePath) {
 		this.picturePath = picturePath;
 	}
 
+	/**
+	 * Gets the publisher.
+	 *
+	 * @return the publisher
+	 */
 	public String getPublisher() {
 		return publisher;
 	}
 
+	/**
+	 * Sets the publisher.
+	 *
+	 * @param publisher
+	 *            the new publisher
+	 */
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
 
+	/**
+	 * Gets the developer.
+	 *
+	 * @return the developer
+	 */
 	public String getDeveloper() {
 		return developer;
 	}
 
+	/**
+	 * Sets the developer.
+	 *
+	 * @param developer
+	 *            the new developer
+	 */
 	public void setDeveloper(String developer) {
 		this.developer = developer;
 	}
 
+	/**
+	 * Gets the imprint year.
+	 *
+	 * @return the imprint year
+	 */
 	public int getImprintYear() {
 		return imprintYear;
 	}
 
+	/**
+	 * Sets the imprint year.
+	 *
+	 * @param imprintYear
+	 *            the new imprint year
+	 */
 	public void setImprintYear(int imprintYear) {
 		this.imprintYear = imprintYear;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.entity.AbstractEntity#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,6 +189,11 @@ public class Product extends AbstractEntity {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.epam.shop.entity.AbstractEntity#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

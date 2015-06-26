@@ -9,11 +9,12 @@ import by.epam.shop.constant.MessageKeys;
 import by.epam.shop.dao.ProductDAO;
 import by.epam.shop.entity.Product;
 import by.epam.shop.entity.User;
-import by.epam.shop.manager.ConfigurationManager;
 
+/**
+ * The Class EditProductPageAction. Only available to the administrator. Jumps to
+ * the edit page item.
+ */
 public class EditProductPageAction implements Action {
-	private static ConfigurationManager configurationManager = ConfigurationManager
-			.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request) {
