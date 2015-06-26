@@ -65,7 +65,7 @@ public class AddToShoppingCartActionTest extends Mockito {
 		ActionFactory factory = ActionFactory.getInstance();
 		Action action = factory.defineCommand(mockRequest);
 		String page = action.execute(mockRequest);
-		assertEquals(product, user.getShoooppingCart().get(0));
+		assertEquals(product, user.getShoooppingCart().iterator().next());
 		assertEquals("/pages/success.jsp", page);
 	}
 
