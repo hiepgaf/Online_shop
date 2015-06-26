@@ -10,6 +10,9 @@ import by.epam.shop.entity.Order;
 import by.epam.shop.entity.User;
 import by.epam.shop.service.user.Encryption;
 
+/**
+ * The Class OrderDAOTest. Check selection of correct order from the database.
+ */
 public class OrderDAOTest {
 	private OrderDAO orderDao;
 	private Order order;

@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,10 @@ import by.epam.shop.entity.Product;
 import by.epam.shop.entity.User;
 import by.epam.shop.service.user.Encryption;
 
+/**
+ * The Class AddToShoppingCartActionTest. Puts the product to the user's
+ * shopping cart. Check whether the correct product added to shopping cart.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class AddToShoppingCartActionTest extends Mockito {
 	@Mock
@@ -51,6 +56,12 @@ public class AddToShoppingCartActionTest extends Mockito {
 		when(mockSession.getAttribute("user")).thenReturn(user);
 		when(mockRequest.getParameter("action")).thenReturn(
 				"add_to_shopping_cart");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		user = null;
+		product = null;
 	}
 
 	@Test

@@ -8,6 +8,10 @@ import org.junit.Test;
 
 import by.epam.shop.entity.Product;
 
+/**
+ * The Class ProductDAOTest. Checks selection of correct product from the
+ * database.
+ */
 public class ProductDAOTest {
 	private ProductDAO productDAO;
 	private Product product;

@@ -14,6 +14,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 import by.epam.shop.entity.User;
 
+/**
+ * The Class ValidatorTest. Checks correct working of Validator.
+ */
 @RunWith(Parameterized.class)
 public class ValidatorTest {
 	private String login;

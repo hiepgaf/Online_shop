@@ -9,6 +9,9 @@ import org.junit.Test;
 import by.epam.shop.entity.User;
 import by.epam.shop.service.user.Encryption;
 
+/**
+ * The Class UserDAOTest. Checks selection of correct user from the database.
+ */
 public class UserDAOTest {
 	private UserDAO userDAO;
 	private User user;
