@@ -13,23 +13,23 @@
 	<div class="title">
 		<fmt:message key="cart.title" />
 	</div>
-	<form method="POST" action="Controller">
-		<c:forEach items="${cart}" var="product">
-			<div id="cart">
-				<div id="cartName">${product.name }</div>
-				<div id="cartPrice">${product.price }
-					<fmt:message key="products.money" />
-				</div>
-				<div>
+	<c:forEach items="${cart}" var="product">
+		<div id="cart">
+			<div id="cartName">${product.name }</div>
+			<div id="cartPrice">${product.price }
+				<fmt:message key="products.money" />
+			</div>
+			<div>
+				<form method="POST" action="Controller">
 					<input name="action" type="hidden" value="remove_from_cart" /> <input
 						name="product_id" type="hidden" value="${product.id }" /> <input
 						id="deleteFromCartButton" type="submit"
 						value="<fmt:message key="product.remove" />" />
-				</div>
+				</form>
 			</div>
-			<div style="clear: left"></div>
-		</c:forEach>
-	</form>
+		</div>
+		<div style="clear: left"></div>
+	</c:forEach>
 	<div align="center">
 		<fmt:message key="cart.price.message" />
 		: ${full_price }

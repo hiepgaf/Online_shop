@@ -44,7 +44,7 @@ public class AddToShoppingCartActionTest extends Mockito {
 		user.setEmail("admin@gmail.com");
 		user.setAccessLevel(2);
 		product.setId(1);
-		product.setType("RPG");
+		product.setType("РПГ");
 		product.setName("Ведьмак 3: Дикая охота");
 		product.setPrice(430000);
 		product.setDescription("«Ведьмак 3: Дикая Охота» – ролевая игра нового поколения, действие которой разворачивается в удивительном фэнтезийном мире, где необходимо принимать сложные решения и отвечать за их последствия.");

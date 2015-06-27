@@ -18,31 +18,31 @@
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_type" type="hidden" value="Action" /> <input
+					name="product_type" type="hidden" value="Экшен" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.action"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_type" type="hidden" value="RPG" /> <input
+					name="product_type" type="hidden" value="РПГ" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.rpg"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_type" type="hidden" value="Strategy" /> <input
+					name="product_type" type="hidden" value="Стратегия" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.strategy"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_type" type="hidden" value="Simulator" /> <input
+					name="product_type" type="hidden" value="Симулятор" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.simulator"/>" />
 			</form></li>
 		<li><form action="Controller" method="POST">
 				<input name="action" type="hidden" value="show_products" /> <input
-					name="product_type" type="hidden" value="Quest" /> <input
+					name="product_type" type="hidden" value="Квест" /> <input
 					class="button" type="submit"
 					value="<fmt:message key="menu.button.quest"/>" />
 			</form></li>

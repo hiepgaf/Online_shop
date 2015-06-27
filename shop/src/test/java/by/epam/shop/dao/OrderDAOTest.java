@@ -46,6 +46,6 @@ public class OrderDAOTest {
 	public void checkStatusTest() {
 		order = orderDao.findEntityById(59);
 		String actualStatus = order.getStatus();
-		assertEquals("active", actualStatus);
+		assertEquals("Отменен", actualStatus);
 	}
 }

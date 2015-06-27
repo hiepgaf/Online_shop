@@ -39,7 +39,7 @@
 								class="buyButton" type="submit"
 								value="<fmt:message key="orders.delete" />" />
 						</form></div></td>
-						<c:if test="${order.status == 'active' }">
+						<c:if test="${order.status == 'Активный' }">
 						<td><div style="width: 140px"><form method="POST" action="Controller">
 							<input name="action" type="hidden" value="deliver_order" /> <input
 								name="order_id" type="hidden" value="${order.id }" /> <input

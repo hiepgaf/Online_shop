@@ -17,8 +17,8 @@ public class CancelOrderAction implements Action {
 		int orderId = Integer.parseInt(request.getParameter("order_id"));
 		OrderDAO orderDAO = new OrderDAO();
 		Order order = orderDAO.findEntityById(orderId);
-		if ("active".equals(order.getStatus())) {
-			order.setStatus("canceled");
+		if ("Активный".equals(order.getStatus())) {
+			order.setStatus("Отменен");
 			if (orderDAO.updateStatus(order)) {
 				request.setAttribute("message",
 						MessageKeys.CANCEL_ORDER_SUCCESS);

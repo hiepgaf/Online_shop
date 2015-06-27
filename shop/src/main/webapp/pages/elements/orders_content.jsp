@@ -31,7 +31,7 @@
 						</form></td>
 					<td>${order.date }</td>
 					<td>${order.status }</td>
-					<c:if test="${order.status == 'active' }">
+					<c:if test="${order.status == 'Активный' }">
 						<td><form method="POST" action="Controller">
 								<input name="action" type="hidden" value="cancel_order" /> <input
 									name="order_id" type="hidden" value="${order.id }" /> <input

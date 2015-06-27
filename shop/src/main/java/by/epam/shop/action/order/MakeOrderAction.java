@@ -34,7 +34,7 @@ public class MakeOrderAction implements Action {
 		}
 		Order order = new Order();
 		order.setProducts(products);
-		order.setStatus("active");
+		order.setStatus("Активный");
 		order.setUser(user);
 		OrderDAO orderDAO = new OrderDAO();
 		if (orderDAO.create(order)) {
