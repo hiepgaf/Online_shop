@@ -24,7 +24,6 @@ public class RemoveFromShoppingCartAction implements Action {
 		}
 		int id = Integer.parseInt(request.getParameter("product_id"));
 		Iterator<Product> iterator = user.getShoooppingCart().iterator();
-		System.out.println(id + "fdfdsfdsfsdfsdf");
 		while (iterator.hasNext()) {
 			if (iterator.next().getId() == id) {
 				iterator.remove();
