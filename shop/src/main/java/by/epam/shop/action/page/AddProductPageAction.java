@@ -10,7 +10,8 @@ import by.epam.shop.dao.ProductDAO;
 import by.epam.shop.entity.User;
 
 /**
- * The Class AddProductPageAction. Jumps to the page add product.
+ * The Class AddProductPageAction. Only available to the administrator. Jumps to
+ * the page add product.
  */
 public class AddProductPageAction implements Action {
 

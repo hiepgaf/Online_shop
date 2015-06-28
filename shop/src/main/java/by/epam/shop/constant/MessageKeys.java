@@ -1,7 +1,7 @@
 package by.epam.shop.constant;
 
 /**
- * The Class MessageKeys. Contains keys by which taking message resources for
+ * The Class MessageKeys. Contains keys for which takes message resources for
  * current locale.
  */
 public class MessageKeys {
