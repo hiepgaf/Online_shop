@@ -1,9 +1,15 @@
 package by.epam.shop.entity;
 
+import java.io.Serializable;
+
 /**
  * The Class Product.
  */
-public class Product extends AbstractEntity {
+public class Product extends AbstractEntity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String type;
 	private String name;
 	private int price;
@@ -174,17 +180,13 @@ public class Product extends AbstractEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result
-				+ ((developer == null) ? 0 : developer.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((developer == null) ? 0 : developer.hashCode());
 		result = prime * result + imprintYear;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((picturePath == null) ? 0 : picturePath.hashCode());
+		result = prime * result + ((picturePath == null) ? 0 : picturePath.hashCode());
 		result = prime * result + price;
-		result = prime * result
-				+ ((publisher == null) ? 0 : publisher.hashCode());
+		result = prime * result + ((publisher == null) ? 0 : publisher.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}

@@ -19,7 +19,7 @@ public class AllOrdersPageAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
-		if (user == null | user.getAccessLevel() != 2) {
+		if (user == null || user.getAccessLevel() != 2) {
 			request.setAttribute("message", MessageKeys.CANCEL_ORDER_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}

@@ -32,7 +32,7 @@ public class ChangeBlockingAction implements Action {
 			user.setBlackListFlag(0);
 		}
 		userDAO.update(user);
-		if (user.getId() == sessionUser.getId()) {
+		if (user.getId().equals(sessionUser.getId())) {
 			request.getSession().setAttribute("user", user);
 		}
 		List<User> users = userDAO.findAll();

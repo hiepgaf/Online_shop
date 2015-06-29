@@ -1,11 +1,16 @@
 package by.epam.shop.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The Class User.
  */
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String login;
 	private String password;
 	private String email;
@@ -167,10 +172,8 @@ public class User extends AbstractEntity {
 		result = prime * result + blackListFlag;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((shoooppingCart == null) ? 0 : shoooppingCart.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((shoooppingCart == null) ? 0 : shoooppingCart.hashCode());
 		return result;
 	}
 
