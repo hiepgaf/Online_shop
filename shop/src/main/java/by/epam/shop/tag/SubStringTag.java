@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 /**
  * The Class SubStringTag. If the text from attribute is greater than a certain
- * length, cut it.
+ * length, cuts it.
  */
 public class SubStringTag extends TagSupport {
 
