@@ -4,6 +4,7 @@ import java.util.List;
 
 import by.epam.shop.connectionpool.ConnectionPool;
 import by.epam.shop.entity.AbstractEntity;
+import by.epam.shop.exception.DAOException;
 
 /**
  * The Class AbstractDAO. Base abstract class for concrete DAO objects.
@@ -18,8 +19,9 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	 * Find all.
 	 *
 	 * @return the list
+	 * @throws DAOException
 	 */
-	public abstract List<T> findAll();
+	public abstract List<T> findAll() throws DAOException;
 
 	/**
 	 * Find entity by id.
@@ -27,8 +29,9 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	 * @param id
 	 *            the id
 	 * @return the t
+	 * @throws DAOException
 	 */
-	public abstract T findEntityById(Integer id);
+	public abstract T findEntityById(Integer id) throws DAOException;
 
 	/**
 	 * Delete.
@@ -36,8 +39,9 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	 * @param id
 	 *            the id
 	 * @return true, if successful
+	 * @throws DAOException
 	 */
-	public abstract boolean delete(Integer id);
+	public abstract boolean delete(Integer id) throws DAOException;
 
 	/**
 	 * Delete.
@@ -45,8 +49,9 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	 * @param entity
 	 *            the entity
 	 * @return true, if successful
+	 * @throws DAOException
 	 */
-	public abstract boolean delete(T entity);
+	public abstract boolean delete(T entity) throws DAOException;
 
 	/**
 	 * Creates the.
@@ -54,8 +59,9 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	 * @param entity
 	 *            the entity
 	 * @return true, if successful
+	 * @throws DAOException
 	 */
-	public abstract boolean create(T entity);
+	public abstract boolean create(T entity) throws DAOException;
 
 	/**
 	 * Update.
@@ -63,6 +69,7 @@ public abstract class AbstractDAO<T extends AbstractEntity> {
 	 * @param entity
 	 *            the entity
 	 * @return the t
+	 * @throws DAOException
 	 */
-	public abstract T update(T entity);
+	public abstract T update(T entity) throws DAOException;
 }

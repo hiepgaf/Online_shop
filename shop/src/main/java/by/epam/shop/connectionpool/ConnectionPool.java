@@ -3,7 +3,10 @@ package by.epam.shop.connectionpool;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
@@ -22,7 +25,8 @@ public class ConnectionPool {
 	private ArrayBlockingQueue<Connection> connectionPool;
 	private static int poolSize;
 	private static ConnectionPool instance;
-	private volatile static boolean instanceCreated;
+	private static AtomicBoolean isNull = new AtomicBoolean(true);
+	private static ReentrantLock lock = new ReentrantLock();
 
 	private ConnectionPool() {
 		try {
@@ -34,8 +38,7 @@ public class ConnectionPool {
 			url = manager.getProperty("url");
 			connectionPool = new ArrayBlockingQueue<>(poolSize);
 			for (int i = 0; i < poolSize; i++) {
-				connectionPool.put(DriverManager.getConnection(url, user,
-						password));
+				connectionPool.put(DriverManager.getConnection(url, user, password));
 			}
 		} catch (SQLException | InterruptedException e) {
 			throw new ExceptionInInitializerError();
@@ -48,17 +51,11 @@ public class ConnectionPool {
 	 * @return single instance of ConnectionPool
 	 */
 	public static ConnectionPool getInstance() {
-		if (!instanceCreated) {
-			synchronized (ConnectionPool.class) {
-				try {
-					if (!instanceCreated) {
-						instance = new ConnectionPool();
-						instanceCreated = true;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+		if (isNull.get()) {
+			lock.lock();
+			instance = new ConnectionPool();
+			isNull.set(false);
+			lock.unlock();
 		}
 		return instance;
 	}
@@ -92,6 +89,17 @@ public class ConnectionPool {
 			}
 		} catch (SQLException | InterruptedException e) {
 			log.error(e);
+		}
+	}
+
+	public void shutDown() {
+		Iterator<Connection> iterator = connectionPool.iterator();
+		while (iterator.hasNext()) {
+			try {
+				iterator.next().close();
+			} catch (SQLException e) {
+				log.error(e);
+			}
 		}
 	}
 }

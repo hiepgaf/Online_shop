@@ -1,12 +1,13 @@
 package by.epam.shop.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import by.epam.shop.entity.User;
+import by.epam.shop.exception.DAOException;
 import by.epam.shop.service.user.Encryption;
 
 /**
@@ -34,7 +35,7 @@ public class UserDAOTest {
 	}
 
 	@Test
-	public void findUserTest() {
+	public void findUserTest() throws DAOException {
 		User findUser = userDAO.findEntityById(1);
 		assertEquals(user, findUser);
 	}

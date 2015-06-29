@@ -7,15 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import by.epam.shop.entity.User;
+import by.epam.shop.exception.DAOException;
 
 /**
  * The Class UserDAO.
  */
 public class UserDAO extends AbstractDAO<User> {
-	private static Logger log = Logger.getLogger(UserDAO.class);
 	private static final String SQL_SELECT_USERS = "SELECT * FROM internet_shop.users";
 	private static final String SQL_SELECT_USERS_BY_ID = "SELECT * FROM internet_shop.users WHERE id= ?";
 	private static final String SQL_SELECT_USERS_BY_LOGIN = "SELECT * FROM internet_shop.users WHERE login= ?";
@@ -30,11 +28,10 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @see by.epam.shop.dao.AbstractDAO#findAll()
 	 */
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll() throws DAOException {
 		ArrayList<User> users = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_USERS)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_USERS)) {
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				User user = new User();
@@ -46,9 +43,10 @@ public class UserDAO extends AbstractDAO<User> {
 				user.setAccessLevel(resultSet.getInt("access_level_id"));
 				users.add(user);
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return users;
 	}
@@ -59,11 +57,10 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @see by.epam.shop.dao.AbstractDAO#findEntityById(java.lang.Integer)
 	 */
 	@Override
-	public User findEntityById(Integer id) {
+	public User findEntityById(Integer id) throws DAOException {
 		User user = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_USERS_BY_ID)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_USERS_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
@@ -74,12 +71,11 @@ public class UserDAO extends AbstractDAO<User> {
 				user.setEmail(resultSet.getString("email"));
 				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
 				user.setAccessLevel(resultSet.getInt("access_level_id"));
-			} else {
-				return null;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return user;
 	}
@@ -90,12 +86,12 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @param login
 	 *            the login
 	 * @return the user
+	 * @throws DAOException
 	 */
-	public User findEntityByLogin(String login) {
+	public User findEntityByLogin(String login) throws DAOException {
 		User user = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_USERS_BY_LOGIN)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_USERS_BY_LOGIN)) {
 			prepareStatement.setString(1, login);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
@@ -106,12 +102,11 @@ public class UserDAO extends AbstractDAO<User> {
 				user.setEmail(resultSet.getString("email"));
 				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
 				user.setAccessLevel(resultSet.getInt("access_level_id"));
-			} else {
-				return null;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return user;
 	}
@@ -124,12 +119,12 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @param password
 	 *            the password
 	 * @return the user
+	 * @throws DAOException
 	 */
-	public User findEntityByLoginAndPassword(String login, String password) {
+	public User findEntityByLoginAndPassword(String login, String password) throws DAOException {
 		User user = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_USERS_BY_LOGIN_AND_PASSWORD)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_USERS_BY_LOGIN_AND_PASSWORD)) {
 			prepareStatement.setString(1, login);
 			prepareStatement.setString(2, password);
 			ResultSet resultSet = prepareStatement.executeQuery();
@@ -141,12 +136,11 @@ public class UserDAO extends AbstractDAO<User> {
 				user.setEmail(resultSet.getString("email"));
 				user.setBlackListFlag(resultSet.getInt("black_list_flag"));
 				user.setAccessLevel(resultSet.getInt("access_level_id"));
-			} else {
-				return null;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return user;
 	}
@@ -157,19 +151,19 @@ public class UserDAO extends AbstractDAO<User> {
 	 * @see by.epam.shop.dao.AbstractDAO#delete(java.lang.Integer)
 	 */
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(Integer id) throws DAOException {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_DELETE_USER)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_DELETE_USER)) {
 			prepareStatement.setInt(1, id);
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -181,19 +175,19 @@ public class UserDAO extends AbstractDAO<User> {
 	 * by.epam.shop.dao.AbstractDAO#delete(by.epam.shop.entity.AbstractEntity)
 	 */
 	@Override
-	public boolean delete(User entity) {
+	public boolean delete(User entity) throws DAOException {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_DELETE_USER)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_DELETE_USER)) {
 			prepareStatement.setInt(1, entity.getId());
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -205,11 +199,10 @@ public class UserDAO extends AbstractDAO<User> {
 	 * by.epam.shop.dao.AbstractDAO#create(by.epam.shop.entity.AbstractEntity)
 	 */
 	@Override
-	public boolean create(User entity) {
+	public boolean create(User entity) throws DAOException {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_CREATE_USER)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_CREATE_USER)) {
 			prepareStatement.setString(1, entity.getLogin());
 			prepareStatement.setString(2, entity.getPassword());
 			prepareStatement.setString(3, entity.getEmail());
@@ -219,9 +212,10 @@ public class UserDAO extends AbstractDAO<User> {
 			if (count == 1) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -233,11 +227,10 @@ public class UserDAO extends AbstractDAO<User> {
 	 * by.epam.shop.dao.AbstractDAO#update(by.epam.shop.entity.AbstractEntity)
 	 */
 	@Override
-	public User update(User entity) {
+	public User update(User entity) throws DAOException {
 		User user = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_UPDATE_USER)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_UPDATE_USER)) {
 			prepareStatement.setString(1, entity.getLogin());
 			prepareStatement.setString(2, entity.getPassword());
 			prepareStatement.setString(3, entity.getEmail());
@@ -246,12 +239,14 @@ public class UserDAO extends AbstractDAO<User> {
 			prepareStatement.setInt(6, entity.getId());
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
-				return user;
+				return entity;
 			}
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
-		return null;
+		return user;
 	}
 
 }

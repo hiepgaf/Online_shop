@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.PropertyConfigurator;
 
+import by.epam.shop.connectionpool.ConnectionPool;
+
 /**
  * The listener interface for receiving context events. Initializes log4j in the
  * event the creation of the servlet context.
@@ -28,10 +30,8 @@ public class ContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext context = sce.getServletContext();
-		String log4jConfigFile = context
-				.getInitParameter("log4j-config-location");
-		String fullPath = context.getRealPath("") + File.separator
-				+ log4jConfigFile;
+		String log4jConfigFile = context.getInitParameter("log4j-config-location");
+		String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
 		PropertyConfigurator.configure(fullPath);
 	}
 
@@ -43,5 +43,7 @@ public class ContextListener implements ServletContextListener {
 	 */
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		connectionPool.shutDown();
 	}
 }

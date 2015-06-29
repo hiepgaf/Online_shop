@@ -1,12 +1,13 @@
 package by.epam.shop.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import by.epam.shop.entity.Product;
+import by.epam.shop.exception.DAOException;
 
 /**
  * The Class ProductDAOTest. Checks selection of correct product from the
@@ -24,7 +25,8 @@ public class ProductDAOTest {
 		product.setType("РПГ");
 		product.setName("Ведьмак 3: Дикая охота");
 		product.setPrice(430000);
-		product.setDescription("«Ведьмак 3: Дикая Охота» – ролевая игра нового поколения, действие которой разворачивается в удивительном фэнтезийном мире, где необходимо принимать сложные решения и отвечать за их последствия.");
+		product.setDescription(
+				"«Ведьмак 3: Дикая Охота» – ролевая игра нового поколения, действие которой разворачивается в удивительном фэнтезийном мире, где необходимо принимать сложные решения и отвечать за их последствия.");
 		product.setPicturePath("images/products/Vedmak_3.jpg");
 		product.setPublisher("1С-СофтКлаб");
 		product.setDeveloper("CD Projekt Red");
@@ -37,7 +39,7 @@ public class ProductDAOTest {
 	}
 
 	@Test
-	public void findProductTest() {
+	public void findProductTest() throws DAOException {
 		Product findProduct = productDAO.findEntityById(1);
 		assertEquals(product, findProduct);
 	}

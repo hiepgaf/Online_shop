@@ -1,6 +1,6 @@
 package by.epam.shop.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import by.epam.shop.entity.Order;
 import by.epam.shop.entity.User;
+import by.epam.shop.exception.DAOException;
 import by.epam.shop.service.user.Encryption;
 
 /**
@@ -37,13 +38,13 @@ public class OrderDAOTest {
 	}
 
 	@Test
-	public void checkUserTest() {
+	public void checkUserTest() throws DAOException {
 		order = orderDao.findEntityById(59);
 		assertEquals(user, order.getUser());
 	}
 
 	@Test
-	public void checkStatusTest() {
+	public void checkStatusTest() throws DAOException {
 		order = orderDao.findEntityById(59);
 		String actualStatus = order.getStatus();
 		assertEquals("Отменен", actualStatus);

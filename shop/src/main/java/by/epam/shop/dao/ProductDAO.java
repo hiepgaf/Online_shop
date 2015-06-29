@@ -7,15 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import by.epam.shop.entity.Product;
+import by.epam.shop.exception.DAOException;
 
 /**
  * The Class ProductDAO.
  */
 public class ProductDAO extends AbstractDAO<Product> {
-	private static Logger log = Logger.getLogger(ProductDAO.class);
 	private static final String SQL_SELECT_PRODUCT = "SELECT * FROM internet_shop.products JOIN internet_shop.product_types ON (products.product_types_id = product_types.id) JOIN internet_shop.product_pictures ON (products.product_pictures_id = product_pictures.id)";
 	private static final String SQL_SELECT_PRODUCT_BY_ID = "SELECT * FROM internet_shop.products JOIN internet_shop.product_types ON (products.product_types_id = product_types.id) JOIN internet_shop.product_pictures ON (products.product_pictures_id = product_pictures.id) WHERE products.id= ?";
 	private static final String SQL_SELECT_PRODUCT_BY_TYPE = "SELECT * FROM internet_shop.products JOIN internet_shop.product_types ON (products.product_types_id = product_types.id) JOIN internet_shop.product_pictures ON (products.product_pictures_id = product_pictures.id) WHERE product_types.description= ?";
@@ -35,32 +33,28 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @see by.epam.shop.dao.AbstractDAO#findAll()
 	 */
 	@Override
-	public List<Product> findAll() {
+	public List<Product> findAll() throws DAOException {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_PRODUCT)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_PRODUCT)) {
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Product product = new Product();
 				product.setId(resultSet.getInt("products.id"));
-				product.setType(resultSet
-						.getString("product_types.description"));
+				product.setType(resultSet.getString("product_types.description"));
 				product.setName(resultSet.getString("products.name"));
 				product.setPrice(resultSet.getInt("products.price"));
-				product.setDescription(resultSet
-						.getString("products.description"));
-				product.setPicturePath(resultSet
-						.getString("product_pictures.path"));
+				product.setDescription(resultSet.getString("products.description"));
+				product.setPicturePath(resultSet.getString("product_pictures.path"));
 				product.setPublisher(resultSet.getString("products.publisher"));
 				product.setDeveloper(resultSet.getString("products.developer"));
-				product.setImprintYear(resultSet
-						.getInt("products.imprint_year"));
+				product.setImprintYear(resultSet.getInt("products.imprint_year"));
 				products.add(product);
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return products;
 	}
@@ -71,32 +65,28 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @see by.epam.shop.dao.AbstractDAO#findEntityById(java.lang.Integer)
 	 */
 	@Override
-	public Product findEntityById(Integer id) {
+	public Product findEntityById(Integer id) throws DAOException {
 		Product product = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_PRODUCT_BY_ID)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_PRODUCT_BY_ID)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
 				product = new Product();
 				product.setId(resultSet.getInt("products.id"));
-				product.setType(resultSet
-						.getString("product_types.description"));
+				product.setType(resultSet.getString("product_types.description"));
 				product.setName(resultSet.getString("products.name"));
 				product.setPrice(resultSet.getInt("products.price"));
-				product.setDescription(resultSet
-						.getString("products.description"));
-				product.setPicturePath(resultSet
-						.getString("product_pictures.path"));
+				product.setDescription(resultSet.getString("products.description"));
+				product.setPicturePath(resultSet.getString("product_pictures.path"));
 				product.setPublisher(resultSet.getString("products.publisher"));
 				product.setDeveloper(resultSet.getString("products.developer"));
-				product.setImprintYear(resultSet
-						.getInt("products.imprint_year"));
+				product.setImprintYear(resultSet.getInt("products.imprint_year"));
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return product;
 	}
@@ -107,34 +97,31 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @param type
 	 *            the type
 	 * @return the list
+	 * @throws DAOException
 	 */
-	public List<Product> findEntitiesByType(String type) {
+	public List<Product> findEntitiesByType(String type) throws DAOException {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_PRODUCT_BY_TYPE)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_PRODUCT_BY_TYPE)) {
 			prepareStatement.setString(1, type);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Product product = new Product();
 				product.setId(resultSet.getInt("products.id"));
-				product.setType(resultSet
-						.getString("product_types.description"));
+				product.setType(resultSet.getString("product_types.description"));
 				product.setName(resultSet.getString("products.name"));
 				product.setPrice(resultSet.getInt("products.price"));
-				product.setDescription(resultSet
-						.getString("products.description"));
-				product.setPicturePath(resultSet
-						.getString("product_pictures.path"));
+				product.setDescription(resultSet.getString("products.description"));
+				product.setPicturePath(resultSet.getString("product_pictures.path"));
 				product.setPublisher(resultSet.getString("products.publisher"));
 				product.setDeveloper(resultSet.getString("products.developer"));
-				product.setImprintYear(resultSet
-						.getInt("products.imprint_year"));
+				product.setImprintYear(resultSet.getInt("products.imprint_year"));
 				products.add(product);
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return products;
 	}
@@ -145,23 +132,23 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @see by.epam.shop.dao.AbstractDAO#delete(java.lang.Integer)
 	 */
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(Integer id) throws DAOException {
 		if (checkActiveOrder(id)) {
 			return false;
 		}
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_DELETE_PRODUCT)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_DELETE_PRODUCT)) {
 			deleteFromOrdersProducts(id);
 			prepareStatement.setInt(1, id);
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -173,23 +160,23 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * by.epam.shop.dao.AbstractDAO#delete(by.epam.shop.entity.AbstractEntity)
 	 */
 	@Override
-	public boolean delete(Product entity) {
+	public boolean delete(Product entity) throws DAOException {
 		if (checkActiveOrder(entity.getId())) {
 			return false;
 		}
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_DELETE_PRODUCT)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_DELETE_PRODUCT)) {
 			deleteFromOrdersProducts(entity.getId());
 			prepareStatement.setInt(1, entity.getId());
 			int count = prepareStatement.executeUpdate();
 			if (count == 1) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -201,11 +188,10 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * by.epam.shop.dao.AbstractDAO#create(by.epam.shop.entity.AbstractEntity)
 	 */
 	@Override
-	public boolean create(Product entity) {
+	public boolean create(Product entity) throws DAOException {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_CREATE_PRODUCT)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_CREATE_PRODUCT)) {
 			int typeId = findTypeId(entity.getType());
 			int pictureId = findPictureId(entity.getPicturePath());
 			prepareStatement.setInt(1, typeId);
@@ -220,9 +206,10 @@ public class ProductDAO extends AbstractDAO<Product> {
 			if (count == 1) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -234,10 +221,9 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * by.epam.shop.dao.AbstractDAO#update(by.epam.shop.entity.AbstractEntity)
 	 */
 	@Override
-	public Product update(Product entity) {
+	public Product update(Product entity) throws DAOException {
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_UPDATE_PRODUCT)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_UPDATE_PRODUCT)) {
 			int typeId = findTypeId(entity.getType());
 			int pictureId = findPictureId(entity.getPicturePath());
 			prepareStatement.setInt(1, typeId);
@@ -253,9 +239,10 @@ public class ProductDAO extends AbstractDAO<Product> {
 			if (count == 1) {
 				return entity;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return null;
 	}
@@ -264,19 +251,20 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * Find all product types.
 	 *
 	 * @return the list
+	 * @throws DAOException
 	 */
-	public List<String> findAllProductTypes() {
+	public List<String> findAllProductTypes() throws DAOException {
 		ArrayList<String> types = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_PRODUCT_TYPES)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_PRODUCT_TYPES)) {
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				types.add(resultSet.getString("description"));
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return types;
 	}
@@ -285,19 +273,20 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * Find all product picture path.
 	 *
 	 * @return the list
+	 * @throws DAOException
 	 */
-	public List<String> findAllProductPicturePath() {
+	public List<String> findAllProductPicturePath() throws DAOException {
 		ArrayList<String> path = new ArrayList<>();
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_PRODUCT_PICTURES)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_PRODUCT_PICTURES)) {
 			ResultSet resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				path.add(resultSet.getString("path"));
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return path;
 	}
@@ -308,20 +297,21 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @param id
 	 *            the id
 	 * @return true, if successful
+	 * @throws DAOException
 	 */
-	private boolean checkActiveOrder(int id) {
+	private boolean checkActiveOrder(int id) throws DAOException {
 		boolean flag = false;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_CHECK_ACTIVE_ORDER)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_CHECK_ACTIVE_ORDER)) {
 			prepareStatement.setInt(1, id);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
 				flag = true;
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return flag;
 	}
@@ -332,20 +322,21 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @param type
 	 *            the type
 	 * @return the integer
+	 * @throws DAOException
 	 */
-	private Integer findTypeId(String type) {
+	private Integer findTypeId(String type) throws DAOException {
 		Integer id = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_TYPE)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_TYPE)) {
 			prepareStatement.setString(1, type);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
 				id = new Integer(resultSet.getInt("id"));
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return id;
 	}
@@ -356,20 +347,21 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 * @param path
 	 *            the path
 	 * @return the integer
+	 * @throws DAOException
 	 */
-	private Integer findPictureId(String path) {
+	private Integer findPictureId(String path) throws DAOException {
 		Integer id = null;
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_SELECT_PICTURE)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_SELECT_PICTURE)) {
 			prepareStatement.setString(1, path);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			if (resultSet.next()) {
 				id = new Integer(resultSet.getInt("id"));
 			}
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 		return id;
 	}
@@ -379,16 +371,17 @@ public class ProductDAO extends AbstractDAO<Product> {
 	 *
 	 * @param productId
 	 *            the product id
+	 * @throws DAOException
 	 */
-	private void deleteFromOrdersProducts(int productId) {
+	private void deleteFromOrdersProducts(int productId) throws DAOException {
 		Connection connection = connectionPool.getConnection();
-		try (PreparedStatement prepareStatement = connection
-				.prepareStatement(SQL_DELETE_ORDERS_PRODUCTS)) {
+		try (PreparedStatement prepareStatement = connection.prepareStatement(SQL_DELETE_ORDERS_PRODUCTS)) {
 			prepareStatement.setInt(1, productId);
 			prepareStatement.executeUpdate();
-			connectionPool.freeConnection(connection);
 		} catch (SQLException e) {
-			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			connectionPool.freeConnection(connection);
 		}
 	}
 }

@@ -1,10 +1,9 @@
 package by.epam.shop.tag;
 
 import java.io.IOException;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
-
-import org.apache.log4j.Logger;
 
 /**
  * The Class SubStringTag. If the text from attribute is greater than a certain
@@ -13,7 +12,6 @@ import org.apache.log4j.Logger;
 public class SubStringTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger(SubStringTag.class);
 	private String text;
 
 	/**
@@ -32,7 +30,7 @@ public class SubStringTag extends TagSupport {
 	 * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
 	 */
 	@Override
-	public int doStartTag() {
+	public int doStartTag() throws JspException {
 		int maxTextLength = 140;
 		try {
 			if (text.length() > maxTextLength) {
@@ -41,7 +39,7 @@ public class SubStringTag extends TagSupport {
 				pageContext.getOut().write(text + "...");
 			}
 		} catch (IOException e) {
-			log.error(e);
+			throw new JspException(e);
 		}
 		return SKIP_BODY;
 	}
