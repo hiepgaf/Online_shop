@@ -53,6 +53,6 @@ public class ValidatorTest {
 
 	@Test
 	public void validationTest() {
-		assertNull(Validator.validateUser(user));
+		assertNull(UserValidator.validateUser(user));
 	}
 }

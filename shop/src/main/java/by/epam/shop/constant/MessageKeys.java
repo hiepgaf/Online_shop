@@ -41,4 +41,8 @@ public class MessageKeys {
 	public static final String EDIT_PRODUCT_SUCCESS = "message.ediproduct.success";
 	public static final String EDIT_PRODUCT_ERROR = "message.ediproduct.error";
 	public static final String DATABASE_ERROR = "message.database.error";
+	public static final String PRODUCT_NAME_PATTERN_ERROR = "message.product.name.error";
+	public static final String PRODUCT_PRICE_PATTERN_ERROR = "message.product.price.error";
+	public static final String PRODUCT_PUBLISHER_PATTERN_ERROR = "message.product.publisher.error";
+	public static final String PRODUCT_DEVELOPER_PATTERN_ERROR = "message.product.developer.error";
 }

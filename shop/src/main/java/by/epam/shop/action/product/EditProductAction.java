@@ -12,6 +12,7 @@ import by.epam.shop.dao.ProductDAO;
 import by.epam.shop.entity.Product;
 import by.epam.shop.entity.User;
 import by.epam.shop.exception.DAOException;
+import by.epam.shop.service.product.ProductValidator;
 
 /**
  * The Class EditProductAction. Only available to the administrator. Edits
@@ -56,6 +57,11 @@ public class EditProductAction implements Action {
 			product.setPublisher(publisher);
 			product.setDeveloper(developer);
 			product.setImprintYear(Integer.parseInt(imprintYear));
+			String validationMessage = ProductValidator.validateProduct(product);
+			if (validationMessage != null) {
+				request.setAttribute("message", validationMessage);
+				return configurationManager.getProperty("path.page.editproduct");
+			}
 			if (productDAO.update(product) != null) {
 				request.setAttribute("message", MessageKeys.EDIT_PRODUCT_SUCCESS);
 				return configurationManager.getProperty("path.page.success");

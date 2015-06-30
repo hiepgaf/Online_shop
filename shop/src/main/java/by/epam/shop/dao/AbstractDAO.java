@@ -13,7 +13,7 @@ import by.epam.shop.exception.DAOException;
  *            the generic type
  */
 public abstract class AbstractDAO<T extends AbstractEntity> {
-	public static ConnectionPool connectionPool = ConnectionPool.getInstance();
+	protected static ConnectionPool connectionPool = ConnectionPool.getInstance();
 
 	/**
 	 * Find all.

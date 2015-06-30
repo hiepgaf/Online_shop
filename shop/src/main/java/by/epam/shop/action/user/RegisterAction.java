@@ -10,7 +10,7 @@ import by.epam.shop.dao.UserDAO;
 import by.epam.shop.entity.User;
 import by.epam.shop.exception.DAOException;
 import by.epam.shop.service.user.Encryption;
-import by.epam.shop.service.user.Validator;
+import by.epam.shop.service.user.UserValidator;
 
 /**
  * The Class RegisterAction. Registers a new user, inserts user in database and
@@ -42,7 +42,7 @@ public class RegisterAction implements Action {
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setAccessLevel(1); // default value for simple user
-		String validationMessage = Validator.validateUser(user);
+		String validationMessage = UserValidator.validateUser(user);
 		if (validationMessage != null) {
 			request.setAttribute("message", validationMessage);
 			return configurationManager.getProperty("path.page.register");

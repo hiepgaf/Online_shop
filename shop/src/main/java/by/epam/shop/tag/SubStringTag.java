@@ -12,6 +12,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class SubStringTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
+	private final int MAX_TEXT_LENGTH = 140;
 	private String text;
 
 	/**
@@ -31,10 +32,9 @@ public class SubStringTag extends TagSupport {
 	 */
 	@Override
 	public int doStartTag() throws JspException {
-		int maxTextLength = 140;
 		try {
-			if (text.length() > maxTextLength) {
-				pageContext.getOut().write(text.substring(0, 140) + "...");
+			if (text.length() > MAX_TEXT_LENGTH) {
+				pageContext.getOut().write(text.substring(0, MAX_TEXT_LENGTH) + "...");
 			} else {
 				pageContext.getOut().write(text + "...");
 			}
