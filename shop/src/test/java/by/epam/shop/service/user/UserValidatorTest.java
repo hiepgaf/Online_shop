@@ -18,13 +18,13 @@ import by.epam.shop.entity.User;
  * The Class ValidatorTest. Checks correct working of Validator.
  */
 @RunWith(Parameterized.class)
-public class ValidatorTest {
+public class UserValidatorTest {
 	private String login;
 	private String password;
 	private String email;
 	private User user;
 
-	public ValidatorTest(String login, String password, String email) {
+	public UserValidatorTest(String login, String password, String email) {
 		this.login = login;
 		this.password = password;
 		this.email = email;
