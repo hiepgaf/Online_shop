@@ -24,9 +24,12 @@ public class ConnectionPoolManager {
 	public static ConnectionPoolManager getInstance() {
 		if (isNull.get()) {
 			lock.lock();
-			instance = new ConnectionPoolManager();
-			isNull.set(false);
-			lock.unlock();
+			try {
+				instance = new ConnectionPoolManager();
+				isNull.set(false);
+			} finally {
+				lock.unlock();
+			}
 		}
 		return instance;
 	}

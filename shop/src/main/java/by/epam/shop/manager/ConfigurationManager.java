@@ -24,9 +24,12 @@ public class ConfigurationManager {
 	public static ConfigurationManager getInstance() {
 		if (isNull.get()) {
 			lock.lock();
-			instance = new ConfigurationManager();
-			isNull.set(false);
-			lock.unlock();
+			try {
+				instance = new ConfigurationManager();
+				isNull.set(false);
+			} finally {
+				lock.unlock();
+			}
 		}
 		return instance;
 	}
