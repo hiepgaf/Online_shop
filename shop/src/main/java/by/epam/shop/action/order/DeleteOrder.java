@@ -29,6 +29,10 @@ public class DeleteOrder implements Action {
 		OrderDAO orderDAO = new OrderDAO();
 		try {
 			Order order = orderDAO.findEntityById(orderId);
+			if (order == null) {
+				request.setAttribute("message", MessageKeys.FIND_ORDER_ERROR);
+				return configurationManager.getProperty("path.page.error");
+			}
 			if (orderDAO.delete(order)) {
 				request.setAttribute("message", MessageKeys.DELETE_ORDER_SUCCESS);
 				return configurationManager.getProperty("path.page.success");

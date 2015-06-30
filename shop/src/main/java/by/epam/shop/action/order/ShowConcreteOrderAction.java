@@ -23,6 +23,10 @@ public class ShowConcreteOrderAction implements Action {
 		OrderDAO orderDAO = new OrderDAO();
 		try {
 			Order order = orderDAO.findEntityById(orderId);
+			if (order == null) {
+				request.setAttribute("message", MessageKeys.FIND_ORDER_ERROR);
+				return configurationManager.getProperty("path.page.error");
+			}
 			int price = 0;
 			for (Product product : order.getProducts()) {
 				price += product.getPrice();

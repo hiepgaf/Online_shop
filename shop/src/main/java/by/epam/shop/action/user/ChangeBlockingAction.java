@@ -31,6 +31,10 @@ public class ChangeBlockingAction implements Action {
 		UserDAO userDAO = new UserDAO();
 		try {
 			User user = userDAO.findEntityById(userId);
+			if (user == null) {
+				request.setAttribute("message", MessageKeys.FIND_USER_ERROR);
+				return configurationManager.getProperty("path.page.error");
+			}
 			if (user.getBlackListFlag() == 0) {
 				user.setBlackListFlag(1);
 			} else {

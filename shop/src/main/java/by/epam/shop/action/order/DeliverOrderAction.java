@@ -30,6 +30,10 @@ public class DeliverOrderAction implements Action {
 		OrderDAO orderDAO = new OrderDAO();
 		try {
 			Order order = orderDAO.findEntityById(orderId);
+			if (order == null) {
+				request.setAttribute("message", MessageKeys.FIND_ORDER_ERROR);
+				return configurationManager.getProperty("path.page.error");
+			}
 			if (OrderStatuses.ACTIVE.equals(order.getStatus())) {
 				order.setStatus(OrderStatuses.DELIVERED);
 				if (orderDAO.updateStatus(order)) {
