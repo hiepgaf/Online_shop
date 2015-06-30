@@ -31,7 +31,8 @@
 				<fmt:message key="reg.login" />
 			</div>
 			<div>
-				<input id="regInput" type="text" name="login" pattern="[A-Za-z][\w]{2,14}" />
+				<input id="regInput" type="text" name="login"
+					pattern="[A-Za-z][\w]{2,14}" required />
 			</div>
 			<div>
 				<i style="color: red; font-size: 14px"><fmt:message
@@ -42,7 +43,8 @@
 				<fmt:message key="reg.password" />
 			</div>
 			<div>
-				<input id="regInput" type="password" name="password" pattern="[\w]{5,15}" />
+				<input id="regInput" type="password" name="password"
+					pattern="[\w]{5,15}" required />
 			</div>
 			<div>
 				<i style="color: red; font-size: 14px;"> <fmt:message
@@ -54,14 +56,16 @@
 				<fmt:message key="reg.password.repeat" />
 			</div>
 			<div>
-				<input id="regInput" type="password" name="password_repeat" pattern="[\w]{5,15}" />
+				<input id="regInput" type="password" name="password_repeat"
+					pattern="[\w]{5,15}" required />
 			</div>
 			<div style="font-size: 18px; margin-top: 12px; margin-bottom: 5px">
 				<b style="color: red; font-size: 14px;">* </b>
 				<fmt:message key="reg.email" />
 			</div>
 			<div>
-				<input id="regInput" type="text" name="email" pattern="[\w]*[.]*[\w]+@[a-z]+\.[a-z]{2,5}" />
+				<input id="regInput" type="text" name="email"
+					pattern="[\w]*[.]*[\w]+@[a-z]+\.[a-z]{2,5}" required />
 			</div>
 			<div>
 				<i style="color: red; font-size: 14px;"><fmt:message

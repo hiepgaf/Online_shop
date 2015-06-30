@@ -37,12 +37,12 @@ public class DeliverOrderAction implements Action {
 					return configurationManager.getProperty("path.page.success");
 				}
 			}
+			request.setAttribute("message", MessageKeys.DELIVER_ORDER_ERROR);
+			return configurationManager.getProperty("path.page.error");
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.DELIVER_ORDER_ERROR);
-		return configurationManager.getProperty("path.page.error");
 	}
 }

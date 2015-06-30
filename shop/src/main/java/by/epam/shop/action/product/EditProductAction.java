@@ -1,5 +1,6 @@
 package by.epam.shop.action.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,8 +43,13 @@ public class EditProductAction implements Action {
 					* publisher.length() * developer.length() * imprintYear.length() == 0) {
 				List<String> types = productDAO.findAllProductTypes();
 				List<String> pictures = productDAO.findAllProductPicturePath();
+				ArrayList<Integer> imprintYears = new ArrayList<>();
+				for (int i = 1990; i < 2016; i++) {
+					imprintYears.add(new Integer(i));
+				}
 				request.setAttribute("types", types);
 				request.setAttribute("picturePath", pictures);
+				request.setAttribute("imprintYears", imprintYears);
 				request.setAttribute("message", MessageKeys.ADD_PRODUCT_BLANK_FIELDS);
 				return configurationManager.getProperty("path.page.editproduct");
 			}
@@ -65,14 +71,15 @@ public class EditProductAction implements Action {
 			if (productDAO.update(product) != null) {
 				request.setAttribute("message", MessageKeys.EDIT_PRODUCT_SUCCESS);
 				return configurationManager.getProperty("path.page.success");
+			} else {
+				request.setAttribute("message", MessageKeys.EDIT_PRODUCT_ERROR);
+				return configurationManager.getProperty("path.page.error");
 			}
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.EDIT_PRODUCT_ERROR);
-		return configurationManager.getProperty("path.page.error");
 	}
 
 }

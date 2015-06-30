@@ -92,6 +92,9 @@ public class ConnectionPool {
 		}
 	}
 
+	/**
+	 * Shut down the connection pool. Closes all connections present in it.
+	 */
 	public void shutDown() {
 		Iterator<Connection> iterator = connectionPool.iterator();
 		while (iterator.hasNext()) {

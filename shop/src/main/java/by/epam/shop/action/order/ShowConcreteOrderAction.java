@@ -30,12 +30,12 @@ public class ShowConcreteOrderAction implements Action {
 			request.setAttribute("products", order.getProducts());
 			request.setAttribute("full_price", price);
 			request.setAttribute("order_id", order.getId());
+			return configurationManager.getProperty("path.page.order");
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.order");
 	}
 
 }

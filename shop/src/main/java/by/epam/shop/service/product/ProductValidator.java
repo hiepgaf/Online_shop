@@ -10,10 +10,10 @@ import by.epam.shop.entity.Product;
  */
 public class ProductValidator {
 
-	public static final Pattern PRODUCT_NAME_PATTERN = Pattern.compile("\\A[А-ЯA-Z\\d][А-Яа-я\\w:.,-]+\\z");
+	public static final Pattern PRODUCT_NAME_PATTERN = Pattern.compile("\\A[А-ЯA-Z\\d][А-Яа-я\\w\\s:.!?,-]+\\z");
 	public static final Pattern PRODUCT_PRICE_PATTERN = Pattern.compile("\\A[\\d]{4,7}\\z");
-	public static final Pattern PRODUCT_PUBLISHER_PATTERN = Pattern.compile("\\A[А-ЯA-Z\\d][А-Яа-я\\w:.,-]+\\z");
-	public static final Pattern PRODUCT_DEVELOPER_PATTERN = Pattern.compile("\\A[А-ЯA-Z\\d][А-Яа-я\\w:.,-]+\\z");
+	public static final Pattern PRODUCT_PUBLISHER_PATTERN = Pattern.compile("\\A[А-ЯA-Z\\d][А-Яа-я\\w\\s:.!?,-]+\\z");
+	public static final Pattern PRODUCT_DEVELOPER_PATTERN = Pattern.compile("\\A[А-ЯA-Z\\d][А-Яа-я\\w\\s:.!?,-]+\\z");
 
 	/**
 	 * Validate product. If data is not correct, returns a message describing a

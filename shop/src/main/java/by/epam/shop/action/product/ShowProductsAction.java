@@ -27,14 +27,15 @@ public class ShowProductsAction implements Action {
 			if (products.isEmpty()) {
 				request.setAttribute("message", MessageKeys.FIND_PRODUCTS_ERROR);
 				return configurationManager.getProperty("path.page.error");
+			} else {
+				request.setAttribute("products", products);
+				return configurationManager.getProperty("path.page.products");
 			}
-			request.setAttribute("products", products);
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.products");
 	}
 
 }

@@ -42,10 +42,20 @@
 					</c:if>
 					<td><div style="width: 180px">
 							<form method="POST" action="Controller">
-								<input name="action" type="hidden" value="change_blocking" /> <input
-									name="user_id" type="hidden" value="${user.id }" /> <input
-									class="buyButton" type="submit"
-									value="<fmt:message key="user.changeblocking.button" />" />
+								<c:choose>
+									<c:when test="${user.blackListFlag == 0 }">
+										<input name="action" type="hidden" value="change_blocking" />
+										<input name="user_id" type="hidden" value="${user.id }" />
+										<input class="buyButton" type="submit"
+											value="<fmt:message key="user.block.button" />" />
+									</c:when>
+									<c:otherwise>
+										<input name="action" type="hidden" value="change_blocking" />
+										<input name="user_id" type="hidden" value="${user.id }" />
+										<input class="buyButton" type="submit"
+											value="<fmt:message key="user.unblock.button" />" />
+									</c:otherwise>
+								</c:choose>
 							</form>
 						</div></td>
 				</tr>

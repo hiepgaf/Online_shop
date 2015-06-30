@@ -42,11 +42,11 @@ public class ChangeBlockingAction implements Action {
 			}
 			List<User> users = userDAO.findAll();
 			request.setAttribute("users", users);
+			return configurationManager.getProperty("path.page.users");
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.users");
 	}
 }

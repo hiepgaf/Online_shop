@@ -33,13 +33,14 @@ public class ShowOrdersAction implements Action {
 			if (orders.isEmpty()) {
 				request.setAttribute("message", MessageKeys.SHOW_ORDERS_ERROR);
 				return configurationManager.getProperty("path.page.error");
+			} else {
+				request.setAttribute("orders", orders);
+				return configurationManager.getProperty("path.page.orders");
 			}
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("orders", orders);
-		return configurationManager.getProperty("path.page.orders");
 	}
 }

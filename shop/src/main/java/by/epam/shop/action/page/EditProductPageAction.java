@@ -1,5 +1,6 @@
 package by.epam.shop.action.page;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,14 +34,19 @@ public class EditProductPageAction implements Action {
 			Product product = productDAO.findEntityById(productId);
 			List<String> types = productDAO.findAllProductTypes();
 			List<String> picturePath = productDAO.findAllProductPicturePath();
+			ArrayList<Integer> imprintYears = new ArrayList<>();
+			for (int i = 1990; i < 2016; i++) {
+				imprintYears.add(new Integer(i));
+			}
 			request.setAttribute("types", types);
 			request.setAttribute("picturePath", picturePath);
+			request.setAttribute("imprintYears", imprintYears);
 			request.setAttribute("product", product);
+			return configurationManager.getProperty("path.page.editproduct");
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.editproduct");
 	}
 }

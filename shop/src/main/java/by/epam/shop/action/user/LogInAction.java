@@ -29,13 +29,14 @@ public class LogInAction implements Action {
 			if (user == null) {
 				request.setAttribute("message", MessageKeys.LOG_IN_ERROR);
 				return configurationManager.getProperty("path.page.error");
+			} else {
+				request.getSession().setAttribute("user", user);
+				return configurationManager.getProperty("path.page.main");
 			}
-			request.getSession().setAttribute("user", user);
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.main");
 	}
 }

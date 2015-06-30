@@ -36,13 +36,14 @@ public class SearchProductAction implements Action {
 			if (findProducts.isEmpty()) {
 				request.setAttribute("message", MessageKeys.FIND_PRODUCTS_ERROR);
 				return configurationManager.getProperty("path.page.error");
+			} else {
+				request.setAttribute("products", findProducts);
+				return configurationManager.getProperty("path.page.products");
 			}
-			request.setAttribute("products", findProducts);
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.products");
 	}
 }

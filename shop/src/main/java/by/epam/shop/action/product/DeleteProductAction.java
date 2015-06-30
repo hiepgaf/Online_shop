@@ -30,14 +30,15 @@ public class DeleteProductAction implements Action {
 			if (productDAO.delete(productId)) {
 				request.setAttribute("message", MessageKeys.DELETE_PRODUCT_SUCCESS);
 				return configurationManager.getProperty("path.page.success");
+			} else {
+				request.setAttribute("message", MessageKeys.DELETE_PRODUCT_ERROR);
+				return configurationManager.getProperty("path.page.error");
 			}
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.DELETE_PRODUCT_ERROR);
-		return configurationManager.getProperty("path.page.error");
 	}
 
 }

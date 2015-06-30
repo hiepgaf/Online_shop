@@ -47,14 +47,15 @@ public class MakeOrderAction implements Action {
 				user.removeAllProducts();
 				request.setAttribute("message", MessageKeys.MAKE_ORDER_SUCCESS);
 				return configurationManager.getProperty("path.page.success");
+			} else {
+				request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);
+				return configurationManager.getProperty("path.page.error");
 			}
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.MAKE_ORDER_ERROR);
-		return configurationManager.getProperty("path.page.error");
 	}
 
 }

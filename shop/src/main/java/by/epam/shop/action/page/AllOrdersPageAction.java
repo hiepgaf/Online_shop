@@ -31,12 +31,12 @@ public class AllOrdersPageAction implements Action {
 		try {
 			List<Order> orders = orderDAO.findAll();
 			request.setAttribute("orders", orders);
+			return configurationManager.getProperty("path.page.allorders");
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.allorders");
 	}
 
 }

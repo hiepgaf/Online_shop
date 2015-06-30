@@ -59,13 +59,14 @@ public class RegisterAction implements Action {
 				request.getSession().setAttribute("user", user);
 				request.setAttribute("message", MessageKeys.REGISTER_SUCCESS);
 				return configurationManager.getProperty("path.page.success");
+			} else {
+				request.setAttribute("message", MessageKeys.REGISTER_ERROR);
+				return configurationManager.getProperty("path.page.error");
 			}
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.REGISTER_ERROR);
-		return configurationManager.getProperty("path.page.error");
 	}
 }

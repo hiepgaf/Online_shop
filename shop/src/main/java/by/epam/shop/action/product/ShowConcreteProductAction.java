@@ -24,12 +24,12 @@ public class ShowConcreteProductAction implements Action {
 		try {
 			Product product = productDAO.findEntityById(productId);
 			request.setAttribute("product", product);
+			return configurationManager.getProperty("path.page.product");
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		return configurationManager.getProperty("path.page.product");
 	}
 
 }

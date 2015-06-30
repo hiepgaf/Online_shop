@@ -36,7 +36,7 @@
 		</c:when>
 		<c:otherwise>
 			<div id="innerlogin">
-				<div>
+				<div style="font-size: 15px; text-align: center">
 					<fmt:message key="menu.user.appeal" />
 					${sessionScope.user.login}
 				</div>

@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
 import by.epam.shop.action.Action;
 import by.epam.shop.action.container.ActionFactory;
 
@@ -20,7 +18,6 @@ import by.epam.shop.action.container.ActionFactory;
  */
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
-	private static Logger log = Logger.getLogger(Controller.class);
 	/**
 	 * 
 	 */
@@ -29,26 +26,24 @@ public class Controller extends HttpServlet {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest
-	 * , javax.servlet.http.HttpServletResponse)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.
+	 * HttpServletRequest , javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest
-	 * , javax.servlet.http.HttpServletResponse)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.
+	 * HttpServletRequest , javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
@@ -59,18 +54,16 @@ public class Controller extends HttpServlet {
 	 *            the request
 	 * @param response
 	 *            the response
+	 * @throws IOException
+	 * @throws ServletException
 	 */
-	private void processRequest(HttpServletRequest request,
-			HttpServletResponse response) {
+	private void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String page = null;
-		try {
-			ActionFactory factory = ActionFactory.getInstance();
-			Action action = factory.defineCommand(request);
-			page = action.execute(request);
-			RequestDispatcher rd = request.getRequestDispatcher(page);
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			log.error(e);
-		}
+		ActionFactory factory = ActionFactory.getInstance();
+		Action action = factory.defineCommand(request);
+		page = action.execute(request);
+		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request, response);
 	}
 }

@@ -36,15 +36,16 @@ public class AddToShoppingCartAction implements Action {
 			if (product == null) {
 				request.setAttribute("message", MessageKeys.FIND_PRODUCT_ERROR);
 				return configurationManager.getProperty("path.page.error");
+			} else {
+				user.addProduct(product);
+				request.getSession().setAttribute("user", user);
+				request.setAttribute("message", MessageKeys.ADD_TO_SHOPPING_CART_SUCCESS);
+				return configurationManager.getProperty("path.page.success");
 			}
-			user.addProduct(product);
-			request.getSession().setAttribute("user", user);
 		} catch (DAOException e) {
 			log.error(e);
 			request.setAttribute("message", MessageKeys.DATABASE_ERROR);
 			return configurationManager.getProperty("path.page.error");
 		}
-		request.setAttribute("message", MessageKeys.ADD_TO_SHOPPING_CART_SUCCESS);
-		return configurationManager.getProperty("path.page.success");
 	}
 }

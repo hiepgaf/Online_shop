@@ -20,34 +20,34 @@
 		<div id="detProductInf">
 			<div class="detProductInfBlock">
 				<fmt:message key="product.name" />
-				: ${product.name }
+				${product.name }
 			</div>
 			<div class="detProductInfBlock">
 				<fmt:message key="product.genre" />
-				: ${product.type }
+				${product.type }
 			</div>
 			<div class="detProductInfBlock">
 				<fmt:message key="product.publisher" />
-				: ${product.publisher }
+				${product.publisher }
 			</div>
 			<div class="detProductInfBlock">
 				<fmt:message key="product.developer" />
-				: ${product.developer }
+				${product.developer }
 			</div>
 			<div class="detProductInfBlock">
 				<fmt:message key="product.imprintyear" />
-				: ${product.imprintYear }
+				${product.imprintYear }
 			</div>
 			<div class="detProductInfBlock">
 				<fmt:message key="product.price" />
-				: ${product.price }
+				${product.price }
 				<fmt:message key="products.money" />
 			</div>
 		</div>
 		<div style="clear: left"></div>
 		<div id="detProductDescription">
 			<fmt:message key="product.description" />
-			: ${product.description}
+			${product.description}
 		</div>
 		<div id="detBuy">
 			<input name="action" type="hidden" value="add_to_shopping_cart" /> <input
