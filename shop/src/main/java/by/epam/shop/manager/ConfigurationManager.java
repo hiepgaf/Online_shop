@@ -1,19 +1,17 @@
 package by.epam.shop.manager;
 
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * The Class ConfigurationManager.
  */
 public class ConfigurationManager {
-	private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
-	private static ConfigurationManager instance;
-	private static AtomicBoolean isNull = new AtomicBoolean(true);
-	private static ReentrantLock lock = new ReentrantLock();
+	private static final String PROPERTY_FILE = "config";
+	private ResourceBundle resourceBundle;
+	private static ConfigurationManager instance = new ConfigurationManager();
 
 	private ConfigurationManager() {
+		resourceBundle = ResourceBundle.getBundle(PROPERTY_FILE);
 	}
 
 	/**
@@ -22,15 +20,6 @@ public class ConfigurationManager {
 	 * @return single instance of ConfigurationManager
 	 */
 	public static ConfigurationManager getInstance() {
-		if (isNull.get()) {
-			lock.lock();
-			try {
-				instance = new ConfigurationManager();
-				isNull.set(false);
-			} finally {
-				lock.unlock();
-			}
-		}
 		return instance;
 	}
 

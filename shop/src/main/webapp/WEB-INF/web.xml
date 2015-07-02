@@ -13,7 +13,7 @@
 	<jsp-config>
 		<taglib>
 			<taglib-uri>customtags</taglib-uri>
-			<taglib-location>../tld/custom.tld</taglib-location>
+			<taglib-location>tld/custom.tld</taglib-location>
 		</taglib>
 	</jsp-config>
 	<session-config>

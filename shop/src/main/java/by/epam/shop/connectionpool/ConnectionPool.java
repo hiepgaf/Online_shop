@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,12 +13,11 @@ import org.apache.log4j.Logger;
 
 import com.mysql.jdbc.Driver;
 
-import by.epam.shop.manager.ConnectionPoolManager;
-
 /**
  * The Class ConnectionPool. Contains a initialize connections to the database.
  */
 public class ConnectionPool {
+	private static final String PROPERTY_FILE = "connection_pool";
 	private static Logger log = Logger.getLogger(ConnectionPool.class);
 	private String user;
 	private String password;
@@ -31,17 +31,18 @@ public class ConnectionPool {
 	private ConnectionPool() {
 		try {
 			DriverManager.registerDriver(new Driver());
-			ConnectionPoolManager manager = ConnectionPoolManager.getInstance();
-			poolSize = Integer.parseInt(manager.getProperty("pool_size"));
-			user = manager.getProperty("user");
-			password = manager.getProperty("password");
-			url = manager.getProperty("url");
+			ResourceBundle resourceBundle = ResourceBundle.getBundle(PROPERTY_FILE);
+			poolSize = Integer.parseInt(resourceBundle.getString("pool_size"));
+			user = resourceBundle.getString("user");
+			password = resourceBundle.getString("password");
+			url = resourceBundle.getString("url");
 			connectionPool = new ArrayBlockingQueue<>(poolSize);
 			for (int i = 0; i < poolSize; i++) {
 				connectionPool.put(DriverManager.getConnection(url, user, password));
 			}
 		} catch (SQLException | InterruptedException e) {
-			throw new ExceptionInInitializerError();
+			log.fatal(e);
+			throw new ExceptionInInitializerError(e);
 		}
 	}
 
@@ -53,11 +54,13 @@ public class ConnectionPool {
 	public static ConnectionPool getInstance() {
 		if (isNull.get()) {
 			lock.lock();
-			try {
-				instance = new ConnectionPool();
-				isNull.set(false);
-			} finally {
-				lock.unlock();
+			if (isNull.get()) {
+				try {
+					instance = new ConnectionPool();
+					isNull.set(false);
+				} finally {
+					lock.unlock();
+				}
 			}
 		}
 		return instance;
