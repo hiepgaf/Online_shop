@@ -1,7 +1,6 @@
 package by.epam.shop.listener;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -31,16 +30,12 @@ public class ContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext context = sce.getServletContext();
-		try {
-			String log4jConfigFile = context.getInitParameter("log4j-config-location1");
-			if (log4jConfigFile == null) {
-				throw new IOException();
-			}
-			String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
-			PropertyConfigurator.configure(fullPath);
-		} catch (IOException e) {
-			context.log("Parameter to initialize log4j does not exist", e);
+		String log4jConfigFile = context.getInitParameter("log4j-config-location");
+		if (log4jConfigFile == null) {
+			context.log("Parameter to initialize log4j does not exist");
 		}
+		String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
+		PropertyConfigurator.configure(fullPath);
 	}
 
 	/*
@@ -52,6 +47,5 @@ public class ContextListener implements ServletContextListener {
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 		ConnectionPool.getInstance().shutDown();
-
 	}
 }
