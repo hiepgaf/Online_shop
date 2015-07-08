@@ -54,13 +54,13 @@ public class ConnectionPool {
 	public static ConnectionPool getInstance() {
 		if (isNull.get()) {
 			lock.lock();
-			if (isNull.get()) {
-				try {
+			try {
+				if (isNull.get()) {
 					instance = new ConnectionPool();
 					isNull.set(false);
-				} finally {
-					lock.unlock();
 				}
+			} finally {
+				lock.unlock();
 			}
 		}
 		return instance;
